@@ -1,0 +1,28 @@
+.accion{
+    background-color: #124330;
+    color: white;
+    padding: 7px;
+    border: none;
+    border-radius: 10px;
+    
+}
+.accion:hover{
+    background-color: #1ea16f;
+}
+.info{
+    background-color: #DAB13E;
+    color: white;
+    padding: 7px;
+    border: none;
+    border-radius: 10px;
+}
+.info:hover{
+    background-color: #facc4f;
+}
+.atencion{
+    background-color: rgba(240, 52, 6, 0.945);
+    color: white;
+    padding: 7px;
+    border: none;
+    border-radius: 10px;
+}
