@@ -3,20 +3,26 @@ import TarjetaLibro from './TarjetaLibro';
 import '../estilos/catalogo.css';
 import BotonArriba from "./BotonArriba";
 import Buscar from "./Buscar";
+import SearchSharpIcon from '@mui/icons-material/SearchSharp';
+
 function Catalogo() {
     return (
         <>
 
             <div className="contenedorCatalogo">
                 <div className="contenedorBusqueda">
-                    <h1>Catalogo de libros</h1>
-                    <div className="inputBuscar"><Buscar /></div>
+                    <h1>Catálogo de Libros</h1>
+                    <div className="inputBuscar">
+                        <Buscar />
+                        <div className="contenedorLupa"><SearchSharpIcon /></div>
+                      
+                    </div>
                 </div>
-                <div className="contenedorCategorias">Filtros de categorias</div>
+                <div className="contenedorCategorias">Filtros de categorías</div>
                 <div className="contenedorTarjetas"><TarjetaLibro /></div>
             </div>
 
-<BotonArriba />
+            <BotonArriba />
         </>
 
     )

@@ -5,7 +5,7 @@ function Buscar(){
         <>
         <input type="text" 
             className="form-control" 
-            onChange={(e) => Filter(e)} placeholder='Busca tu Libro Favorito'
+            onChange={(e) => Filter(e)} placeholder='Qué estás buscando'
             // value={searchValue}
             >
             </input>

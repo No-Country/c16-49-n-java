@@ -30,7 +30,7 @@ const pages = [
     // }
 ];
 
-const settings = ['Inicia Sesion', 'Registrate'];
+const settings = ['Inicia Sesión', 'Registrate'];
 
 
 function NavBar() {

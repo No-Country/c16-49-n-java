@@ -49,7 +49,7 @@ export default function TarjetaLibro() {
                 </CardContent>
                 <CardActions sx={{ height: 48, justifyContent:'center'}}>
                   <Boton className="info" titulo="Ver más" mensaje="Registrate para ver mas informacion"></Boton>
-                  <Boton className="accion" titulo="Lo quiero" mensaje="Inicia Sesion o Registrate para pedir intercambio"></Boton>
+                  {/* <Boton className="accion" titulo="Lo quiero" mensaje="Inicia Sesion o Registrate para pedir intercambio"></Boton> */}
                   {/* agregarle acciones a los botones para llamar a funciones
                   <Boton className="info" titulo="Ver más" mensaje="Producto agregado al carrito" onClick={handleVerDetalle}></Boton>
                   <Boton className="accion" titulo="Lo quiero" mensaje="Producto agregado al carrito" onClick={handleRegistrarse}></Boton> */}

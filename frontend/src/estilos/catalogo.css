@@ -1,4 +1,4 @@
-.contenedorCatalogo{
+.contenedorCatalogo {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,7 +8,8 @@
     margin-top: 90px;
     margin-bottom: 70px;
 }
-.contenedorBusqueda{
+
+.contenedorBusqueda {
     width: 100vw;
     height: 130px;
     display: flex;
@@ -17,7 +18,8 @@
     align-items: center;
     margin: 20px 0;
 }
-.contenedorCategorias{
+
+.contenedorCategorias {
     width: 100%;
     height: auto;
     display: flex;
@@ -30,7 +32,8 @@
     text-align: center;
     margin: 20px 0;
 }
-.contenedorTarjetas{
+
+.contenedorTarjetas {
     width: 90%;
     margin-left: 5%;
     height: auto;
@@ -42,11 +45,29 @@
     column-gap: 5%;
     row-gap: 35px;
 }
-.inputBuscar{
+
+.inputBuscar {
     width: 60%;
     height: 30px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     text-align: center;
+}
+
+.contenedorLupa {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(128, 128, 128, 0.794);
+    border: none;
+    /* padding: 0; */
+}
+
+.contenedorLupa:focus {
+    outline: none;
+}
+
+.contenedorLupa:hover {
+    background-color: #facc4f;
 }
