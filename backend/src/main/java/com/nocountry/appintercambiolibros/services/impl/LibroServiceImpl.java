@@ -1,7 +1,7 @@
 package com.nocountry.appintercambiolibros.services.impl;
 
 import com.nocountry.appintercambiolibros.especificacion.BuscarLibroEspecificacion;
-import com.nocountry.appintercambiolibros.exceptions.BuscarLibroException;
+import com.nocountry.appintercambiolibros.exceptions.RecursoNoEncontradoException;
 import com.nocountry.appintercambiolibros.models.dto.GetLibro;
 import com.nocountry.appintercambiolibros.models.entity.Libro;
 import com.nocountry.appintercambiolibros.repositories.LibroRepository;
@@ -19,11 +19,12 @@ public class LibroServiceImpl implements LibroService {
     private LibroRepository libroRepository;
 
     @Override
-    public List<GetLibro> buscar(BuscarLibroEspecificacion especificacion) {
+    public List<GetLibro> buscar(String isbn, String titulo, String autor) {
+        BuscarLibroEspecificacion especificacion = new BuscarLibroEspecificacion(isbn, titulo, autor);
         List<Libro> librosEncontrados = libroRepository.findAll(especificacion);
 
         if(librosEncontrados.isEmpty()){
-            throw new BuscarLibroException("No se encontraron resultados");
+            throw new RecursoNoEncontradoException("No se encontraron resultados");
         }
         return librosEncontrados.stream()
                 .map(
@@ -38,5 +39,14 @@ public class LibroServiceImpl implements LibroService {
     @Override
     public Libro guardar(Libro libro) {
         return libroRepository.save(libro);
+    }
+
+    @Override
+    public List<Libro> findByGenero(String genero) {
+        List<Libro> libros = libroRepository.findByGenero(genero);
+        if(libros.isEmpty()){
+            throw new RecursoNoEncontradoException("No se encontraron resultados");
+        }
+        return libros;
     }
 }

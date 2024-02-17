@@ -19,7 +19,7 @@ public class BuscarLibroEspecificacion implements Specification<Libro> {
     private String isbn;
     private String titulo;
     private String autor;
-    private String genero;
+
 
     @Override
     public Predicate toPredicate(Root<Libro> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
@@ -42,12 +42,6 @@ public class BuscarLibroEspecificacion implements Specification<Libro> {
             Expression<String> autorNombreToLowerCase = criteriaBuilder.lower(root.get("autor"));
             Predicate autorNombreLikePredicate = criteriaBuilder.like(autorNombreToLowerCase, "%".concat(autor.toLowerCase()).concat("%"));
             predicados.add(autorNombreLikePredicate);
-        }
-       // Join<Libro, Genero> libroGeneroJoin = root.join("genero");
-        if(StringUtils.hasText(genero)){
-            Expression<String> generoNombreToLowerCase = criteriaBuilder.lower(root.get("genero"));
-            Predicate generoNombreLikePredicate = criteriaBuilder.like(generoNombreToLowerCase, "%".concat(genero.toLowerCase()).concat("%"));
-            predicados.add(generoNombreLikePredicate);
         }
 
         return criteriaBuilder.and( predicados.toArray( new Predicate[predicados.size()] ) );

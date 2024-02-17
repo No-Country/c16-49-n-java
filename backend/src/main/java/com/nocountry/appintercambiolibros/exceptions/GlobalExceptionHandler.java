@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(BuscarLibroException.class)
-    public ResponseEntity<?> handleBuscarLibroException(BuscarLibroException ex, HttpServletRequest request){
+    @ExceptionHandler(RecursoNoEncontradoException.class)
+    public ResponseEntity<?> handleBuscarLibroException(RecursoNoEncontradoException ex, HttpServletRequest request){
         ApiErrorRespuesta response = ApiErrorRespuesta.builder()
-                .error("BuscarLibroException")
+                .error("RecursoNoEncontradoException")
                 .url(request.getRequestURL().toString())
                 .method(request.getMethod())
                 .message(ex.getMessage())

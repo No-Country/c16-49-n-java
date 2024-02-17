@@ -24,13 +24,15 @@ public class LibroController {
     }
 
     @GetMapping("/buscar")
-    public ResponseEntity<?> search(@RequestParam(required = false) String isbn,
+    public ResponseEntity<?> buscar(@RequestParam(required = false) String isbn,
                                     @RequestParam(required = false) String titulo,
-                                    @RequestParam(required = false) String autor,
-                                    @RequestParam(required = false) String genero){
-        BuscarLibroEspecificacion especificacion = new BuscarLibroEspecificacion(
-                isbn, titulo, autor, genero);
-        return ResponseEntity.status(HttpStatus.OK).body(libroService.buscar(especificacion));
+                                    @RequestParam(required = false) String autor){
+        return ResponseEntity.status(HttpStatus.OK).body(libroService.buscar(isbn,titulo, autor));
+    }
+
+    @GetMapping("/genero/{genero}")
+    public ResponseEntity<?> buscarGenero(@PathVariable String genero){
+        return ResponseEntity.status(HttpStatus.OK).body(libroService.findByGenero(genero));
     }
 
 
