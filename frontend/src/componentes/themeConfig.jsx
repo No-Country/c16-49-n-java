@@ -8,15 +8,15 @@ import { green} from '@mui/material/colors';
 const theme = createTheme({
     palette: {
         secondary: {
-            main: '#F94D03',
-            light: deepOrange[200],
+            main: '#bc6c25',
+            light: '#dda15e',
             dark: deepOrange[900],
             contrastText: '#F5F4F5',
         },
         primary: {
-            main: '#124330',
+            main: '#283618',
             light: '#7B6042',
-            dark: brown[900],
+            dark: '#606c38',
             contrastText: '#F5F4F5',
         },
         warning: {
@@ -37,7 +37,7 @@ const theme = createTheme({
 
     },
     typography: {
-        fontFamily: ["'Roboto', sans-serif"],
+        fontFamily: 'Libre Franklin',
         fontSize: 15,
         body2:{
             fontSize:10,
@@ -53,7 +53,8 @@ const theme = createTheme({
             fontSize: 22,
         },
         h1: {
-            fontFamily: ["'Roboto', sans-serif"],
+            // fontFamily: 'Libre+Franklin:ital',
+            fontWeight: '500',
             letterSpacing: "0.02em",
             fontSize: "2rem",
             '@media (max-width:600px)': {
@@ -65,7 +66,7 @@ const theme = createTheme({
             },
         },
         h2: {
-            fontFamily: ["'Archivo Narrow', cursive"],
+            // fontFamily: ["'Archivo Narrow', cursive"],
             letterSpacing: "0.03em",
             lineHeight: 1.6,
             fontWeight: 500,
@@ -82,7 +83,7 @@ const theme = createTheme({
 
         },
         h3: {
-            fontFamily: ["'Archivo Narrow', sans-serif"],
+            // fontFamily: ["'Archivo Narrow', sans-serif"],
             lineHeight: 1.5,
             fontSize: '1.7rem',
             '@media (max-width:600px)': {
@@ -93,7 +94,7 @@ const theme = createTheme({
             },
         },
         h4: {
-            fontFamily: ["'Archivo Narrow', sans-serif"],
+            // fontFamily: ["'Archivo Narrow', sans-serif"],
             letterSpacing: "0.02em",
             lineHeight: 1.3,
             fontWeight: 400,
@@ -110,7 +111,7 @@ const theme = createTheme({
 
         },
         h5: {
-            fontFamily: ["'Archivo Narrow', cursive"],
+            // fontFamily: ["'Archivo Narrow', cursive"],
             lineHeight: 0.9,
             fontSize: '1.2rem',
             fontWeight: 'bold',
