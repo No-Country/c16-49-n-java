@@ -53,7 +53,7 @@ const theme = createTheme({
             fontSize: 22,
         },
         h1: {
-            // fontFamily: 'Libre+Franklin:ital',
+            fontFamily: 'Libre Franklin',
             fontWeight: '500',
             letterSpacing: "0.02em",
             fontSize: "2rem",
@@ -66,7 +66,7 @@ const theme = createTheme({
             },
         },
         h2: {
-            // fontFamily: ["'Archivo Narrow', cursive"],
+            fontFamily: 'Libre Franklin',
             letterSpacing: "0.03em",
             lineHeight: 1.6,
             fontWeight: 500,
@@ -83,7 +83,7 @@ const theme = createTheme({
 
         },
         h3: {
-            // fontFamily: ["'Archivo Narrow', sans-serif"],
+            fontFamily: 'Libre Franklin',
             lineHeight: 1.5,
             fontSize: '1.7rem',
             '@media (max-width:600px)': {
@@ -94,7 +94,7 @@ const theme = createTheme({
             },
         },
         h4: {
-            // fontFamily: ["'Archivo Narrow', sans-serif"],
+            fontFamily: 'Libre Franklin',
             letterSpacing: "0.02em",
             lineHeight: 1.3,
             fontWeight: 400,
@@ -111,7 +111,7 @@ const theme = createTheme({
 
         },
         h5: {
-            // fontFamily: ["'Archivo Narrow', cursive"],
+            fontFamily: 'Libre Franklin',
             lineHeight: 0.9,
             fontSize: '1.2rem',
             fontWeight: 'bold',

@@ -88,14 +88,14 @@ function NavBar() {
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     {/* <div className='logo'><Link to='/'><img  src={logo} alt='logo' ></img></Link></div> */}
                     <Typography
-                        variant="h6"
+                        variant="h5"
                         noWrap
                         component={LinkRouter}
                         to="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
+                            fontFamily: 'Libre Franklin',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
@@ -154,7 +154,7 @@ function NavBar() {
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
-                            fontFamily: 'monospace',
+                            fontFamily: 'Libre Franklin',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
