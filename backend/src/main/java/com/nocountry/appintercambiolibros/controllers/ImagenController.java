@@ -1,4 +1,4 @@
-package com.nocountry.appintercambiolibros.controller;
+package com.nocountry.appintercambiolibros.controllers;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nocountry.appintercambiolibros.services.ImagenService;
 
 @RestController()
-@RequestMapping("imagenes")
+@RequestMapping("/imagenes")
 public class ImagenController {
 
     @Autowired 
