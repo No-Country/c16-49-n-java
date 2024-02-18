@@ -1,5 +1,5 @@
 .accion{
-    background-color: #124330;
+    background-color: #283618;
     color: white;
     padding: 7px;
     border: none;
@@ -7,17 +7,17 @@
     
 }
 .accion:hover{
-    background-color: #1ea16f;
+    background-color: #606c38;
 }
 .info{
-    background-color: #DAB13E;
+    background-color: #dda15e;
     color: white;
     padding: 7px;
     border: none;
     border-radius: 10px;
 }
 .info:hover{
-    background-color: #facc4f;
+    background-color: #bc6c25;
 }
 .atencion{
     background-color: rgba(240, 52, 6, 0.945);

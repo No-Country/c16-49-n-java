@@ -39,9 +39,14 @@ const theme = createTheme({
     typography: {
         fontFamily: 'Libre Franklin',
         fontSize: 15,
+        body1:{
+            fontSize:12,
+            // fontStyle: 'italic',
+        } ,
         body2:{
             fontSize:10,
             fontStyle: 'italic',
+            fontWeight:'400'
         } ,
         '@media (max-width:600px)': {
             fontSize: 12,
@@ -113,7 +118,7 @@ const theme = createTheme({
         h5: {
             fontFamily: 'Libre Franklin',
             lineHeight: 0.9,
-            fontSize: '1.2rem',
+            fontSize: '1rem',
             fontWeight: 'bold',
             '@media (max-width:600px)': {
                 fontSize: '0.8rem',
@@ -121,6 +126,9 @@ const theme = createTheme({
             '@media (min-width:1440px)': {
                 fontSize: '1.2rem',
             },
+        },
+        button:{
+            fontFamily: 'Libre Franklin',
         }
 
     }

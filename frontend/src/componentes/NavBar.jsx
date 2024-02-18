@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { styled, alpha } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,29 +13,30 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import SearchIcon from '@mui/icons-material/Search';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link as LinkRouter } from 'react-router-dom';
+import Buscar from './Buscar';
+import { useLocation } from 'react-router-dom';
+import '../estilos/navbar.css';
 
 
 const pages = [
-    // {
-    //     name: 'Inicio',
-    //     path: '/Inicio'
-    // },
+    
     {
         name: 'Libros',
         path: '/Libros'
     },
-    // {
-    //     name: 'Registro',
-    //     path: '/Registro'
-    // }
+
 ];
 
 const settings = ['Inicia Sesión', 'Registrate'];
 
 
 function NavBar() {
+    const ubicacion = useLocation();
+    const mostrarBuscador = ubicacion.pathname === '/Libros';
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -59,13 +62,13 @@ function NavBar() {
         console.log("Se abrió el formulario de inicio de sesión");
         handleCloseUserMenu(); // Cierra el menú después de hacer clic en "Iniciar Sesión"
     };
-    
+
     const handleOpenRegistro = () => {
         setShowRegistro(true);
         console.log("Se abrió el formulario de registro");
         handleCloseUserMenu(); // Cierra el menú después de hacer clic en "Registrarse"
     };
-    
+
     const handleCloseForms = () => {
         setShowSesion(false);
         setShowRegistro(false);
@@ -85,25 +88,12 @@ function NavBar() {
         <AppBar position="fixed" sx={{ left: '0', right: 'auto' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                    {/* <div className='logo'><Link to='/'><img  src={logo} alt='logo' ></img></Link></div> */}
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component={LinkRouter}
-                        to="/"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'Libre Franklin',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        Paginas Compartidas
-                    </Typography>
+                    <LinkRouter to='/'>
+                        <div className='logo' >
+                            <img src='https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2Flogo.png?alt=media&token=b47a9708-49ef-4457-bc1a-f42b16282ef1' alt='logo'
+                            /></div>
+                    </LinkRouter>
+
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -144,25 +134,7 @@ function NavBar() {
                             ))}
                         </Menu>
                     </Box>
-                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component={LinkRouter}
-                        to="/"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'Libre Franklin',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        Paginas Compartidas
-                    </Typography>
+
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
@@ -176,6 +148,9 @@ function NavBar() {
                         ))}
                     </Box>
 
+                    {/* BUSQUEDA */}
+                    {mostrarBuscador && (
+                    <Buscar />)}
                     {/* NAVEGACION DEL SIDEBAR */}
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
@@ -201,9 +176,9 @@ function NavBar() {
                         >
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleMenuItemClick(setting)}>
-                                    <Typography 
-                                    textAlign="center"
-                                    component={LinkRouter}
+                                    <Typography
+                                        textAlign="center"
+                                        component={LinkRouter}
                                         to={`/${setting.replace(/\s+/g, '')}`}>{setting}</Typography>
                                 </MenuItem>
                             ))}

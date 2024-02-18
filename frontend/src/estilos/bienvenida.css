@@ -1,5 +1,75 @@
-.contenedorHero{
+.contenedorHero {
     width: 100vw;
-    height: 80vh;
-    background-color:#E5E2E1 ;
+    height: 98vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.contenedorHero>video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+
+}
+
+.fondo {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 98%;
+    height: 90%;
+    z-index: 100;
+    position: absolute;
+    top: 5%;
+    left: 1%;
+    bottom: 5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: justify;
+
+}
+
+.slogan {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    margin-bottom: 1%;
+    margin-left: 5%;
+    position: absolute;
+    bottom: 0;
+
+
+
+    /* transition: .3s ease;
+  box-shadow: 0 1px 1px rgba(0,0,0,.3);
+  
+  &:hover {
+    box-shadow: 0 5px 20px rgba(0,0,0,.8);
+    transform: translateY(-10px) scale(1.02);
+  	.entry-title{
+			background-position: -100% 0;
+		} 
+  } */
+}
+
+.titulo {
+    font-size: 60px;
+    padding: 80px 50px;
+    text-align: center;
+    text-rendering: optimizeLegibility;
+    letter-spacing: 0.01rem;
+    
+    text-transform: uppercase;
+    /* background-color: #2d2d2d; */
+    letter-spacing: .1em;
+    text-shadow: 
+      -1px -1px 1px #111, 
+      2px 2px 1px #363636;
 }

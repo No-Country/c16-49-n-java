@@ -12,13 +12,14 @@ import Registro from './componentes/Registro';
 import Sesion from './componentes/InicioSesion';
 import Footer from './componentes/Footer';
 
-
 import { Routes, Route } from 'react-router-dom';
+
 function App() {
 
   return (
     <>
       <ThemeProvider theme={theme}>
+
         <NavBar />
         <Routes>
           <Route path="*" element={<Home />}></Route>
