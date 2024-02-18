@@ -14,7 +14,7 @@ function Hero() {
                     <div className="fondo">
                         <div className="slogan">
                           
-                            <Typography  className="titulo" color='secondary.light'>Cada libro, una conexión: <span>Únete a Páginas Compartidas</span>  y forma parte de una comunidad de lectores apasionados</Typography>
+                            <Typography variant="h4" className="titulo" >Cada libro, una conexión: forma parte de una comunidad de lectores apasionados</Typography>
                         </div>
                     </div>
 

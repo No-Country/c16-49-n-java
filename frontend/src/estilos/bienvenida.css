@@ -1,11 +1,12 @@
 .contenedorHero {
     width: 100vw;
-    height: 98vh;
+    height: 86vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 100px;
 
 }
 
@@ -17,33 +18,35 @@
 }
 
 .fondo {
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 98%;
-    height: 90%;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    background-color: #606c3828;
+    width: 30%;
+    height: 88%;
+    margin-left: 3%;
     z-index: 100;
     position: absolute;
-    top: 5%;
-    left: 1%;
-    bottom: 5%;
+    left: 0%;
+    top: 100px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    text-align: justify;
+    justify-content: flex-end;
+    text-align: left;
 
 }
 
 .slogan {
-    width: 90%;
-    height: 100%;
+    width: 100%;
+    height: 30%;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    text-align: justify;
-    margin-bottom: 1%;
-    margin-left: 5%;
+    text-align: left;
+    /* margin-bottom: 1%;
+    margin-left: 5%; */
     position: absolute;
-    bottom: 0;
+   top: 55%;
 
 
 
@@ -60,16 +63,13 @@
 }
 
 .titulo {
-    font-size: 60px;
-    padding: 80px 50px;
-    text-align: center;
+    font-weight: bold;
+    padding: 1px 5px;
+    text-align: left;
     text-rendering: optimizeLegibility;
     letter-spacing: 0.01rem;
-    
-    text-transform: uppercase;
-    /* background-color: #2d2d2d; */
-    letter-spacing: .1em;
+    color:white;
     text-shadow: 
       -1px -1px 1px #111, 
-      2px 2px 1px #363636;
+      1px 1.5px 1px #dda15e;
 }

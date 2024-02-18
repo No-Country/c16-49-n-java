@@ -75,7 +75,7 @@ const theme = createTheme({
             letterSpacing: "0.03em",
             lineHeight: 1.6,
             fontWeight: 500,
-            fontSize: "2rem",
+            fontSize: "1.8rem",
             '@media (max-width:600px)': {
                 fontSize: '1.03rem',
             },
@@ -90,7 +90,7 @@ const theme = createTheme({
         h3: {
             fontFamily: 'Libre Franklin',
             lineHeight: 1.5,
-            fontSize: '1.7rem',
+            fontSize: '1.5rem',
             '@media (max-width:600px)': {
                 fontSize: '1.3rem',
             },
@@ -101,7 +101,7 @@ const theme = createTheme({
         h4: {
             fontFamily: 'Libre Franklin',
             letterSpacing: "0.02em",
-            lineHeight: 1.3,
+            lineHeight: 1.2,
             fontWeight: 400,
             fontSize: "1.6rem",
             '@media (max-width:600px)': {

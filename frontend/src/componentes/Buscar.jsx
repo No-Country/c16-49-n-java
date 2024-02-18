@@ -1,23 +1,12 @@
-import React from "react";
-// import '../estilos/catalogo.css';
-// function Buscar(){
-//     return(
-//         <>
-//         <input type="text" 
-//             className="form-control" 
-//             onChange={(e) => Filter(e)} placeholder='Busca tu libro por autor, título o ISBN'
-//             // value={searchValue}
-//             >
-//             </input>
-//         </>
-//     )
-// }
-
-// export default Buscar;
-
+import React, { useState, useEffect } from "react";
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 {/* SEARCH */ }
 const Search = styled('div')(({ theme }) => ({
@@ -61,16 +50,76 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Buscar() {
+    const [datosInput, setDatosInput] = useState('');
+    const [parametro, setParametro] = useState('');
+    const [ejecutarConsulta, setEjecutarConsulta] = useState(false);
+
+    useEffect(() => {
+        if (ejecutarConsulta && parametro !== '' && datosInput.trim() !== '') {
+            handleInput();
+            setEjecutarConsulta(false);
+        }
+    }, [ejecutarConsulta, parametro, datosInput]);
+
+    const handleInputChange = (event) => {
+        setDatosInput(event.target.value);
+        setEjecutarConsulta(true);
+    };
+
+    const handleFiltro = (event) => {
+        setParametro(event.target.value);
+        setEjecutarConsulta(true);
+    };
+
+    const handleInput = () => {
+        
+            fetch(`http://localhost:8080/api/v1/libros/buscar?${parametro}=${datosInput}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error al realizar la búsqueda:', error);
+            });
+        
+
+           
+    };
+
     return (
-        <Search>
-            <SearchIconWrapper>
-                <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-                placeholder="Busca por titulo, autor o ISBN"
-                inputProps={{ 'aria-label': 'search' }}
-            />
-        </Search>
+        <>
+            <Search >
+                <SearchIconWrapper>
+                    <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                    placeholder="Busca por titulo, autor o ISBN"
+                    inputProps={{ 'aria-label': 'search' }}
+                    value={datosInput}
+                    onChange={handleInputChange}
+                   
+                />
+
+            </Search>
+            <Box sx={{ width: 80 }}>
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={parametro}
+                        label="parametro"
+                        onChange={handleFiltro}
+                        
+                    >
+                        <MenuItem value='titulo'>Título</MenuItem>
+                        <MenuItem value='autor'>Autor</MenuItem>
+                        <MenuItem value='isbn'>ISBN</MenuItem>
+                    </Select>
+                </FormControl>
+            </Box>
+        </>
+
     )
 }
 export default Buscar;

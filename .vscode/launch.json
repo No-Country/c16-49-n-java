@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "PaginasCompartidasApplication",
+            "request": "launch",
+            "mainClass": "com.nocountry.appintercambiolibros.PaginasCompartidasApplication",
+            "projectName": "app-intercambio-libros"
+        },
+        {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",

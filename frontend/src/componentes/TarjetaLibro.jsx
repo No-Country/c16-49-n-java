@@ -38,18 +38,19 @@ export default function TarjetaLibro() {
       <>
         {loading ? (
           <div className="contenedorTarjetas">
+            <h1>buscando</h1>
+            {/* <div >
+              <Skeleton variant="rectangular" width={200} height={320} justifyContent='space-between' />
+            </div>
             <div >
               <Skeleton variant="rectangular" width={200} height={320} justifyContent='space-between' />
             </div>
             <div >
-              <Skeleton variant="rectangular" width={200} height={320} justifyContent='space-between'/>
+              <Skeleton variant="rectangular" width={200} height={320} justifyContent='space-between' />
             </div>
             <div >
-              <Skeleton variant="rectangular" width={200} height={320} justifyContent='space-between'/>
-            </div>
-            <div >
-              <Skeleton variant="rectangular" width={200} height={320} justifyContent='space-between'/>
-            </div>
+              <Skeleton variant="rectangular" width={200} height={320} justifyContent='space-between' />
+            </div> */}
           </div>
 
         ) : (

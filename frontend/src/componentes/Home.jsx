@@ -1,9 +1,11 @@
 import React from "react";
 import Hero from './Bienvenida';
-function Home(){
-    return(
+import InfoWeb from "./InfoWeb";
+function Home() {
+    return (
         <>
-<Hero />
+            <Hero />
+            <InfoWeb />
         </>
 
     )
