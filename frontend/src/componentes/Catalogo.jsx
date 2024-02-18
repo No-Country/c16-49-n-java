@@ -11,7 +11,7 @@ function Catalogo() {
 
             <div className="contenedorCatalogo">
                 <div className="contenedorBusqueda">
-                    <h1>Catálogo de Libros</h1>
+                    <h1>Catálogo de Librossss</h1>
                     <div className="inputBuscar">
                         <Buscar />
                         <div className="contenedorLupa"><SearchSharpIcon /></div>
