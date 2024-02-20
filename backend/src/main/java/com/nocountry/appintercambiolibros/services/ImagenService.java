@@ -19,8 +19,15 @@ public class ImagenService {
     private final Path imagePath;
 
     @Autowired
-    public ImagenService(@Value("${storage.path.imagen}") Path imagePath){
+    public ImagenService(@Value("${storage.path.imagen}") Path imagePath) throws IOException{
         this.imagePath = imagePath;
+        this.asegurarDirectorio();
+    }
+
+    public void asegurarDirectorio() throws IOException{
+        if (!Files.exists(this.imagePath)){
+            Files.createDirectories(this.imagePath);
+        }
     }
 
     public byte[] obtenerImagen(String filename) throws IOException {
