@@ -32,7 +32,8 @@ public class LibroServiceImpl implements LibroService {
                                 libro.getIsbn(), libro.getTitulo(),
                                 libro.getAutor(), libro.getFechaDePublicacion(),
                                 libro.getResumen(), libro.getEditorial(),
-                                libro.getPaginas(), libro.getGenero()
+                                libro.getPaginas(), libro.getGenero(),
+                                libro.getNombreImagen()
                         )).collect(Collectors.toList());
     }
 

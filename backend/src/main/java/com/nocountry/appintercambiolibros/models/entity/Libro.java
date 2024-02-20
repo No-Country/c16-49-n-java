@@ -32,6 +32,7 @@ public class Libro {
     private String editorial;
     private String paginas;
     private String genero;
+    private String nombreImagen;
 
     @Temporal(TemporalType.DATE)
     private Date fechaDeCreacion;
