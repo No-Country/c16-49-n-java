@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import AppContext from "../context/AppContext";
 
 {/* SEARCH */ }
 const Search = styled('div')(({ theme }) => ({
@@ -53,6 +54,7 @@ function Buscar() {
     const [datosInput, setDatosInput] = useState('');
     const [parametro, setParametro] = useState('');
     const [ejecutarConsulta, setEjecutarConsulta] = useState(false);
+    const { setResultadosBusqueda } = useContext(AppContext);
 
     useEffect(() => {
         if (ejecutarConsulta && parametro !== '' && datosInput.trim() !== '') {
@@ -77,6 +79,7 @@ function Buscar() {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                setResultadosBusqueda(data)
             })
             .catch(error => {
                 console.error('Error al realizar la búsqueda:', error);

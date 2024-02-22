@@ -38,9 +38,11 @@ const theme = createTheme({
     },
     typography: {
         fontFamily: 'Libre Franklin',
-        fontSize: 15,
+        fontSize: 14,
+    
         body1:{
-            fontSize:12,
+            fontSize:14,
+            fontWeight:500,
             // fontStyle: 'italic',
         } ,
         body2:{
