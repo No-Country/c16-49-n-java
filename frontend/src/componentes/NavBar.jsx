@@ -22,15 +22,23 @@ import '../estilos/navbar.css';
 
 
 const pages = [
-    
+
     {
         name: 'Libros',
         path: '/Libros'
     },
+    {
+        name: 'Registrate',
+        path: '/Registro'
+    },
+    {
+        name: 'Inicia Sesión',
+        path: '/Sesion'
+    }
 
 ];
 
-const settings = ['Inicia Sesión', 'Registrate'];
+// const settings = ['Inicia Sesión', 'Registrate'];
 
 
 function NavBar() {
@@ -38,155 +46,186 @@ function NavBar() {
     const mostrarBuscador = ubicacion.pathname === '/Libros';
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
     };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
 
-    const [showSesion, setShowSesion] = React.useState(false);
-    const [showRegistro, setShowRegistro] = React.useState(false);
-    const handleOpenSesion = () => {
-        setShowSesion(true);
-        console.log("Se abrió el formulario de inicio de sesión");
-        handleCloseUserMenu(); // Cierra el menú después de hacer clic en "Iniciar Sesión"
-    };
+    // manejo de los estados para mostrar inicio de sesion
+    // const [showSesion, setShowSesion] = React.useState(false);
+    // const [showRegistro, setShowRegistro] = React.useState(false);
+    // const handleOpenSesion = () => {
+    //     setShowSesion(true);
+    //     console.log("Se abrió el formulario de inicio de sesión");
+    //     handleCloseUserMenu(); // Cierra el menú después de hacer clic en "Iniciar Sesión"
+    // };
 
-    const handleOpenRegistro = () => {
-        setShowRegistro(true);
-        console.log("Se abrió el formulario de registro");
-        handleCloseUserMenu(); // Cierra el menú después de hacer clic en "Registrarse"
-    };
+    // const handleOpenRegistro = () => {
+    //     setShowRegistro(true);
+    //     console.log("Se abrió el formulario de registro");
+    //     handleCloseUserMenu(); // Cierra el menú después de hacer clic en "Registrarse"
+    // };
 
-    const handleCloseForms = () => {
-        setShowSesion(false);
-        setShowRegistro(false);
-    };
-    const handleMenuItemClick = (setting) => {
-        switch (setting) {
-            case 'Inicia Sesion':
-                return handleOpenSesion;
-            case 'Registrate':
-                return handleOpenRegistro;
-            default:
-                return handleCloseUserMenu;
-        }
-    };
+    // const handleCloseForms = () => {
+    //     setShowSesion(false);
+    //     setShowRegistro(false);
+    // };
+    // const handleMenuItemClick = (setting) => {
+    //     switch (setting) {
+    //         case 'Inicia Sesion':
+    //             return handleOpenSesion;
+    //         case 'Registrate':
+    //             return handleOpenRegistro;
+    //         default:
+    //             return handleCloseUserMenu;
+    //     }
+    // };
 
     return (
-        <AppBar position="fixed" sx={{ left: '0', right: 'auto' }}>
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <LinkRouter to='/'>
-                        <div className='logo' >
-                            <img src='https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2Flogo.png?alt=media&token=b47a9708-49ef-4457-bc1a-f42b16282ef1' alt='logo'
-                            /></div>
-                    </LinkRouter>
-
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
-                            color="inherit"
+        <AppBar position='fixed' sx={{ left: '0', right: 'auto' }}>
+            <Toolbar disableGutters>
+                <LinkRouter to='/'>
+                    <div className='logo'>
+                        <img src='https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2Flogo.png?alt=media&token=b47a9708-49ef-4457-bc1a-f42b16282ef1' alt='logo' />
+                    </div>
+                </LinkRouter>
+                {/* BUSQUEDA */}
+                {mostrarBuscador && <Buscar />}
+                <Box sx={{ flexGrow: 1 }} />
+                {/* contenedor de enlaces */}
+                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    {pages.map((page) => (
+                        <Button
+                            key={page.path}
+                            component={LinkRouter}
+                            to={page.path}
+                            sx={{ mx: 2, color: 'white' }}
                         >
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
-                        >
-                            {pages.map((page) => (
-                                <MenuItem key={page.path} onClick={handleCloseNavMenu}>
-                                    <Typography
-                                        textAlign="center"
-                                        component={LinkRouter}
-                                        to={page.path}>{page.name}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                            {page.name}
+                        </Button>
+                    ))}
+                </Box>
+                <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                    <IconButton
+                        size="large"
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        onClick={handleOpenNavMenu}
+                        color="inherit"
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Menu
+                        id="menu-appbar"
+                        anchorEl={anchorElNav}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={Boolean(anchorElNav)}
+                        onClose={handleCloseNavMenu}
+                        sx={{
+                            display: { xs: 'block', md: 'none' },
+                        }}
+                    >
                         {pages.map((page) => (
-                            <Button
-                                key={page.path}
-                                component={LinkRouter}
-                                to={page.path}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page.name}
-                            </Button>
+                            <MenuItem key={page.path} onClick={handleCloseNavMenu}>
+                                <Typography
+                                    textAlign="center"
+                                    component={LinkRouter}
+                                    to={page.path}>{page.name}
+                                </Typography>
+                            </MenuItem>
                         ))}
-                    </Box>
+                    </Menu>
+                </Box >
 
-                    {/* BUSQUEDA */}
-                    {mostrarBuscador && (
-                    <Buscar />)}
-                    {/* NAVEGACION DEL SIDEBAR */}
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleMenuItemClick(setting)}>
-                                    <Typography
-                                        textAlign="center"
-                                        component={LinkRouter}
-                                        to={`/${setting.replace(/\s+/g, '')}`}>{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
-                </Toolbar>
-            </Container>
+
+            </Toolbar>
         </AppBar>
+
+
+        // <AppBar  position='fixed' sx={{  left: '0', right: 'auto' }}>
+        //     <Container maxWidth="xl">
+        //         <Toolbar disableGutters>
+        //             <LinkRouter to='/'>
+        //                 <div className='logo' >
+        //                     <img src='https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2Flogo.png?alt=media&token=b47a9708-49ef-4457-bc1a-f42b16282ef1' alt='logo'
+        //                     /></div>
+        //             </LinkRouter>
+
+
+        //             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+        //                 <IconButton
+        //                     size="large"
+        //                     aria-label="account of current user"
+        //                     aria-controls="menu-appbar"
+        //                     aria-haspopup="true"
+        //                     onClick={handleOpenNavMenu}
+        //                     color="inherit"
+        //                 >
+        //                     <MenuIcon />
+        //                 </IconButton>
+        //                 <Menu
+        //                     id="menu-appbar"
+        //                     anchorEl={anchorElNav}
+        //                     anchorOrigin={{
+        //                         vertical: 'bottom',
+        //                         horizontal: 'right',
+        //                     }}
+        //                     keepMounted
+        //                     transformOrigin={{
+        //                         vertical: 'top',
+        //                         horizontal: 'right',
+        //                     }}
+        //                     open={Boolean(anchorElNav)}
+        //                     onClose={handleCloseNavMenu}
+        //                     sx={{
+        //                         display: { xs: 'block', md: 'none' },
+        //                     }}
+        //                 >
+        //                     {pages.map((page) => (
+        //                         <MenuItem key={page.path} onClick={handleCloseNavMenu}>
+        //                             <Typography
+        //                                 textAlign="center"
+        //                                 component={LinkRouter}
+        //                                 to={page.path}>{page.name}</Typography>
+        //                         </MenuItem>
+        //                     ))}
+        //                 </Menu>
+        //             </Box>
+
+        //             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+        //                 {pages.map((page) => (
+        //                     <Button
+        //                         key={page.path}
+        //                         component={LinkRouter}
+        //                         to={page.path}
+        //                         sx={{ my: 2, color: 'white', display: 'block' }}
+        //                     >
+        //                         {page.name}
+        //                     </Button>
+        //                 ))}
+        //             </Box>
+
+        //             {/* BUSQUEDA */}
+        //             {mostrarBuscador && (
+        //             <Buscar />)}
+
+        //         </Toolbar>
+        //     </Container>
+        // </AppBar>
     );
 }
 export default NavBar;

@@ -34,27 +34,27 @@ function InfoWeb() {
                     <div className="contenedorTexto">
                         <Typography variant="body1">En esta Web puedes ser parte de una comunidad de Intercambio de Libros en tu Ciudad</Typography>
                     </div>
-                    <div className="preguntasD"><Typography variant="h5">¿Cómo intercambio libros en Páginas Compartidas?</Typography></div>
+                    <div className="preguntas"><Typography variant="h5">¿Cómo intercambio libros en Páginas Compartidas?</Typography></div>
                     <div className="contenedorTexto">
                         <Typography variant="body1">Imagina una biblioteca virtual donde puedes explorar una amplia 
                         selección de libros de segunda mano, todos en excelente estado y listos para ser compartidos. 
                         Navega por el <span>Catálogo de Libros</span> y conoce los títulos disponibles.
                        </Typography>
                     </div>
-                    <div className="preguntasI"><Typography variant="h5">Registrate</Typography></div>
+                    <div className="preguntas"><Typography variant="h5">Registrate</Typography></div>
                     <div className="contenedorTexto">
                         <Typography variant="body1">Completa tu registro en simples pasos y empieza a crear tu Librería.
                         ¿Tienes un montón de libros guardados que ya no lees? ¡Anímate a intercambiarlos!
                         Crea tu librería virtual y carga los libros que tienes y quieres compartir. La comunidad podrá explorar
                         tus lecturas y encontrar aquellos que le apasionan</Typography>
                     </div>
-                    <div className="preguntasD"><Typography variant="h5">Arma tu lista de Deseos</Typography></div>
+                    <div className="preguntas"><Typography variant="h5">Arma tu lista de Deseos</Typography></div>
                     <div className="contenedorTexto">Explora las librerías de otros usuarios. 
                     Encuentra los libros que quisieras leer y solicita intercambio</div>
-                    <div className="preguntasI"><Typography variant="h5">Intercambia tus Libros</Typography></div>
+                    <div className="preguntas"><Typography variant="h5">Intercambia tus Libros</Typography></div>
                     <div className="contenedorTexto">¿Ya solicitaste un intercambio?Chatea con los lectores y organiza 
                     una <span>Date de Intercambio</span> </div>
-                    <div className="preguntasD"><Typography variant="h5">¡Eso no es todo!</Typography></div>
+                    <div className="preguntas"><Typography variant="h5">¡Eso no es todo!</Typography></div>
                     <div className="contenedorTexto">También encontrarás reseñas y recomendaciones de otros lectores apasionados como tú. 
                     Conecta con personas que comparten tus mismos intereses y descubre nuevas perspectivas sobre tus libros favoritos
                     <span>¡Ya estás creando Red! </span></div>
