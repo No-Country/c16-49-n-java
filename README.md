@@ -54,7 +54,9 @@ cd c16-49-n-java/backend
    npm install
 
    ```
+
 Para backend, será necesario contar con con Java 17 y Maven como herramienta de gestión de construcción. Pueden obtener las dependencias usando `mvn`:
+
 ```
 mvn dependency:resolve
 ```
@@ -63,12 +65,14 @@ mvn dependency:resolve
    ```
    npm run dev (frontend)
    ```
+
 Inicializar backend:
 ```
 mvn compile
 cd target
 java app-intercambio-libros-<version>.jar
 ```
+
 
 5. Abre tu navegador web y visita la dirección: `http://localhost:5173` para ver la aplicación en funcionamiento.
 
