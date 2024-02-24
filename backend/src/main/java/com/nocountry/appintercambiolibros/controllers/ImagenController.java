@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nocountry.appintercambiolibros.services.ImagenService;
+import com.nocountry.appintercambiolibros.services.impl.ImagenServiceImpl;
 
 @RestController()
 @RequestMapping("/imagenes")
 public class ImagenController {
 
     @Autowired 
-    ImagenService imagenService;
+    ImagenServiceImpl imagenService;
 
     @GetMapping("/{filename}")
     public ResponseEntity<?> descargarImagen(@PathVariable("filename") String filename) throws IOException {

@@ -42,6 +42,7 @@ public class LibroDTOSolicitud implements Serializable {
     @NotEmpty
     @Size(min = 5, max = 10)
     private String estado;
+    private String nombreImagen;
 
 
 }

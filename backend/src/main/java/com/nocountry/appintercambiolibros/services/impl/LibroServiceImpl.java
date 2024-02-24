@@ -1,6 +1,5 @@
 package com.nocountry.appintercambiolibros.services.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nocountry.appintercambiolibros.especificacion.BuscarLibroEspecificacion;
 import com.nocountry.appintercambiolibros.exceptions.RecursoNoEncontradoException;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
@@ -26,6 +25,12 @@ public class LibroServiceImpl implements LibroService {
     private ImagenService imagenService;
 
     @Override
+    public List<LibroDTORespuesta> listarLibros(){
+        List<Libro> libros = libroRepository.findAll();
+        return libros.stream().map(libro -> this.toDtoRespuesta(libro)).collect(Collectors.toList());
+    }
+
+    @Override
     public List<LibroDTORespuesta> buscar(String isbn, String titulo, String autor) {
         BuscarLibroEspecificacion especificacion = new BuscarLibroEspecificacion(isbn, titulo, autor);
         List<Libro> librosEncontrados = libroRepository.findAll(especificacion);
@@ -34,20 +39,16 @@ public class LibroServiceImpl implements LibroService {
             throw new RecursoNoEncontradoException("No se encontraron resultados");
         }
         return librosEncontrados.stream()
-                .map(
-                        libro -> new LibroDTORespuesta(
-                                libro.getId().toString(),
-                                libro.getIsbn(), libro.getTitulo(),
-                                libro.getAutor(), libro.getFechaDePublicacion(),
-                                libro.getResumen(), libro.getEditorial(),
-                                libro.getPaginas(), libro.getGenero(),
-                                libro.getNombreImagen(),
-                                libro.getEstado().toString()
-                        )).collect(Collectors.toList());
+                .map(libro -> this.toDtoRespuesta(libro)).collect(Collectors.toList());
     }
 
     @Override
-    public LibroDTORespuesta guardar(LibroDTOSolicitud libroSolicitud) {
+    public LibroDTORespuesta guardar(LibroDTOSolicitud libroSolicitud, MultipartFile imagen) {
+        final String nombreImagen =  this.imagenService.guardarImagen(imagen);
+        if (nombreImagen == null){
+            return null;
+        }
+
         Libro libroGuardado = libroRepository.save(Libro.builder()
                 .isbn(libroSolicitud.getIsbn())
                 .titulo(libroSolicitud.getTitulo())
@@ -58,46 +59,19 @@ public class LibroServiceImpl implements LibroService {
                 .paginas(String.valueOf(libroSolicitud.getPaginas()))
                 .genero(libroSolicitud.getGenero())
                 .estado(Libro.LibroEstado.valueOf(libroSolicitud.getEstado().toUpperCase()))
+                .nombreImagen(nombreImagen)
                 .build());
-        return LibroDTORespuesta.builder()
-                .id(libroGuardado.getId().toString())
-                .isbn(libroGuardado.getIsbn())
-                .titulo(libroGuardado.getTitulo())
-                .autor(libroGuardado.getAutor())
-                .fechaDePublicacion(libroGuardado.getFechaDePublicacion())
-                .resumen(libroGuardado.getResumen())
-                .editorial(libroGuardado.getEditorial())
-                .paginas(libroGuardado.getPaginas())
-                .genero(libroGuardado.getGenero())
-                .estado(libroGuardado.getEstado().toString())
-                .build();
+
+        return this.toDtoRespuesta(libroGuardado);
     }
 
     @Override
-    public Libro guardar(Libro libro){
-        return this.libroRepository.save(libro);
-    }
-
-    @Override
-    public Libro guardar(Libro libro, MultipartFile imagen) {
-        try {
-            final String nombreImagen = this.imagenService.guardarImagen(imagen);
-            libro.setNombreImagen(nombreImagen);
-            return this.guardar(libro);
-        } catch(Exception e) {
+    public LibroDTORespuesta find(String id){
+        Libro libro = this.libroRepository.findById(Long.parseLong(id)).orElse(null);
+        if(libro == null){
             return null;
         }
-    }
-
-    @Override
-    public Libro fromJson(String json){
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            Libro libro = mapper.readValue(json, Libro.class);
-            return libro;
-        } catch (Exception e){
-            return null;
-        }
+        return this.toDtoRespuesta(libro);
     }
 
     @Override
@@ -107,19 +81,23 @@ public class LibroServiceImpl implements LibroService {
             throw new RecursoNoEncontradoException("No se encontraron resultados");
         }
         return libros.stream()
-                .map( libroGuardado -> {
-                    LibroDTORespuesta libroDTO = new LibroDTORespuesta();
-                    libroDTO.setId(libroGuardado.getId().toString());
-                    libroDTO.setIsbn(libroGuardado.getIsbn());
-                    libroDTO.setTitulo(libroGuardado.getTitulo());
-                    libroDTO.setAutor(libroGuardado.getAutor());
-                    libroDTO.setFechaDePublicacion(libroGuardado.getFechaDePublicacion());
-                    libroDTO.setResumen(libroGuardado.getResumen());
-                    libroDTO.setEditorial(libroGuardado.getEditorial());
-                    libroDTO.setPaginas(libroGuardado.getPaginas());
-                    libroDTO.setGenero(libroGuardado.getGenero());
-                    libroDTO.setEstado(libroGuardado.getEstado().toString());
-                    return libroDTO;
-                }).collect(Collectors.toList());
+                .map( libroGuardado -> this.toDtoRespuesta(libroGuardado)).collect(Collectors.toList());
+    }
+
+
+    private LibroDTORespuesta toDtoRespuesta( Libro libro){
+        return LibroDTORespuesta.builder()
+            .id(libro.getId().toString())
+            .isbn(libro.getIsbn())
+            .titulo(libro.getTitulo())
+            .autor(libro.getAutor())
+            .fechaDePublicacion(libro.getFechaDePublicacion())
+            .resumen(libro.getResumen())
+            .editorial(libro.getEditorial())
+            .paginas(libro.getPaginas())
+            .genero(libro.getGenero())
+            .estado(libro.getEstado().toString())
+            .nombreImagen(libro.getNombreImagen())
+            .build();
     }
 }
