@@ -44,22 +44,31 @@ ColorMind : para revisar la aplicación de paleta de colores
    ```
 
 2. Accede al directorio del proyecto:
+   
    ```
+   
 cd c16-49-n-java/frontend
 cd c16-49-n-java/backend
+
    ```
 
+
+
 3. Instala las dependencias del frontend y backend:
+
    ```
    npm install
 
    ```
 
-Para backend, será necesario contar con con Java 17 y Maven como herramienta de gestión de construcción. Pueden obtener las dependencias usando `mvn`:
+
+*Para backend, será necesario contar con con Java 17 y Maven como herramienta de gestión de construcción. Pueden obtener las dependencias usando `mvn`:*
+
 
 ```
 mvn dependency:resolve
 ```
+
 
 4. Inicia el servidor de desarrollo:
    ```
