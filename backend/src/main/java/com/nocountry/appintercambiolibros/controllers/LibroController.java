@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,8 +21,16 @@ public class LibroController {
     private LibroService libroService;
 
     @PostMapping
-    public ResponseEntity<?> guardarLibro(@RequestBody Libro libro){
-        return ResponseEntity.status(HttpStatus.CREATED).body(libroService.guardar(libro));
+    public ResponseEntity<?> guardarLibro(
+        @RequestParam String libroJson,
+        @RequestParam MultipartFile imagen){
+            Libro libro = this.libroService.fromJson(libroJson);
+            libro = libroService.guardar(libro, imagen);
+            if(libro == null){
+                return ResponseEntity.internalServerError().build();
+            }
+            // return ResponseEntity.ok("Todo en orden");
+            return ResponseEntity.status(HttpStatus.CREATED).body(libro);
     }
 
     @GetMapping("/buscar")

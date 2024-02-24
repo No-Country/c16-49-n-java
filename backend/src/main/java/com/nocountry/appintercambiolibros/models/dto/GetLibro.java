@@ -17,4 +17,5 @@ public class GetLibro {
     private String editorial;
     private String paginas;
     private String genero;
+    private String nombreImagen;
 }
