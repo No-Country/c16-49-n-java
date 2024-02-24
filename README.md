@@ -58,6 +58,8 @@ cd c16-49-n-java/backend
 ```
 mvn dependency:resolve
 ```
+
+*Para frontend, necesitas instalar react y vite en su ultima version, con el comando npm instalará todas las dependencias*
  ```
    npm install
 
