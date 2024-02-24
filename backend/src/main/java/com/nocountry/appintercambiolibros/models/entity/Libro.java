@@ -1,11 +1,7 @@
 package com.nocountry.appintercambiolibros.models.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
@@ -13,6 +9,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "libros")
 public class Libro {
@@ -27,12 +24,14 @@ public class Libro {
     private String titulo;
     private String autor;
     private String fechaDePublicacion;
-    @Size(min = 20, max = 500)
     private String resumen;
     private String editorial;
     private String paginas;
     private String genero;
     private String nombreImagen;
+
+    @Enumerated(EnumType.STRING)
+    private LibroEstado estado;
 
     @Temporal(TemporalType.DATE)
     private Date fechaDeCreacion;
@@ -41,4 +40,13 @@ public class Libro {
     public void fechaDeCreacion(){
         this.fechaDeCreacion = new Date();
     }
+
+
+    public static enum LibroEstado{
+        NUEVO,
+        USADO,
+        DESGASTADO
+    }
+
+
 }
