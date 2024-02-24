@@ -1,15 +1,17 @@
 package com.nocountry.appintercambiolibros.models.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetLibro {
-    private String ISBN;
+@Builder
+public class LibroDTORespuesta {
+    private String id;
+    private String isbn;
     private String titulo;
     private String autor;
     private String fechaDePublicacion;
@@ -18,4 +20,5 @@ public class GetLibro {
     private String paginas;
     private String genero;
     private String nombreImagen;
+    private String estado;
 }

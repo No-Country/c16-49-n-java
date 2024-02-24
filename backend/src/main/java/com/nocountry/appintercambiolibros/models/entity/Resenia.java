@@ -20,7 +20,9 @@ public class Resenia {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String comentario;
+
+    // TODO: sin comentarios
+    // private String comentario;
 
     @NotNull
     @DecimalMin(value = "0.5")
