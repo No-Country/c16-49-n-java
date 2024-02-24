@@ -14,6 +14,15 @@ function InfoWeb() {
                         <div className="contenedorGaleria">
                             <img src="https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2Fpexels-koshevayak-4170628.jpg?alt=media&token=2fe685a4-9227-4bcc-98e4-514d74bb60b3"></img>
                         </div>
+                        <div className="contenedorGaleria">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2Fpexels-nubia-navarro-(nubikini)-1517355.jpg?alt=media&token=67c1900a-e540-4053-b8fc-18be61af4f94"></img>
+                        </div>
+                        <div className="contenedorGaleria">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2Fpexels-andrea-piacquadio-3769708.jpg?alt=media&token=32a65f5b-6a8d-420b-a5cf-502ace5efb21"></img>
+                        </div>
+                        <div className="contenedorGaleria">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2Fpexels-karolina-grabowska-6328831.jpg?alt=media&token=c36077ce-6aaf-4c0f-b50f-775a2b98f526"></img>
+                        </div>
                     </div>
                 </div>
                 <div className="derecha">
