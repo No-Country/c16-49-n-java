@@ -46,6 +46,7 @@ ColorMind : para revisar la aplicación de paleta de colores
 2. Accede al directorio del proyecto:
 
 cd c16-49-n-java/frontend
+
 cd c16-49-n-java/backend
 
 
