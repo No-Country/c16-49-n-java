@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface LibroService {
     Page<LibroDTORespuesta> listarLibros(Pageable pageable);
     Page<LibroDTORespuesta> buscar(String isbn, String titulo, String autor, Pageable pageable);
-    //LibroDTORespuesta guardar(LibroDTOSolicitud libro, MultipartFile imagen);
+    LibroDTORespuesta guardar(LibroDTOSolicitud libro, MultipartFile imagen);
     LibroDTORespuesta find(String id);
     List<LibroDTORespuesta> findByGenero(String genero, Pageable pageable);
 }

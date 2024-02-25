@@ -1,6 +1,7 @@
 package com.nocountry.appintercambiolibros.controllers;
 
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
+import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
 import com.nocountry.appintercambiolibros.services.JsonService;
 import com.nocountry.appintercambiolibros.services.LibroService;
 
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -37,9 +39,9 @@ public class LibroController {
     public LibroDTORespuesta getLibro(@PathVariable String id) {
         return this.libroService.find(id);
     }
-    
 
-   /* @PostMapping
+    @Operation(summary = "Guarda un libro con imagen")
+    @PostMapping
     public ResponseEntity<?> guardarLibro(
         @RequestParam(name = "json") String libroDTOJson,
         @RequestParam(name = "imagen") MultipartFile imagen){
@@ -53,7 +55,7 @@ public class LibroController {
                 return ResponseEntity.internalServerError().build();
             }
             return ResponseEntity.status(HttpStatus.CREATED).body(libro);
-    }*/
+    }
 
 
     @Operation(summary = "Obtener una lista de libros paginados, filtrados por isbn, titulo, autor")
@@ -65,10 +67,6 @@ public class LibroController {
         return ResponseEntity.status(HttpStatus.OK).body(libroService.buscar(isbn,titulo, autor, pageable));
     }
 
-/*    @Parameters({
-            @Parameter(name = "página", schema = @Schema(type = "integer", minimum = "0", defaultValue = "0"), in = ParameterIn.QUERY, description = "Número de página."),
-            @Parameter(name = "tamaño", schema = @Schema(type = "integer", minimum = "1", defaultValue = "2"), in = ParameterIn.QUERY, description = "Tamaño fijo de la página. Siempre se devolverán dos libros por página.")
-    })*/
     @Operation(summary = "Obtener una lista de libros paginados por género")
     @GetMapping("/genero/{genero}")
     public ResponseEntity<?> buscarGenero(@PathVariable String genero, @ParameterObject @Parameter(hidden = true) Pageable pageable){

@@ -20,7 +20,7 @@ import com.nocountry.appintercambiolibros.services.impl.ImagenServiceImpl;
 @RequestMapping("api/v1/imagenes")
 public class ImagenController {
 
-   /* @Autowired
+    @Autowired
     ImagenServiceImpl imagenService;
 
     @GetMapping("/{filename}")
@@ -36,7 +36,7 @@ public class ImagenController {
         }
     }
 
-  *//*  @PostMapping("/guardar")
+    @PostMapping("/guardar")
     public ResponseEntity<?> guardarImagen(@RequestParam MultipartFile file){
         try {
             this.imagenService.guardarImagen(file);
@@ -44,5 +44,5 @@ public class ImagenController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
-    }*/
+    }
 }

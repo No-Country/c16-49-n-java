@@ -9,7 +9,6 @@ import com.nocountry.appintercambiolibros.repositories.LibroRepository;
 import com.nocountry.appintercambiolibros.services.ImagenService;
 import com.nocountry.appintercambiolibros.services.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 
 import org.springframework.data.domain.Pageable;
@@ -17,13 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class LibroServiceImpl implements LibroService {
-    @Value("${spring.data.web.pageable.default-page-size}")
-    private int size;
 
     @Autowired
     private LibroRepository libroRepository;
@@ -52,7 +48,7 @@ public class LibroServiceImpl implements LibroService {
         return librosEncontrados.map(this::toDtoRespuesta);
     }
 
-    /*@Override
+    @Override
     public LibroDTORespuesta guardar(LibroDTOSolicitud libroSolicitud, MultipartFile imagen) {
         final String nombreImagen =  this.imagenService.guardarImagen(imagen);
         if (nombreImagen == null){
@@ -73,7 +69,7 @@ public class LibroServiceImpl implements LibroService {
                 .build());
 
         return this.toDtoRespuesta(libroGuardado);
-    }*/
+    }
 
     @Override
     public LibroDTORespuesta find(String id){
@@ -83,15 +79,6 @@ public class LibroServiceImpl implements LibroService {
         }
         return this.toDtoRespuesta(libro);
 
-        //puedes hacer esto
-       /*   Optional<Libro> libro = libroRepository.buscarLibroPorId((id))
-        .orElseThrow( () -> new RecursoNoEncontradoException("No se encontró un libro con el id: " + id));*/
-        /*
-        //O validar que esta presente tambien, ya que te retorna un opcional el repositorio
-        if(!libro.isPresent()){
-            return new RecursoNoEncontradoException("mensaje");
-        }
-        return this.toDtoRespuesta(libro);*/
     }
 
     @Override
