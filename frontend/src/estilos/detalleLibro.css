@@ -1,6 +1,6 @@
 .contenedorInfoDetalle {
     width: 90%;
-    margin-left: 5%;
+    padding-left: 5%;
     display: flex;
     flex-direction: row;
     justify-content: center;

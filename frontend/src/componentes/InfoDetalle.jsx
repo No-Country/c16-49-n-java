@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Comentarios from "./Comentarios";
 import ListaComentarios from './ListaComentarios';
 
-function InfoDetalle(props) {
+function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
@@ -20,14 +20,15 @@ function InfoDetalle(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Box>{children}</Box>
+          {/* <Typography>{children}</Typography> */}
         </Box>
       )}
     </div>
-  );
+  )
 }
 
-InfoDetalle.propTypes = {
+CustomTabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
@@ -40,7 +41,7 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function InfoDetalle() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -55,13 +56,13 @@ export default function BasicTabs() {
           <Tab label="Librería" {...a11yProps(1)} />
         </Tabs>
       </Box>
-      <InfoDetalle value={value} index={0}>
+      <CustomTabPanel value={value} index={0}>
         <ListaComentarios />
         <Comentarios />
-      </InfoDetalle>
-      <InfoDetalle value={value} index={1}>
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}>
         Detalles sobre el usuario que lo tiene
-      </InfoDetalle>
+      </CustomTabPanel>
     </Box>
   );
 }

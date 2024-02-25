@@ -45,9 +45,9 @@ function DetalleLibro(libro) {
                         officia deserunt mollit anim id est laborum
                     </Typography>
                     <div className="tipsDetalle">
-                        <Typography><HomeIcon sx={{ color: 'primary.light' }} />Editorial:{libro.editorial}XYZ</Typography>
-                        <Typography><AutoStoriesIcon sx={{ color: 'primary.light' }} />Páginas:345{libro.paginas}</Typography>
-                        <Typography><EditCalendarIcon sx={{ color: 'primary.light' }} />Fecha de Publicación:25/02/2024 {libro.fechaDePublicacion}</Typography>
+                    <HomeIcon sx={{ color: 'primary.light' }} /><Typography>Editorial:{libro.editorial}XYZ</Typography>
+                    <AutoStoriesIcon sx={{ color: 'primary.light' }} /><Typography>Páginas:345{libro.paginas}</Typography>
+                    <EditCalendarIcon sx={{ color: 'primary.light' }} /><Typography>Fecha de Publicación:25/02/2024 {libro.fechaDePublicacion}</Typography>
                     </div>
                     <div className="contenedorBotonDetalle">
                         <Boton className={'atencion'} onClick={handleClick} titulo={'Pedir Intercambio'} ></Boton>
