@@ -4,5 +4,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ImagenService {
 
-    String guardarImagen(MultipartFile imagen);
+  //  String guardarImagen(MultipartFile imagen);
 }

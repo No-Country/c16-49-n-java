@@ -18,13 +18,13 @@ import com.nocountry.appintercambiolibros.services.ImagenService;
 @Service
 public class ImagenServiceImpl implements ImagenService {
 
-    private final Path imagePath;
+   /* //private final Path imagePath;
 
-    @Autowired
+  *//*  @Autowired
     public ImagenServiceImpl(@Value("${storage.path.imagen}") Path imagePath) throws IOException{
         this.imagePath = imagePath;
         this.asegurarDirectorio();
-    }
+    }*//*
 
     public void asegurarDirectorio() throws IOException{
         if (!Files.exists(this.imagePath)){
@@ -37,13 +37,13 @@ public class ImagenServiceImpl implements ImagenService {
         if(Files.exists(pathImage)){
             return Files.readAllBytes(pathImage);
         } else {
-            throw new FileNotFoundException("No se encontro el archivo" + filename );
+            throw new FileNotFoundException("No se encontró el archivo" + filename );
         }
     }
 
-    public String guardarImagen(MultipartFile imagen){
+   *//* public String guardarImagen(MultipartFile imagen){
         if (imagen == null){
-            throw new IllegalArgumentException("No se envió ningun archivo");
+            throw new IllegalArgumentException("No se envió ningún archivo");
         }
 
         String extension = StringUtils.getFilenameExtension(imagen.getOriginalFilename());
@@ -57,5 +57,5 @@ public class ImagenServiceImpl implements ImagenService {
         } catch (IOException ioe) {
             return null;
         }
-    }
+    }*/
 }
