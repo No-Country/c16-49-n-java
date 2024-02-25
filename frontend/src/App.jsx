@@ -24,9 +24,9 @@ function App() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8080/api/v1/libros')
+      .get('http://localhost:8080/api/v1/libros/buscar')
       .then((response) => {
-       console.log(response)
+       
         setDataLibros(response.data);
         setLoading(false);
       })
