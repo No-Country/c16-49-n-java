@@ -12,6 +12,7 @@ import Libro from './componentes/Libro';
 import Registro from './componentes/Registro';
 import Sesion from './componentes/InicioSesion';
 import Footer from './componentes/Footer';
+import DetalleLibro from './componentes/DetalleLibro'
 import axios from 'axios';
 
 import { Routes, Route } from 'react-router-dom';
@@ -45,9 +46,9 @@ function App() {
             <Route path="*" element={<Home />}></Route>
             {/* <Route path='/Inicio' element={<Home />}> </Route> */}
             <Route path='/Libros' element={<Catalogo />} ></Route>
-            <Route path='/Registrate' element={<Registro />}></Route>
-            <Route path='/IniciaSesion' element={<Sesion />}></Route>
-            <Route path='/Libro/:id' element={<Libro />}></Route>
+            <Route path='/Registro' element={<Registro />}></Route>
+            <Route path='/Sesion' element={<Sesion />}></Route>
+            <Route path='/Libro/:id' element={<DetalleLibro />}></Route>
           </Routes>
           <Footer />
 

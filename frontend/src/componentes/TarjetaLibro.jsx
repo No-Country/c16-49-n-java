@@ -52,7 +52,8 @@ export default function TarjetaLibro({ libro }) {
           />
           <CardContent sx={{ height: 112 }}>
             <Typography gutterBottom variant="body2" component="div" style={{ textAlign: 'left' }}>
-              Autor:{libro.autor.length > 25 ? `${libro.autor.slice(0, 25)}...` : libro.autor}
+              {/* Autor:{libro.autor.length > 25 ? `${libro.autor.slice(0, 25)}...` : libro.autor} */}
+              Autor:{libro.autor.length > 25 ? `${libro.author.slice(0, 25)}...` : libro.autor}
             </Typography>
             <Typography variant="h5" color="secondary.dark">
               {libro.titulo}

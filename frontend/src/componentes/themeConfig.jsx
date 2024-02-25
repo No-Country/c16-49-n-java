@@ -120,8 +120,9 @@ const theme = createTheme({
         h5: {
             fontFamily: 'Libre Franklin',
             lineHeight: 0.9,
-            fontSize: '1rem',
+            fontSize: '0.9rem',
             fontWeight: 'bold',
+            fontStyle: 'italic',
             '@media (max-width:600px)': {
                 fontSize: '0.8rem',
             },

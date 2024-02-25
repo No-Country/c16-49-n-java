@@ -76,6 +76,7 @@ function Buscar() {
     const handleInput = () => {
         
             fetch(`http://localhost:8080/api/v1/libros/buscar?${parametro}=${datosInput}`)
+            
             .then(response => response.json())
             .then(data => {
                 console.log(data);
