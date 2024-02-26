@@ -11,21 +11,27 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@AllArgsConstructor 
 @NoArgsConstructor
-/*@Entity
-@Table(name = "resenias")*/
+@Entity
+@Table(name = "resenias")
 public class Resenia {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // TODO: sin comentarios
-    // private String comentario;
-
-    @NotNull
-    @DecimalMin(value = "0.5")
+    @DecimalMin(value = "0")
     @DecimalMax(value = "5")
-    private double calificacion;
+    private double calificacion;  
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "libro_id")
+    private Libro libro;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    
 }

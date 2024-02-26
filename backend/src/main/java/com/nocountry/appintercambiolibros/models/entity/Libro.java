@@ -1,9 +1,12 @@
 package com.nocountry.appintercambiolibros.models.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -24,6 +27,7 @@ public class Libro {
     private String titulo;
     private String autor;
     private String fechaDePublicacion;
+    @Size(min = 50, max = 400)
     private String resumen;
     private String editorial;
     private String paginas;
@@ -35,6 +39,12 @@ public class Libro {
 
     @Temporal(TemporalType.DATE)
     private Date fechaDeCreacion;
+
+    @ManyToOne( fetch = FetchType.LAZY)
+    private Usuario usuario;
+
+    @OneToMany(mappedBy = "libro", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Resenia> resenias;
 
     @PrePersist
     public void fechaDeCreacion(){

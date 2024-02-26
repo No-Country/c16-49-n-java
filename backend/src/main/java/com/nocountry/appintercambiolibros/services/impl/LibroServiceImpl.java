@@ -2,10 +2,12 @@ package com.nocountry.appintercambiolibros.services.impl;
 
 import com.nocountry.appintercambiolibros.especificacion.BuscarLibroEspecificacion;
 import com.nocountry.appintercambiolibros.exceptions.RecursoNoEncontradoException;
+import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
 import com.nocountry.appintercambiolibros.models.entity.Libro;
 import com.nocountry.appintercambiolibros.repositories.LibroRepository;
+import com.nocountry.appintercambiolibros.repositories.ReseniaRepository;
 import com.nocountry.appintercambiolibros.services.ImagenService;
 import com.nocountry.appintercambiolibros.services.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +27,16 @@ public class LibroServiceImpl implements LibroService {
     @Autowired
     private LibroRepository libroRepository;
 
-    @Autowired 
+    @Autowired
+    private ReseniaRepository reseniaRepository;
+
+    @Autowired
     private ImagenService imagenService;
 
     @Override
-    public Page<LibroDTORespuesta> listarLibros(Pageable pageable){
+    public Page<LibroDTORespuesta> listarLibros(Pageable pageable) {
         Page<Libro> libros = libroRepository.findAll(pageable);
-        if(!libros.hasContent()){
+        if (!libros.hasContent()) {
             throw new RecursoNoEncontradoException("No se encontraron resultados");
         }
         return libros.map(this::toDtoRespuesta);
@@ -42,7 +47,7 @@ public class LibroServiceImpl implements LibroService {
         BuscarLibroEspecificacion especificacion = new BuscarLibroEspecificacion(isbn, titulo, autor);
         Page<Libro> librosEncontrados = libroRepository.findAll(especificacion, pageable);
 
-        if(librosEncontrados.isEmpty()){
+        if (librosEncontrados.isEmpty()) {
             throw new RecursoNoEncontradoException("No se encontraron resultados");
         }
 
@@ -51,8 +56,8 @@ public class LibroServiceImpl implements LibroService {
 
     @Override
     public LibroDTORespuesta guardar(LibroDTOSolicitud libroSolicitud, MultipartFile imagen) {
-        final String nombreImagen =  this.imagenService.guardarImagen(imagen);
-        if (nombreImagen == null){
+        final String nombreImagen = this.imagenService.guardarImagen(imagen);
+        if (nombreImagen == null) {
             return null;
         }
 
@@ -73,47 +78,54 @@ public class LibroServiceImpl implements LibroService {
     }
 
     @Override
-    public LibroDTORespuesta find(String id){
-        Libro libro = this.libroRepository.findById(Long.valueOf(id)).orElse(null);
-        if(libro == null){
-            return null;
-        }
-        return this.toDtoRespuesta(libro);
+    public LibroDTORespuesta find(Long libroId) {
+        Libro libro = libroRepository.findById(libroId)
+                .orElseThrow( ()-> new RecursoNoEncontradoException("Libro no encontrado con el id: " + libroId));
 
-    }
+            return this.toDtoRespuesta(libro);
+
+        }
 
     @Override
-    public Page<LibroDTORespuesta> findByGenero(String genero, Pageable pageable) {
-        List<Libro> libros = libroRepository.findByGenero(genero);
-        if(libros.isEmpty()){
-            throw new RecursoNoEncontradoException("No se encontraron resultados");
+        public Page<LibroDTORespuesta> findByGenero(String genero, Pageable pageable){
+            List<Libro> libros = libroRepository.findByGenero(genero);
+            if (libros.isEmpty()) {
+                throw new RecursoNoEncontradoException("No se encontraron resultados");
+            }
+
+            int start = (int) pageable.getOffset();
+            int end = Math.min((start + pageable.getPageSize()), libros.size());
+
+            List<LibroDTORespuesta> librosDTO = libros.subList(start, end).stream()
+                    .map(this::toDtoRespuesta)
+                    .collect(Collectors.toList());
+
+            return new PageImpl<>(librosDTO, pageable, libros.size());
+
         }
 
-        int start = (int) pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), libros.size());
 
-        List<LibroDTORespuesta> librosDTO = libros.subList(start, end).stream()
-                .map(this::toDtoRespuesta)
-                .collect(Collectors.toList());
+        public LibroDTORespuesta toDtoRespuesta (Libro libro){
+            return LibroDTORespuesta.builder()
+                    .id(libro.getId().toString())
+                    .isbn(libro.getIsbn())
+                    .titulo(libro.getTitulo())
+                    .autor(libro.getAutor())
+                    .fechaDePublicacion(libro.getFechaDePublicacion())
+                    .resumen(libro.getResumen())
+                    .editorial(libro.getEditorial())
+                    .paginas(libro.getPaginas())
+                    .genero(libro.getGenero())
+                    .estado(libro.getEstado().toString())
+                    .nombreImagen(libro.getNombreImagen())
+                    .build();
+        }
 
-        return new PageImpl<>(librosDTO, pageable, libros.size());
+        @Override
+        public List<GetReseniaDTO> getReseniasDeLibroId (Long idLibro){
+            Libro libro = this.libroRepository.findById(idLibro).orElseThrow();
+            return this.reseniaRepository.findByLibro(libro);
+        }
 
-    }
-
-
-    private LibroDTORespuesta toDtoRespuesta( Libro libro){
-        return LibroDTORespuesta.builder()
-            .id(libro.getId().toString())
-            .isbn(libro.getIsbn())
-            .titulo(libro.getTitulo())
-            .autor(libro.getAutor())
-            .fechaDePublicacion(libro.getFechaDePublicacion())
-            .resumen(libro.getResumen())
-            .editorial(libro.getEditorial())
-            .paginas(libro.getPaginas())
-            .genero(libro.getGenero())
-            .estado(libro.getEstado().toString())
-            .nombreImagen(libro.getNombreImagen())
-            .build();
-    }
 }
+

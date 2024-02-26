@@ -1,5 +1,6 @@
 package com.nocountry.appintercambiolibros.controllers;
 
+import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
 import com.nocountry.appintercambiolibros.services.JsonService;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 
 @RestController
@@ -36,8 +39,13 @@ public class LibroController {
     }
     @Operation(summary = "Obtener libro por Id")
     @GetMapping("/{id}")
-    public LibroDTORespuesta getLibro(@PathVariable String id) {
+    public LibroDTORespuesta getLibro(@PathVariable Long id) {
         return this.libroService.find(id);
+    }
+
+    @GetMapping("/{id}/resenias")
+    public List<GetReseniaDTO> getReseniasDeLibro(@PathVariable("id") Long id) {
+        return this.libroService.getReseniasDeLibroId(id);
     }
 
     @Operation(summary = "Guarda un libro con imagen")
@@ -56,7 +64,6 @@ public class LibroController {
             }
             return ResponseEntity.status(HttpStatus.CREATED).body(libro);
     }
-
 
     @Operation(summary = "Obtener una lista de libros paginados, filtrados por isbn, titulo, autor")
     @GetMapping("/buscar")
