@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nocountry.appintercambiolibros.services.impl.ImagenServiceImpl;
 
 @RestController()
-<<<<<<< HEAD
 @CrossOrigin(origins = "http://localhost:5173")
-=======
 @RequestMapping("api/v1/imagenes")
->>>>>>> paginable-swagger
 public class ImagenController {
 
     @Autowired
