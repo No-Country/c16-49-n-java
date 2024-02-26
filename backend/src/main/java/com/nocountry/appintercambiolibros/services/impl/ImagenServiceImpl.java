@@ -22,7 +22,7 @@ public class ImagenServiceImpl implements ImagenService {
 
     @Autowired
     public ImagenServiceImpl(@Value("${storage.path.imagen}") Path imagePath) throws IOException{
-        this.imagePath = imagePath;
+        this.imagePath = Paths.get(System.getProperty("user.home"), imagePath.toString());
         this.asegurarDirectorio();
     }
 

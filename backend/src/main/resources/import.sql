@@ -8,7 +8,8 @@ INSERT INTO libros (isbn, titulo, autor, fecha_de_publicacion, resumen, editoria
 INSERT INTO libros (isbn, titulo, autor, fecha_de_publicacion, resumen, editorial, paginas, genero, estado, nombre_imagen, fecha_de_creacion) VALUES ('2780132350884', 'La vidente 2', 'Lars Kepler', '2008-08-11', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Prentice Hall', '464', 'Programming', 'NUEVO', 'la_vidente_2.jpg', NOW());
 
 INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, psword) VALUES ('frankenstein', 'hplover@gmail.com', NOW() , 'frank1.jpg', 'sh@d0w231')
+INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, psword) VALUES ('Rambo', 'hplover@gmail.com', NOW() , 'frank1.jpg', 'sh@d0w231')
 
 INSERT INTO resenias (calificacion, libro_id, usuario_id) VALUES (4.0, 1, 1)
-INSERT INTO resenias (calificacion, libro_id, usuario_id) VALUES (1.0, 2, 1)
+INSERT INTO resenias (calificacion, libro_id, usuario_id) VALUES (1.0, 2, 2)
 INSERT INTO resenias (calificacion, libro_id, usuario_id) VALUES (2.0, 3, 1)
