@@ -96,7 +96,7 @@ public class LibroServiceImpl implements LibroService {
                 .map(this::toDtoRespuesta)
                 .collect(Collectors.toList());
 
-        return new PageIgit mpl<>(librosDTO, pageable, libros.size());
+        return new PageImpl<>(librosDTO, pageable, libros.size());
 
     }
 
