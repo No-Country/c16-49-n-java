@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface LibroRepository extends JpaRepository<Libro, Long>, JpaSpecificationExecutor<Libro> {
-    @Query("SELECT l FROM Libro l WHERE l.genero LIKE %?1%")
+    @Query("SELECT l FROM Libro l WHERE LOWER(l.genero) LIKE LOWER(concat('%', ?1, '%'))")
     List<Libro> findByGenero(String genero);
 }

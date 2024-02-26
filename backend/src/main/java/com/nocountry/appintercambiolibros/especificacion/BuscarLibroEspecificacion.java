@@ -1,6 +1,5 @@
 package com.nocountry.appintercambiolibros.especificacion;
 
-import com.nocountry.appintercambiolibros.models.entity.Genero;
 import com.nocountry.appintercambiolibros.models.entity.Libro;
 import jakarta.persistence.criteria.*;
 import lombok.AllArgsConstructor;

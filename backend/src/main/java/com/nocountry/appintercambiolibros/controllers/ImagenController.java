@@ -9,20 +9,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.nocountry.appintercambiolibros.services.impl.ImagenServiceImpl;
 
 @RestController()
-@RequestMapping("/imagenes")
+<<<<<<< HEAD
 @CrossOrigin(origins = "http://localhost:5173")
+=======
+@RequestMapping("api/v1/imagenes")
+>>>>>>> paginable-swagger
 public class ImagenController {
 
-    @Autowired 
+    @Autowired
     ImagenServiceImpl imagenService;
 
     @GetMapping("/{filename}")
@@ -37,14 +37,5 @@ public class ImagenController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @PostMapping("/guardar")
-    public ResponseEntity<?> guardarImagen(@RequestParam MultipartFile file){
-        try {
-            this.imagenService.guardarImagen(file);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
-    }
+    
 }

@@ -13,10 +13,11 @@ import java.time.LocalDateTime;
 @Builder
 public class ApiErrorRespuesta {
 
-    private String error;
+    private String type;
     private String url;
     private String method;
     private int status;
     private String message;
     private LocalDateTime timestamp;
+    private String error;
 }

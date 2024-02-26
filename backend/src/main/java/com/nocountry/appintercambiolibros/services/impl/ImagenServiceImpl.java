@@ -38,13 +38,13 @@ public class ImagenServiceImpl implements ImagenService {
         if(Files.exists(pathImage)){
             return Files.readAllBytes(pathImage);
         } else {
-            throw new FileNotFoundException("No se encontro el archivo" + filename );
+            throw new FileNotFoundException("No se encontró el archivo" + filename );
         }
     }
 
     public String guardarImagen(MultipartFile imagen){
         if (imagen == null){
-            throw new IllegalArgumentException("No se envió ningun archivo");
+            throw new IllegalArgumentException("No se envió ningún archivo");
         }
 
         String extension = StringUtils.getFilenameExtension(imagen.getOriginalFilename());

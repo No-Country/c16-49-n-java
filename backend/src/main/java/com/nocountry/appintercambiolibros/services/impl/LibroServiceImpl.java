@@ -9,6 +9,10 @@ import com.nocountry.appintercambiolibros.repositories.LibroRepository;
 import com.nocountry.appintercambiolibros.services.ImagenService;
 import com.nocountry.appintercambiolibros.services.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,21 +29,24 @@ public class LibroServiceImpl implements LibroService {
     private ImagenService imagenService;
 
     @Override
-    public List<LibroDTORespuesta> listarLibros(){
-        List<Libro> libros = libroRepository.findAll();
-        return libros.stream().map(libro -> this.toDtoRespuesta(libro)).collect(Collectors.toList());
+    public Page<LibroDTORespuesta> listarLibros(Pageable pageable){
+        Page<Libro> libros = libroRepository.findAll(pageable);
+        if(!libros.hasContent()){
+            throw new RecursoNoEncontradoException("No se encontraron resultados");
+        }
+        return libros.map(this::toDtoRespuesta);
     }
 
     @Override
-    public List<LibroDTORespuesta> buscar(String isbn, String titulo, String autor) {
+    public Page<LibroDTORespuesta> buscar(String isbn, String titulo, String autor, Pageable pageable) {
         BuscarLibroEspecificacion especificacion = new BuscarLibroEspecificacion(isbn, titulo, autor);
-        List<Libro> librosEncontrados = libroRepository.findAll(especificacion);
+        Page<Libro> librosEncontrados = libroRepository.findAll(especificacion, pageable);
 
         if(librosEncontrados.isEmpty()){
             throw new RecursoNoEncontradoException("No se encontraron resultados");
         }
-        return librosEncontrados.stream()
-                .map(libro -> this.toDtoRespuesta(libro)).collect(Collectors.toList());
+
+        return librosEncontrados.map(this::toDtoRespuesta);
     }
 
     @Override
@@ -67,21 +74,30 @@ public class LibroServiceImpl implements LibroService {
 
     @Override
     public LibroDTORespuesta find(String id){
-        Libro libro = this.libroRepository.findById(Long.parseLong(id)).orElse(null);
+        Libro libro = this.libroRepository.findById(Long.valueOf(id)).orElse(null);
         if(libro == null){
             return null;
         }
         return this.toDtoRespuesta(libro);
+
     }
 
     @Override
-    public List<LibroDTORespuesta> findByGenero(String genero) {
+    public Page<LibroDTORespuesta> findByGenero(String genero, Pageable pageable) {
         List<Libro> libros = libroRepository.findByGenero(genero);
         if(libros.isEmpty()){
             throw new RecursoNoEncontradoException("No se encontraron resultados");
         }
-        return libros.stream()
-                .map( libroGuardado -> this.toDtoRespuesta(libroGuardado)).collect(Collectors.toList());
+
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), libros.size());
+
+        List<LibroDTORespuesta> librosDTO = libros.subList(start, end).stream()
+                .map(this::toDtoRespuesta)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(librosDTO, pageable, libros.size());
+
     }
 
 
