@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { useContext } from 'react';
+import { useEffect, useState} from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -10,32 +10,39 @@ import Typography from '@mui/material/Typography';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "./themeConfig";
 import { Box } from '@mui/material';
+import { Link as LinkRouter } from 'react-router-dom';
 import '../estilos/tarjetaLibros.css';
-// import axios from 'axios';
-// import { useEffect, useState } from 'react';
-// import Skeleton from '@mui/material/Skeleton';
-// import AppContext from '../context/AppContext';
+
 
 export default function TarjetaLibro({ libro }) {
-  console.log(libro)
-  // const {dataLibros} = useContext(AppContext);
-  // const {loading} = useContext(AppContext);
-  // const [dataLibros, setDataLibros] = useState([])
+  const handleClick = (event, id) => {
+    console.log('hice click en el boton ver del id'+{id})
+};
+  const [imagen, setImagen] = useState(null);
+  
+  const imagenGenerica = 'https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2FPortada%20Libro%20Generica.png?alt=media&token=42926409-eb7b-4a16-9298-e6a53d6faee8'
 
+  useEffect(() => {
+    if (libro && libro.nombreImagen) {
+      const apiUrl = `http://localhost:8080/api/v1/imagenes/${libro.nombreImagen}`;
 
-  // useEffect(() => {
-  //   axios
-  //     .get('https://www.dbooks.org/api/recent')
-  //     .then((response) => {
-  //       setDataLibros(response.data.books);
-  //       setLoading(false);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching data:', error);
-  //       setLoading(false);
-  //     });
+      fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error al cargar la imagen');
+          }
+          return response.blob();
+        })
+        .then(blob => {
+          const imageUrl = URL.createObjectURL(blob);
+          setImagen(imageUrl);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+  }, [libro]);
 
-  // }, []);
 
   return (
 
@@ -47,10 +54,10 @@ export default function TarjetaLibro({ libro }) {
           <CardMedia
             component="img"
             alt="caratula libro"
-            height="160"
-          // image={libro.image}
+            height="200"
+          image={imagen ? imagen : imagenGenerica}
           />
-          <CardContent sx={{ height: 112 }}>
+          <CardContent sx={{ height: 80 }}>
             <Typography gutterBottom variant="body2" component="div" style={{ textAlign: 'left' }}>
               {/* Autor:{libro.autor.length > 25 ? `${libro.autor.slice(0, 25)}...` : libro.autor} */}
               Autor:{libro.autor.length > 25 ? `${libro.author.slice(0, 25)}...` : libro.autor}
@@ -59,13 +66,14 @@ export default function TarjetaLibro({ libro }) {
               {libro.titulo}
             </Typography>
           </CardContent>
-          <CardActions sx={{ height: 48, justifyContent: 'center' }}>
-            <Boton className="info" titulo="Ver más" mensaje="Registrate para ver mas informacion"></Boton>
-            {/* <Boton className="accion" titulo="Lo quiero" mensaje="Inicia Sesion o Registrate para pedir intercambio"></Boton> */}
-            {/* agregarle acciones a los botones para llamar a funciones
-<Boton className="info" titulo="Ver más" mensaje="Producto agregado al carrito" onClick={handleVerDetalle}></Boton>
-<Boton className="accion" titulo="Lo quiero" mensaje="Producto agregado al carrito" onClick={handleRegistrarse}></Boton> */}
-
+          <CardActions sx={{ height: 40, justifyContent: 'center' }}>
+            <LinkRouter to={'/Libro/'+ libro.id}>
+            <Boton className="info" 
+            titulo="Ver más" 
+            mensaje="Registrate para ver mas informacion" 
+            ></Boton>
+            </LinkRouter>
+            
           </CardActions>
         </Card>
       }
