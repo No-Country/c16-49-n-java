@@ -2,10 +2,12 @@ package com.nocountry.appintercambiolibros.services.impl;
 
 import com.nocountry.appintercambiolibros.especificacion.BuscarLibroEspecificacion;
 import com.nocountry.appintercambiolibros.exceptions.RecursoNoEncontradoException;
+import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
 import com.nocountry.appintercambiolibros.models.entity.Libro;
 import com.nocountry.appintercambiolibros.repositories.LibroRepository;
+import com.nocountry.appintercambiolibros.repositories.ReseniaRepository;
 import com.nocountry.appintercambiolibros.services.ImagenService;
 import com.nocountry.appintercambiolibros.services.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class LibroServiceImpl implements LibroService {
 
     @Autowired
     private LibroRepository libroRepository;
+
+    @Autowired
+    private ReseniaRepository reseniaRepository;
 
     @Autowired 
     private ImagenService imagenService;
@@ -66,8 +71,8 @@ public class LibroServiceImpl implements LibroService {
     }
 
     @Override
-    public LibroDTORespuesta find(String id){
-        Libro libro = this.libroRepository.findById(Long.parseLong(id)).orElse(null);
+    public LibroDTORespuesta find(Long idLibro){
+        Libro libro = this.libroRepository.findById(idLibro).orElse(null);
         if(libro == null){
             return null;
         }
@@ -99,5 +104,11 @@ public class LibroServiceImpl implements LibroService {
             .estado(libro.getEstado().toString())
             .nombreImagen(libro.getNombreImagen())
             .build();
+    }
+
+    @Override
+    public List<GetReseniaDTO> getReseniasDeLibroId(Long idLibro) {
+        Libro libro = this.libroRepository.findById(idLibro).orElseThrow();
+        return this.reseniaRepository.findByLibro(libro);
     }
 }

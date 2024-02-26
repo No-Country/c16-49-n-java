@@ -1,5 +1,6 @@
 package com.nocountry.appintercambiolibros.controllers;
 
+import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
 import com.nocountry.appintercambiolibros.services.JsonService;
@@ -33,10 +34,14 @@ public class LibroController {
     }
 
     @GetMapping("/{id}")
-    public LibroDTORespuesta getLibro(@PathVariable String id) {
+    public LibroDTORespuesta getLibro(@PathVariable Long id) {
         return this.libroService.find(id);
     }
-    
+
+    @GetMapping("/{id}/resenias")
+    public List<GetReseniaDTO> getReseniasDeLibro(@PathVariable("id") Long id) {
+        return this.libroService.getReseniasDeLibroId(id);
+    }
 
     @PostMapping
     public ResponseEntity<?> guardarLibro(

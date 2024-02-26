@@ -1,5 +1,6 @@
 package com.nocountry.appintercambiolibros.services;
 
+import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
 
@@ -11,6 +12,7 @@ public interface LibroService {
     List<LibroDTORespuesta> listarLibros();
     List<LibroDTORespuesta> buscar(String isbn, String titulo, String autor);
     LibroDTORespuesta guardar(LibroDTOSolicitud libro, MultipartFile imagen);
-    LibroDTORespuesta find(String id);
+    LibroDTORespuesta find(Long id);
     List<LibroDTORespuesta> findByGenero(String genero);
+    List<GetReseniaDTO> getReseniasDeLibroId(Long id);
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -35,6 +37,14 @@ public class Libro {
 
     @Temporal(TemporalType.DATE)
     private Date fechaDeCreacion;
+
+    // TODO: Completar los datos de prueba y descomentar
+    // @NotNull
+    @ManyToOne( fetch = FetchType.LAZY)
+    private Usuario usuario;
+
+    @OneToMany(mappedBy = "libro", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Resenia> resenias;
 
     @PrePersist
     public void fechaDeCreacion(){
