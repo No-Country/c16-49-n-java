@@ -11,6 +11,7 @@ import com.nocountry.appintercambiolibros.services.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -82,14 +83,21 @@ public class LibroServiceImpl implements LibroService {
     }
 
     @Override
-    public List<LibroDTORespuesta> findByGenero(String genero, Pageable pageable) {
-        List<Libro> libros = libroRepository.findByGenero(genero, pageable);
+    public Page<LibroDTORespuesta> findByGenero(String genero, Pageable pageable) {
+        List<Libro> libros = libroRepository.findByGenero(genero);
         if(libros.isEmpty()){
             throw new RecursoNoEncontradoException("No se encontraron resultados");
         }
 
-        return libros.stream()
-                .map(this::toDtoRespuesta).collect(Collectors.toList());
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), libros.size());
+
+        List<LibroDTORespuesta> librosDTO = libros.subList(start, end).stream()
+                .map(this::toDtoRespuesta)
+                .collect(Collectors.toList());
+
+        return new PageIgit mpl<>(librosDTO, pageable, libros.size());
+
     }
 
 

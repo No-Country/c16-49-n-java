@@ -14,5 +14,5 @@ public interface LibroService {
     Page<LibroDTORespuesta> buscar(String isbn, String titulo, String autor, Pageable pageable);
     LibroDTORespuesta guardar(LibroDTOSolicitud libro, MultipartFile imagen);
     LibroDTORespuesta find(String id);
-    List<LibroDTORespuesta> findByGenero(String genero, Pageable pageable);
+    Page<LibroDTORespuesta> findByGenero(String genero, Pageable pageable);
 }

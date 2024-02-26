@@ -35,14 +35,5 @@ public class ImagenController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @PostMapping("/guardar")
-    public ResponseEntity<?> guardarImagen(@RequestParam MultipartFile file){
-        try {
-            this.imagenService.guardarImagen(file);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
-    }
+    
 }
