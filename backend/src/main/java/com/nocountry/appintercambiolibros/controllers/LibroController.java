@@ -1,8 +1,10 @@
 package com.nocountry.appintercambiolibros.controllers;
 
 import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
+import com.nocountry.appintercambiolibros.models.dto.GetUsuarioDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
+import com.nocountry.appintercambiolibros.models.dto.UsuarioDTO;
 import com.nocountry.appintercambiolibros.services.JsonService;
 import com.nocountry.appintercambiolibros.services.LibroService;
 
@@ -47,6 +49,12 @@ public class LibroController {
     public List<GetReseniaDTO> getReseniasDeLibro(@PathVariable("id") Long id) {
         return this.libroService.getReseniasDeLibroId(id);
     }
+
+    @GetMapping("/{id}/usuario")
+    public UsuarioDTO getUsuarioLibroId(@PathVariable("id") Long idLibro) {
+        return this.libroService.getUsuarioDTODeLibrodId(idLibro);
+    }
+    
 
     @Operation(summary = "Guarda un libro con imagen")
     @PostMapping

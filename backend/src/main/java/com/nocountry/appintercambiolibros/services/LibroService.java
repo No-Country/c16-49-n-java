@@ -1,8 +1,10 @@
 package com.nocountry.appintercambiolibros.services;
 
 import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
+import com.nocountry.appintercambiolibros.models.dto.GetUsuarioDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
+import com.nocountry.appintercambiolibros.models.dto.UsuarioDTO;
 
 import java.util.List;
 
@@ -17,5 +19,6 @@ public interface LibroService {
     Page<LibroDTORespuesta> findByGenero(String genero, Pageable pageable);
     LibroDTORespuesta find(Long libroId);
     List<GetReseniaDTO> getReseniasDeLibroId(Long id);
+    UsuarioDTO getUsuarioDTODeLibrodId(Long idLibro);
 
 }

@@ -3,9 +3,12 @@ package com.nocountry.appintercambiolibros.services.impl;
 import com.nocountry.appintercambiolibros.especificacion.BuscarLibroEspecificacion;
 import com.nocountry.appintercambiolibros.exceptions.RecursoNoEncontradoException;
 import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
+import com.nocountry.appintercambiolibros.models.dto.GetUsuarioDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
+import com.nocountry.appintercambiolibros.models.dto.UsuarioDTO;
 import com.nocountry.appintercambiolibros.models.entity.Libro;
+import com.nocountry.appintercambiolibros.models.entity.Usuario;
 import com.nocountry.appintercambiolibros.repositories.LibroRepository;
 import com.nocountry.appintercambiolibros.repositories.ReseniaRepository;
 import com.nocountry.appintercambiolibros.services.ImagenService;
@@ -125,6 +128,18 @@ public class LibroServiceImpl implements LibroService {
         public List<GetReseniaDTO> getReseniasDeLibroId (Long idLibro){
             Libro libro = this.libroRepository.findById(idLibro).orElseThrow();
             return this.reseniaRepository.findByLibro(libro);
+        }
+
+        @Override
+        public UsuarioDTO getUsuarioDTODeLibrodId(Long idLibro) {
+            Libro libro = this.libroRepository.findById(idLibro).orElseThrow();
+            Usuario usuario = libro.getUsuario();
+            return UsuarioDTO.builder()
+                .id(usuario.getId())
+                .nombre(usuario.getNombre())
+                .nombreImagen(usuario.getNombreImagen())
+                .build();
+                
         }
 
 }
