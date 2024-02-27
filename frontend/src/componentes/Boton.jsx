@@ -8,9 +8,9 @@ function Boton(props) {
         if (props.mensaje) {
             // alert(props.mensaje);
             Swal.fire({
-                title: "Atencion",
+                title: props.title,
                 text: props.mensaje,
-                icon: "success"
+                icon: props.icon
               }); 
         }
 

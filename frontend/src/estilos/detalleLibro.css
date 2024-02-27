@@ -1,28 +1,28 @@
 .contenedorInfoDetalle {
     width: 90%;
-    padding-left: 5%;
+    margin-left: 5%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    height: auto;
+    height: 300px;
     margin-top: 100px;
     margin-bottom: 120px;
 }
 .detalleIzq{
     width: 45%;
-    height: 300px;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    background-color: #301607;
 
    
 }
 .contenedorImagen {
-    margin-top: 100px;
     width: 50%;
-    height: 100%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,10 +39,11 @@
 
 .contenedorCinta {
     width: 71%;
+    height: 10%;
     display: flex;
-    position: relative;
+    /* position: relative;
     bottom: 320px;
-   left: 10%;
+   left: 10%; */
     /* transform: rotate(-20deg); */
 }
 
@@ -139,17 +140,23 @@
 }
 .contenedorTextoDetalle{
     width: 55%;
-    height: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+.contenedorTituloDetalle{
+    width: 100%;
+    height: 20%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-
-
 }
 .contenedorResenias{
     width: 100%;
-    height: auto;
+    height: 10%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -157,22 +164,55 @@
     margin-top: 10px;
     color: rgba(105, 105, 105, 0.76);
 }
-.tipsDetalle{
+.contenedorTipsDetalle{
     width: 100%;
-    height: auto;
+    height: 20%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    column-gap: 10px;
     align-items: center;
     margin-top: 10px;
 }
+.tipsDetalle{
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+}
+.infoTipDetalle{
+    width: 100%;
+    height:auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
 .contenedorBotonDetalle{
     width: 100%;
-    height: auto;
+    height: 10%;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     margin-top: 20px;
+}
+
+/* ESTILOS DE LOS CAMPOS DE COMENTARIOS */
+.contenedorComentario{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 10px;
+}
+.infoUsuarioComentario{
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 30px;
 }

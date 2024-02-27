@@ -70,7 +70,9 @@ export default function TarjetaLibro({ libro }) {
             <LinkRouter to={'/Libro/'+ libro.id}>
             <Boton className="info" 
             titulo="Ver más" 
-            mensaje="Registrate para ver mas informacion" 
+            mensaje="Registrate para ver más informacion" 
+            title='Atención'
+            icon='info'
             ></Boton>
             </LinkRouter>
             

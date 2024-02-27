@@ -25,9 +25,6 @@ function Footer() {
                             <LinkRouter to='/Libros'>Ver Catálogo</LinkRouter>
                             <LinkRouter to='/Registro'>Registrate</LinkRouter>
                             <LinkRouter to='/Sesion'>Inicia Sesión</LinkRouter>
-                            
-                            {/* sacar este link cuando esten los endpoint */}
-                            <LinkRouter to='/Libro/{1}'>Detalle</LinkRouter>
                         </div>
                     </div>
                     <div className="contenedorDerechos">

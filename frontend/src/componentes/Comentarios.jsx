@@ -2,18 +2,20 @@ import * as React from 'react';
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 import { styled } from '@mui/system';
 import Boton from './Boton';
+import Container from '@mui/material/Container';
 
+// PARA CREAR COMENTARIOS NUEVOS
 export default function Comentarios() {
     const handleClick = () => {
         console.log('hice clic en comentar')
     }
-    const blue = {
-        100: '#DAECFF',
-        200: '#b6daff',
-        400: '#3399FF',
-        500: '#007FFF',
-        600: '#0072E5',
-        900: '#003A75',
+    const lightGreen = {
+        100: '#dcedc8',
+        200: '#c5e1a5',
+        400: '#9ccc65',
+        500: '#8bc34a',
+        600: '#7cb342',
+        900: '#33691e',
     };
 
     const grey = {
@@ -45,12 +47,12 @@ export default function Comentarios() {
     box-shadow: 0px 2px 2px ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
 
     &:hover {
-      border-color: ${blue[400]};
+      border-color: ${lightGreen[400]};
     }
 
     &:focus {
-      border-color: ${blue[400]};
-      box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
+      border-color: ${lightGreen[400]};
+      box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? lightGreen[600] : lightGreen[200]};
     }
 
     // firefox
@@ -62,14 +64,21 @@ export default function Comentarios() {
 
     return (
         <>
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+            <Container maxWidth="xl">
+                <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
 
-                <Textarea aria-label="minimum height" minRows={4} placeholder="Ingresa tu comentario" sx={{ width: '100%', marginBottom: '10px' }} />
-                <div style={{ width: '10%', marginBottom: '30px', alignItems: 'left' }}>
-                    <Boton className={'accion'} onClick={handleClick} titulo={'Comentar'} ></Boton>
+                    <Textarea aria-label="minimum height" minRows={4} placeholder="Ingresa tu comentario" sx={{ width: '100%', marginBottom: '10px' }} />
+                    <div style={{ width: '10%', marginBottom: '30px', alignItems: 'left' }}>
+                        <Boton className='accion' titulo='Comentar' 
+                        mensaje="Gracias por tu comentario" 
+                        title=''
+                        icon='success'></Boton>
+                    </div>
+
                 </div>
 
-            </div>
+            </Container>
+
 
         </>
 
