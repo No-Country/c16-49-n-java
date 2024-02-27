@@ -2,12 +2,14 @@ package com.nocountry.appintercambiolibros.services.impl;
 
 import com.nocountry.appintercambiolibros.especificacion.BuscarLibroEspecificacion;
 import com.nocountry.appintercambiolibros.exceptions.RecursoNoEncontradoException;
-import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
-import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
-import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
+import com.nocountry.appintercambiolibros.models.dto.*;
+import com.nocountry.appintercambiolibros.models.entity.Comentario;
 import com.nocountry.appintercambiolibros.models.entity.Libro;
+import com.nocountry.appintercambiolibros.models.entity.Usuario;
+import com.nocountry.appintercambiolibros.repositories.ComentarioRepository;
 import com.nocountry.appintercambiolibros.repositories.LibroRepository;
 import com.nocountry.appintercambiolibros.repositories.ReseniaRepository;
+import com.nocountry.appintercambiolibros.repositories.UsuarioRepository;
 import com.nocountry.appintercambiolibros.services.ImagenService;
 import com.nocountry.appintercambiolibros.services.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -29,6 +32,12 @@ public class LibroServiceImpl implements LibroService {
 
     @Autowired
     private ReseniaRepository reseniaRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private ComentarioRepository comentarioRepository;
 
     @Autowired
     private ImagenService imagenService;
@@ -126,6 +135,83 @@ public class LibroServiceImpl implements LibroService {
             Libro libro = this.libroRepository.findById(idLibro).orElseThrow();
             return this.reseniaRepository.findByLibro(libro);
         }
+    @Transactional
+    @Override
+    public void agregarComentario(ComentarioDTOSolicitud comentarioSolicitud, Long usuarioId, Long libroId) {
+        System.out.println(comentarioSolicitud.getContenido());
+        Usuario usuarioBD = usuarioRepository.findById(usuarioId)
+                .orElseThrow( ()-> new RecursoNoEncontradoException("Usuario no encontrado con el id: " + usuarioId));
 
+        Libro libroBD = libroRepository.findById(libroId)
+                .orElseThrow( ()-> new RecursoNoEncontradoException("Libro no encontrado con el id: " + libroId));;
+
+        Comentario comentario = comentarioRepository.save(Comentario.builder()
+                .contenido(comentarioSolicitud.getContenido())
+                .build());
+
+        usuarioBD.addComentario(comentario);
+        libroBD.addComentario(comentario);
+        usuarioRepository.save(usuarioBD);
+        libroRepository.save(libroBD);
+
+
+    }
+    @Transactional
+    @Override
+    public void eliminarComentario(Long usuarioId, Long comentarioId) {
+        Usuario usuarioBD = usuarioRepository.findById(usuarioId)
+                .orElseThrow( () -> new RecursoNoEncontradoException("Usuario no encontrado con el id: " + usuarioId));
+
+        Comentario comentarioBD = usuarioBD.getComentarios().stream()
+                .filter(comentario -> comentario.getId().equals(comentarioId))
+                .findFirst()
+                .orElseThrow(
+                        () -> new RecursoNoEncontradoException(
+                                "El comentario con el id: " + comentarioId + " no pertenece al usuario con el id: " + usuarioId));
+
+        usuarioBD.removeComentario(comentarioBD);
+        usuarioRepository.save(usuarioBD);
+
+    }
+
+    @Transactional
+    @Override
+    public void actualizarComentario(Long usuarioId, Long comentarioId, ComentarioDTOSolicitud comentarioSolicitud) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow( () -> new RecursoNoEncontradoException("Usuario no encontrado con el id: " + usuarioId));
+
+        Comentario comentarioBD = usuario.getComentarios().stream()
+                .filter(comentario -> comentario.getId().equals(comentarioId))
+                .findFirst()
+                .orElseThrow(
+                        () -> new RecursoNoEncontradoException(
+                                "El comentario con el id: " + comentarioId + " no pertenece al usuario con el id: " + usuarioId));
+
+        comentarioBD.setId(comentarioId);
+        comentarioBD.setContenido(comentarioSolicitud.getContenido());
+        comentarioRepository.save(comentarioBD);
+
+    }
+    @Transactional(readOnly = true)
+    @Override
+    public List<ComentarioDTORespuesta> comentariosPorLibro(Long libroId) {
+        List<Comentario> comentarios = comentarioRepository.buscarComentarioPorLibroId(libroId);
+        if(comentarios.isEmpty()){
+            throw new RecursoNoEncontradoException("No hay comentarios agregados al libro con el id: " + libroId);
+        }
+        return comentarios.stream()
+                .map( comentarioBD -> {
+                    ComentarioDTORespuesta comentario = new ComentarioDTORespuesta();
+                    comentario.setId(comentarioBD.getId());
+                    comentario.setContenido(comentarioBD.getContenido());
+                    comentario.setFechaDeCreacion(comentarioBD.getFechaDeCreacion());
+                    comentario.setUsuarioId(comentarioBD.getUsuario().getId());
+                    comentario.setNombreUsuario(comentarioBD.getUsuario().getNombre());
+                    comentario.setNombreImagen(comentarioBD.getUsuario().getNombreImagen());
+                    comentario.setLibroId(comentarioBD.getLibro().getId().toString());
+                    comentario.setLibroTitulo(comentarioBD.getLibro().getTitulo());
+                    return comentario;
+                }).collect(Collectors.toList());
+    }
 }
 

@@ -2,10 +2,7 @@ package com.nocountry.appintercambiolibros.models.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
@@ -14,6 +11,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "comentarios")
 public class Comentario {
@@ -27,11 +25,28 @@ public class Comentario {
     @Temporal(TemporalType.DATE)
     private Date fechaDeCreacion;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "libro_id")
+    private Libro libro;
+
 
     @PrePersist
     public void fechaDeCreacion(){
         this.fechaDeCreacion = new Date();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj){
+            return true;
+        }
+        if(!(obj instanceof Comentario c)){
+            return false;
+        }
+        return this.id != null && this.id.equals(c.getId());
     }
 }
