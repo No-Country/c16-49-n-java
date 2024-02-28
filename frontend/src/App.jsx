@@ -21,13 +21,19 @@ function App() {
   const [dataLibros, setDataLibros] = useState([])
   const [loading, setLoading] = useState(true);
   const [resultadosBusqueda, setResultadosBusqueda] = useState([]);
+  const [cantidadPaginas, setCantidadPaginas]= useState(0)
+  const [tamañoPagina, setTamañoPagina]= useState([]);
+  const [paginaActual, setPaginaActual] =useState(0);
 
   useEffect(() => {
     axios
-      .get('http://localhost:8080/api/v1/libros')
+      .get('http://localhost:8080/api/v1/libros?p='+paginaActual)
       .then((response) => {
-       console.log(response)
-        setDataLibros(response.data);
+       console.log(response.data)
+        setDataLibros(response.data.content);
+        setCantidadPaginas(Math.ceil(response.data.totalPages))
+        setTamañoPagina(response.data.size)
+        setPaginaActual(Math.ceil(response.data.pageable.pageNumber))
         setLoading(false);
       })
       .catch(error => {
@@ -35,12 +41,12 @@ function App() {
         setLoading(false);
       });
 
-  }, []);
+  }, [paginaActual]);
   console.log(dataLibros)
   return (
     <>
       <ThemeProvider theme={theme}>
-        <AppContext.Provider value={{ dataLibros, setResultadosBusqueda, resultadosBusqueda }}>
+        <AppContext.Provider value={{ dataLibros, setResultadosBusqueda, resultadosBusqueda, setCantidadPaginas, cantidadPaginas, tamañoPagina, paginaActual, setPaginaActual }}>
           <NavBar />
           <Routes>
             <Route path="*" element={<Home />}></Route>

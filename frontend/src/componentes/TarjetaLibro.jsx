@@ -15,6 +15,7 @@ import '../estilos/tarjetaLibros.css';
 
 
 export default function TarjetaLibro({ libro }) {
+  // console.log(libro)
   const handleClick = (event, id) => {
     console.log('hice click en el boton ver del id'+{id})
 };

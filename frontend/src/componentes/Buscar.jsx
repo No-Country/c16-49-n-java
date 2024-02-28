@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -54,7 +54,7 @@ function Buscar() {
     const [datosInput, setDatosInput] = useState('');
     const [parametro, setParametro] = useState('');
     const [ejecutarConsulta, setEjecutarConsulta] = useState(false);
-    const { setResultadosBusqueda } = useContext(AppContext);
+    const { setResultadosBusqueda, setCantidadPaginas } = useContext(AppContext);
 
     useEffect(() => {
         if (ejecutarConsulta && parametro !== '' && datosInput.trim() !== '') {
@@ -74,22 +74,23 @@ function Buscar() {
     };
 
     const handleInput = () => {
-        
-            fetch(`http://localhost:8080/api/v1/libros/buscar?${parametro}=${datosInput}`)
-            
+
+        fetch(`http://localhost:8080/api/v1/libros/buscar?${parametro}=${datosInput}`)
+
             .then(response => response.json())
             .then(data => {
-                console.log(data);
-                setResultadosBusqueda(data)
+                console.log(data.content);
+                setResultadosBusqueda(data.content)
+                setCantidadPaginas(data.totalPages)
             })
             .catch(error => {
                 console.error('Error al realizar la búsqueda:', error);
             });
-        
 
-           
+
+
     };
-
+ 
     return (
         <>
             <Search >
@@ -101,7 +102,7 @@ function Buscar() {
                     inputProps={{ 'aria-label': 'search' }}
                     value={datosInput}
                     onChange={handleInputChange}
-                   
+
                 />
 
             </Search>
@@ -114,7 +115,7 @@ function Buscar() {
                         value={parametro}
                         label="parametro"
                         onChange={handleFiltro}
-                        
+
                     >
                         <MenuItem value='titulo'>Título</MenuItem>
                         <MenuItem value='autor'>Autor</MenuItem>

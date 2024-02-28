@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import TarjetaLibro from './TarjetaLibro';
 import '../estilos/catalogo.css';
 import BotonArriba from "./BotonArriba";
@@ -9,12 +9,19 @@ import theme from "./themeConfig";
 import { Typography } from "@mui/material";
 import AppContext from "../context/AppContext";
 import Button from '@mui/material/Button';
+import Paginacion from "./Paginacion";
 
 function Catalogo() {
-    const { dataLibros, resultadosBusqueda, setResultadosBusqueda } = useContext(AppContext);
+    const { dataLibros, resultadosBusqueda, setResultadosBusqueda,cantidadPaginas, setCantidadPaginas, tamañoPagina, paginaActual, setPaginaActual} = useContext(AppContext);
+   
     const handleLimpiarBusqueda = () => {
         setResultadosBusqueda([]);
+        setCantidadPaginas(0); // Actualiza la cantidad de páginas
+        setPaginaActual(1); // Reinicia la página actual
+        handleLimpiarCampos()
     };
+   
+
     return (
         <>
             <ThemeProvider theme={(theme.palette)}>
@@ -30,7 +37,8 @@ function Catalogo() {
                     </div>
                     <div className="contenedorTarjetas">
                         {resultadosBusqueda.length > 0 ?
-                            (resultadosBusqueda.map((libro, index) => (
+                            
+                                (resultadosBusqueda.map((libro, index) => (
                                 <TarjetaLibro key={index} libro={libro} />
                             )))
 
@@ -38,10 +46,13 @@ function Catalogo() {
                             :
                             (dataLibros.map((libro, index) => (
                                 <TarjetaLibro key={index} libro={libro} />
-                            )))
+                            ))) 
                         }
+                            
+                        
                         <TarjetaLibro />
                     </div>
+                    <Paginacion />
                 </div>
                 <BotonArriba />
             </ThemeProvider>
