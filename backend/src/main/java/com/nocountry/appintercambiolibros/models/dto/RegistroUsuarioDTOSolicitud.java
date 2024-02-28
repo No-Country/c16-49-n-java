@@ -1,23 +1,28 @@
 package com.nocountry.appintercambiolibros.models.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class UsuarioDTO {
+public class RegistroUsuarioDTOSolicitud {
 
-    private Long id;
+    @NotEmpty
+    @Size(min = 10, max = 13)
     private String nombre;
-    private String nombreImagen;
+    
+    @NotEmpty
+    @Size(min = 10, max = 13)
     private String email;
+    
+    @NotEmpty
+    @Size(min = 10, max = 13)
     private String pssword;
 
 }
