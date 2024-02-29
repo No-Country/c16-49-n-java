@@ -1,5 +1,6 @@
 package com.nocountry.appintercambiolibros.controllers;
 
+import com.nocountry.appintercambiolibros.models.dto.ComentarioDTOSolicitud;
 import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
@@ -8,6 +9,7 @@ import com.nocountry.appintercambiolibros.services.LibroService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.validation.Valid;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -79,6 +81,32 @@ public class LibroController {
     public ResponseEntity<?> buscarGenero(@PathVariable String genero, @ParameterObject @Parameter(hidden = true) Pageable pageable){
         return ResponseEntity.status(HttpStatus.OK).body(libroService.findByGenero(genero,pageable));
     }
+    @Operation(summary = "Agregar comentario a un libro")
+    @PostMapping("usuario/{usuarioId}/libro/{libroId}/agregar-comentario")
+    public ResponseEntity<?> agregarComentario(@Valid @RequestBody ComentarioDTOSolicitud comentarioSolicitud, @PathVariable Long usuarioId, @PathVariable Long libroId){
+        libroService.agregarComentario(comentarioSolicitud,usuarioId,libroId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    @Operation(summary = "Eliminar comentario de un libro")
+    @DeleteMapping("usuario/{usuarioId}/libro/eliminar-comentario/{comentarioId}")
+    public ResponseEntity<?> eliminarComentario(
+            @PathVariable Long usuarioId, @PathVariable Long comentarioId){
+        libroService.eliminarComentario(usuarioId,comentarioId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 
+    @Operation(summary = "Actualizar comentario")
+    @PutMapping("usuario/{usuarioId}/comentario/{comentarioId}")
+    public ResponseEntity<?> actualizarComentario(@PathVariable Long usuarioId,
+                                                  @PathVariable Long comentarioId,
+                                                  @RequestBody ComentarioDTOSolicitud comentarioSolicitud){
+        libroService.actualizarComentario(usuarioId,comentarioId,comentarioSolicitud);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    @Operation(summary = "Obtener comentarios de un libro por su id")
+    @GetMapping("comentarios/libro/{libroId}")
+    public ResponseEntity<?> buscarComentariosPorLibro(@PathVariable Long libroId){
+        return ResponseEntity.ok(libroService.comentariosPorLibro(libroId));
+    }
 
 }

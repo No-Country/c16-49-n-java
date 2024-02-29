@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,6 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "libros")
@@ -41,10 +41,18 @@ public class Libro {
     private Date fechaDeCreacion;
 
     @ManyToOne( fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     @OneToMany(mappedBy = "libro", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<Resenia> resenias;
+
+    @OneToMany(mappedBy = "libro", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Comentario> comentarios;
+
+    public Libro() {
+        this.comentarios = new ArrayList<>();
+    }
 
     @PrePersist
     public void fechaDeCreacion(){
@@ -58,5 +66,24 @@ public class Libro {
         DESGASTADO
     }
 
+    public void addComentario(Comentario comentario){
+        this.comentarios.add(comentario);
+        comentario.setLibro(this);
+    }
+    public void removeComentario(Comentario comentario){
+        this.comentarios.remove(comentario);
+        comentario.setLibro(null);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj){
+            return true;
+        }
+        if(!(obj instanceof Libro l)){
+            return false;
+        }
+        return this.id != null && this.id.equals(l.getId());
+    }
 
 }
