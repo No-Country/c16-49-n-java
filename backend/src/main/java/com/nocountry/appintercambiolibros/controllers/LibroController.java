@@ -98,7 +98,8 @@ public class LibroController {
         if (!this.reseniaService.eliminarResenia(idResenia)){
             return ResponseEntity.internalServerError().build();
         }
-        return ResponseEntity.status(HttpStatus.OK).body("Elemento eliminado");
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @Operation( summary = "Obtener el usuario de un libro por su id")
