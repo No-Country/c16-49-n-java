@@ -12,33 +12,34 @@ import Button from '@mui/material/Button';
 import Paginacion from "./Paginacion";
 
 function Catalogo() {
-    const { dataLibros, resultadosBusqueda, setResultadosBusqueda,cantidadPaginas, setCantidadPaginas, tamañoPagina, paginaActual, setPaginaActual} = useContext(AppContext);
-   
-    const handleLimpiarBusqueda = () => {
-        setResultadosBusqueda([]);
-        setCantidadPaginas(0); // Actualiza la cantidad de páginas
-        setPaginaActual(1); // Reinicia la página actual
-        handleLimpiarCampos()
-    };
-   
+    const { dataLibros, resultadosBusqueda, setResultadosBusqueda, cantidadPaginas, setCantidadPaginas, tamañoPagina, paginaActual, setPaginaActual } = useContext(AppContext);
+
+    // const handleLimpiarBusqueda = ()  => {
+    //     setResultadosBusqueda([]);
+    //     setCantidadPaginas(0); // Actualiza la cantidad de páginas
+    //     setPaginaActual(1); // Reinicia la página actual
+
+    // };
 
     return (
         <>
             <ThemeProvider theme={(theme.palette)}>
                 <div className="contenedorCatalogo">
-                    <div className="contenedorBusqueda">
-                        <Typography variant="h1">Catálogo de Libros</Typography>
+                    <Typography variant="h1">Catálogo de Libros</Typography>
+                    {/* <div className="contenedorBusqueda">
+                        
                         {resultadosBusqueda.length > 0 && (
                             // Renderiza el botón solo si hay resultados de búsqueda
-                            <Button variant="contained" color="primary" onClick={handleLimpiarBusqueda}>
+                            <Button variant="contained" color="primary" onClick={handleLimpiarBusqueda}
+                            >
                                 Limpiar Búsqueda
                             </Button>
                         )}
-                    </div>
+                    </div> */}
                     <div className="contenedorTarjetas">
                         {resultadosBusqueda.length > 0 ?
-                            
-                                (resultadosBusqueda.map((libro, index) => (
+
+                            (resultadosBusqueda.map((libro, index) => (
                                 <TarjetaLibro key={index} libro={libro} />
                             )))
 
@@ -46,10 +47,10 @@ function Catalogo() {
                             :
                             (dataLibros.map((libro, index) => (
                                 <TarjetaLibro key={index} libro={libro} />
-                            ))) 
+                            )))
                         }
-                            
-                        
+
+
                         <TarjetaLibro />
                     </div>
                     <Paginacion />

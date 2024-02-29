@@ -15,7 +15,7 @@ function Hero() {
                     <div className="fondo">
                         <div className="slogan">
 
-                            <Typography variant="h4" className="titulo" >Cada libro, una conexión: forma parte de una comunidad de lectores apasionados</Typography>
+                            <Typography variant="h2" className="titulo" >Cada libro, una conexión: forma parte de una comunidad de lectores apasionados</Typography>
                             <Boton className="atencion" titulo="Quiero ser Parte"></Boton>
                         </div>
 

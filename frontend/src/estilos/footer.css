@@ -1,76 +1,129 @@
-.footerContenedor{
-    /* margin-top: 70px; */
+.footerContenedor {
+    margin-top: 0px;
     padding: 0;
     width: 100vw;
-    height: 200px;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-   /* margin-bottom: 0;
-    bottom: 0; */
-    /* background-color: #E5E2E1;
-    color: rgb(20, 20, 20); */
-    /* background-color: #606c38; */
     color: white;
-    
-    background-image: linear-gradient(#68753ebd, #3a4123);
+    background-image: linear-gradient(#68753edc, #3a4123);
+
 }
-.contenedorRedes{
+
+.contenedorEstatico {
+    width: 60%;
+    height: 100px;
+    position: relative;
+    bottom: 40px;
+
+    display: flex;
+    flex-direction: row;
+    background-color: #283618;
+    border-radius: 10px;
+}
+
+.contenedorTextoEstatico {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+.contenedorLlamados {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.contenedorBotones {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.contenedorInfoFooter {
     width: 100%;
-    height: 20%;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.contenedorLogoFooter {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 50px;
+}
+
+.contenedorLogoFooter>img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+
+}
+
+.contenedorInfoDerecha {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedorEnlacesFooter {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    column-gap: 50px;
+    margin-left: 10px;
+    font-size: 20px;
+}
+.contenedorRedes {
+    width: 100%;
+    height: 50%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     column-gap: 30px;
-    color:#f8f7f3;
+    color: #f8f7f3;
     font-weight: bold;
+  
 }
-.contenedorInfoFooter{
+
+.contenedorDerechos {
     width: 100%;
-    height: 60%;
+    height: 30px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
+    column-gap: 70px;
+    color: white;
+    font-weight: bold;
+    padding:0 ;
+    margin: 0;
 }
-
-
-    .contenedorLogoFooter{
-        width: 55%;
-        height: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-end;
-        /* margin-right: 20px; */
-    }
-    .contenedorLogoFooter>img{
-        object-fit: contain;
-        max-width: 100%;
-        max-height: 100%;
-    
-    }
-    .contenedorEnlacesFooter{
-        width: 45%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        text-align: left;
-        column-gap: 10px;
-        margin-left: 10px;
-    }
-    .contenedorDerechos{
-        width: 100%;
-        height: 20%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        column-gap: 30px;
-        color:white;
-        font-weight: bold;
-    }

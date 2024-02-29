@@ -26,3 +26,23 @@
     border: none;
     border-radius: 10px;
 }
+.focoA{
+    background-color: rgba(240, 52, 6, 0.945);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+.focoA:hover{
+    background-color: rgba(177, 39, 5, 0.993);
+}
+.focoB{
+    background-color: #79a843;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+.focoB:hover{
+    background-color: #8ad336;
+}

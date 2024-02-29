@@ -79,10 +79,7 @@ function DetalleLibro() {
                                 </div>
 
                                 <div className="contenedorResenias">
-                                    {/* renderiza las estrellas */}
                                     <Resenias />
-                                    {/* indica la cantidad de puntuaciones */}
-                                    <Typography>X {libro.resenias} Valoraciones</Typography>
                                 </div>
                                 <LineaH color={'#dda15e'} width={'100%'} />
                                 <Typography sx={{ textAlign: 'justify' , height:'40%'}}>{libro.resumen}</Typography>

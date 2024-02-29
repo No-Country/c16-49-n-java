@@ -43,10 +43,11 @@ function App() {
 
   }, [paginaActual]);
   console.log(dataLibros)
+
   return (
     <>
       <ThemeProvider theme={theme}>
-        <AppContext.Provider value={{ dataLibros, setResultadosBusqueda, resultadosBusqueda, setCantidadPaginas, cantidadPaginas, tamañoPagina, paginaActual, setPaginaActual }}>
+        <AppContext.Provider value={{ dataLibros, setResultadosBusqueda, resultadosBusqueda, setCantidadPaginas, cantidadPaginas, tamañoPagina, paginaActual, setPaginaActual}}>
           <NavBar />
           <Routes>
             <Route path="*" element={<Home />}></Route>

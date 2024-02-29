@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -7,6 +7,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import ClearIcon from '@mui/icons-material/Clear';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import { Button } from "@mui/material";
 import AppContext from "../context/AppContext";
 
 {/* SEARCH */ }
@@ -51,10 +54,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Buscar() {
+    const {dataLibros, resultadosBusqueda, setResultadosBusqueda,cantidadPaginas, setCantidadPaginas, tamañoPagina, paginaActual, setPaginaActual} = useContext(AppContext);
     const [datosInput, setDatosInput] = useState('');
     const [parametro, setParametro] = useState('');
     const [ejecutarConsulta, setEjecutarConsulta] = useState(false);
-    const { setResultadosBusqueda, setCantidadPaginas } = useContext(AppContext);
+    // const { setResultadosBusqueda, setCantidadPaginas } = useContext(AppContext);
 
     useEffect(() => {
         if (ejecutarConsulta && parametro !== '' && datosInput.trim() !== '') {
@@ -72,7 +76,14 @@ function Buscar() {
         setParametro(event.target.value);
         setEjecutarConsulta(true);
     };
-
+    const handleLimpiarBusqueda = ()  => {
+        setResultadosBusqueda([]);
+        setCantidadPaginas(0); // Actualiza la cantidad de páginas
+        setPaginaActual(1); // Reinicia la página actual
+        setDatosInput('');
+        setParametro('');
+    };
+    
     const handleInput = () => {
 
         fetch(`http://localhost:8080/api/v1/libros/buscar?${parametro}=${datosInput}`)
@@ -90,23 +101,11 @@ function Buscar() {
 
 
     };
- 
+
+
     return (
         <>
-            <Search >
-                <SearchIconWrapper>
-                    <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                    placeholder="Busca por titulo, autor o ISBN"
-                    inputProps={{ 'aria-label': 'search' }}
-                    value={datosInput}
-                    onChange={handleInputChange}
-
-                />
-
-            </Search>
-            <Box sx={{ width: 80 }}>
+        <Box sx={{ width: 80 }}>
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
                     <Select
@@ -123,8 +122,27 @@ function Buscar() {
                     </Select>
                 </FormControl>
             </Box>
+            <Search >
+                <SearchIconWrapper>
+                    <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                    placeholder="Busca por titulo, autor o ISBN"
+                    inputProps={{ 'aria-label': 'search' }}
+                    value={datosInput}
+                    onChange={handleInputChange}
+
+                />
+<Button   variant="text" color="secondary" sx={{height:'100%'}} onClick={handleLimpiarBusqueda}
+                            >
+                                <ClearIcon sx={{ fontSize:'large'}}/>
+                            </Button>
+            </Search>
+            
+            
         </>
 
     )
+
 }
 export default Buscar;

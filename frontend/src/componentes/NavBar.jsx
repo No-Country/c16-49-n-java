@@ -85,7 +85,7 @@ function NavBar() {
     //             return handleCloseUserMenu;
     //     }
     // };
-
+    
     return (
         <AppBar position='fixed' sx={{ left: '0', right: 'auto' }}>
             <Toolbar disableGutters>
@@ -95,7 +95,7 @@ function NavBar() {
                     </div>
                 </LinkRouter>
                 {/* BUSQUEDA */}
-                {mostrarBuscador && <Buscar />}
+                {mostrarBuscador && <Buscar/>}
                 <Box sx={{ flexGrow: 1 }} />
                 {/* contenedor de enlaces */}
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -154,78 +154,6 @@ function NavBar() {
 
             </Toolbar>
         </AppBar>
-
-
-        // <AppBar  position='fixed' sx={{  left: '0', right: 'auto' }}>
-        //     <Container maxWidth="xl">
-        //         <Toolbar disableGutters>
-        //             <LinkRouter to='/'>
-        //                 <div className='logo' >
-        //                     <img src='https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2Flogo.png?alt=media&token=b47a9708-49ef-4457-bc1a-f42b16282ef1' alt='logo'
-        //                     /></div>
-        //             </LinkRouter>
-
-
-        //             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-        //                 <IconButton
-        //                     size="large"
-        //                     aria-label="account of current user"
-        //                     aria-controls="menu-appbar"
-        //                     aria-haspopup="true"
-        //                     onClick={handleOpenNavMenu}
-        //                     color="inherit"
-        //                 >
-        //                     <MenuIcon />
-        //                 </IconButton>
-        //                 <Menu
-        //                     id="menu-appbar"
-        //                     anchorEl={anchorElNav}
-        //                     anchorOrigin={{
-        //                         vertical: 'bottom',
-        //                         horizontal: 'right',
-        //                     }}
-        //                     keepMounted
-        //                     transformOrigin={{
-        //                         vertical: 'top',
-        //                         horizontal: 'right',
-        //                     }}
-        //                     open={Boolean(anchorElNav)}
-        //                     onClose={handleCloseNavMenu}
-        //                     sx={{
-        //                         display: { xs: 'block', md: 'none' },
-        //                     }}
-        //                 >
-        //                     {pages.map((page) => (
-        //                         <MenuItem key={page.path} onClick={handleCloseNavMenu}>
-        //                             <Typography
-        //                                 textAlign="center"
-        //                                 component={LinkRouter}
-        //                                 to={page.path}>{page.name}</Typography>
-        //                         </MenuItem>
-        //                     ))}
-        //                 </Menu>
-        //             </Box>
-
-        //             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-        //                 {pages.map((page) => (
-        //                     <Button
-        //                         key={page.path}
-        //                         component={LinkRouter}
-        //                         to={page.path}
-        //                         sx={{ my: 2, color: 'white', display: 'block' }}
-        //                     >
-        //                         {page.name}
-        //                     </Button>
-        //                 ))}
-        //             </Box>
-
-        //             {/* BUSQUEDA */}
-        //             {mostrarBuscador && (
-        //             <Buscar />)}
-
-        //         </Toolbar>
-        //     </Container>
-        // </AppBar>
     );
 }
 export default NavBar;

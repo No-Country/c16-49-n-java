@@ -65,11 +65,11 @@ const theme = createTheme({
             letterSpacing: "0.02em",
             fontSize: "2rem",
             '@media (max-width:600px)': {
-                fontSize: '2.5rem',
+                fontSize: '1.5rem',
             },
 
             '@media (min-width:1280px)': {
-                fontSize: '4rem',
+                fontSize: '3rem',
             },
         },
         h2: {
@@ -77,7 +77,7 @@ const theme = createTheme({
             letterSpacing: "0.03em",
             lineHeight: 1.6,
             fontWeight: 500,
-            fontSize: "1.8rem",
+            fontSize: "1.5rem",
             '@media (max-width:600px)': {
                 fontSize: '1.03rem',
             },
@@ -92,9 +92,9 @@ const theme = createTheme({
         h3: {
             fontFamily: 'Libre Franklin',
             lineHeight: 1.5,
-            fontSize: '1.5rem',
+            fontSize: '1.3rem',
             '@media (max-width:600px)': {
-                fontSize: '1.3rem',
+                fontSize: '1.1rem',
             },
             '@media (min-width:1440px)': {
                 fontSize: '2rem',
@@ -105,7 +105,7 @@ const theme = createTheme({
             letterSpacing: "0.02em",
             lineHeight: 1.2,
             fontWeight: 400,
-            fontSize: "1.6rem",
+            fontSize: "1.1rem",
             '@media (max-width:600px)': {
                 fontSize: '1.03rem',
             },
@@ -120,7 +120,7 @@ const theme = createTheme({
         h5: {
             fontFamily: 'Libre Franklin',
             lineHeight: 0.9,
-            fontSize: '0.9rem',
+            fontSize: '1.2rem',
             fontWeight: 'bold',
             fontStyle: 'italic',
             '@media (max-width:600px)': {
