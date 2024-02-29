@@ -1,5 +1,6 @@
 package com.nocountry.appintercambiolibros.models.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "usuarios")
@@ -37,7 +37,7 @@ public class Usuario {
     private String email;
     
     private String nombreImagen;
-    private String psword;
+    private String password;
     private Date fechaCreacion;
     
     @OneToMany( mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -48,5 +48,30 @@ public class Usuario {
 
     @OneToMany( mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<Comentario> comentarios;
-       
+
+    public Usuario() {
+        this.comentarios = new ArrayList<>();
+        this.libros = new ArrayList<>();
+    }
+
+    public void addLibro(Libro libro){
+        this.libros.add(libro);
+        libro.setUsuario(this);
+    }
+
+    public void removeLibro(Comentario comentario) {
+        this.comentarios.remove(comentario);
+        comentario.setUsuario(null);
+    }
+
+    public void addComentario(Comentario comentario){
+            this.comentarios.add(comentario);
+            comentario.setUsuario(this);
+    }
+
+    public void removeComentario(Comentario comentario){
+            this.comentarios.remove(comentario);
+            comentario.setUsuario(null);
+    }
+
 }
