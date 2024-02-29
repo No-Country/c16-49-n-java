@@ -7,4 +7,5 @@ public interface ReseniaService {
     ReseniaDTO registrarResenia(Long idLibro, Long idUsuario, ReseniaDTO solicituDto);
     ReseniaDTO editarResenia(Long idLibro, Long idUsuario, ReseniaDTO solicituDto);
     boolean eliminarResenia(Long idResenia);
+    Integer getPromedioReseniasDeLibroId(Long idLibro);
 }

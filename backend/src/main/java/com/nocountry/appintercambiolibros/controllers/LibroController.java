@@ -56,6 +56,12 @@ public class LibroController {
         return this.libroService.getReseniasDeLibroId(id);
     }
 
+    @Operation(summary = "Obtener el promedio de reseña de un libro")
+    @GetMapping("/{id}/resenias/promedio")
+    public ResponseEntity<?> getPromedioReseniaLibro(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(this.reseniaService.getPromedioReseniasDeLibroId(id));
+    }
+
     @Operation( summary = "Registrar una reseña nueva por un usuario y libro especifico")
     @PostMapping("/usuario/{usuarioId}/libro/{libroId}/agregar-resenia")
     public ResponseEntity<?> agregarResenia(
@@ -95,6 +101,7 @@ public class LibroController {
         return ResponseEntity.status(HttpStatus.OK).body("Elemento eliminado");
     }
 
+    @Operation( summary = "Obtener el usuario de un libro por su id")
     @GetMapping("/{id}/usuario")
     public UsuarioDTO getUsuarioLibroId(@PathVariable("id") Long idLibro) {
         return this.libroService.getUsuarioDTODeLibrodId(idLibro);

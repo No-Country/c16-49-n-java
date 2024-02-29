@@ -94,5 +94,10 @@ public class ReseniaServiceImpl implements ReseniaService {
         return true;
     }
 
+    @Override
+    public Integer getPromedioReseniasDeLibroId(Long idLibro) {
+        return this.reseniaRepository.promedioCalificacionPorLibroId(idLibro);
+    }
+
     
 }
