@@ -6,13 +6,17 @@ import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
 import com.nocountry.appintercambiolibros.models.dto.GetUsuarioDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
+import com.nocountry.appintercambiolibros.models.dto.ReseniaDTO;
 import com.nocountry.appintercambiolibros.models.dto.UsuarioDTO;
 import com.nocountry.appintercambiolibros.models.entity.Libro;
+import com.nocountry.appintercambiolibros.models.entity.Resenia;
 import com.nocountry.appintercambiolibros.models.entity.Usuario;
 import com.nocountry.appintercambiolibros.repositories.LibroRepository;
 import com.nocountry.appintercambiolibros.repositories.ReseniaRepository;
 import com.nocountry.appintercambiolibros.services.ImagenService;
 import com.nocountry.appintercambiolibros.services.LibroService;
+import com.nocountry.appintercambiolibros.services.ReseniaService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
@@ -140,6 +144,11 @@ public class LibroServiceImpl implements LibroService {
                 .nombreImagen(usuario.getNombreImagen())
                 .build();
                 
+        }
+
+        @Override
+        public Libro findLibro(Long libroId) {
+            return this.libroRepository.findById(libroId).orElse(null);
         }
 
 }

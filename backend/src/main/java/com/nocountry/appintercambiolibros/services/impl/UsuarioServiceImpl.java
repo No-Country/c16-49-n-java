@@ -87,4 +87,9 @@ public class UsuarioServiceImpl implements UsuarioService{
             .nombreImagen(usuario.getNombreImagen())
             .build();
     }
+
+    @Override
+    public Usuario findUsuario(Long idUsuario) {
+        return this.usuarioRepository.findById(idUsuario).orElse(null);
+    }
 }

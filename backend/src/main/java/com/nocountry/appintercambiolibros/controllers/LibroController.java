@@ -4,20 +4,21 @@ import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
 import com.nocountry.appintercambiolibros.models.dto.GetUsuarioDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
+import com.nocountry.appintercambiolibros.models.dto.ReseniaDTO;
 import com.nocountry.appintercambiolibros.models.dto.UsuarioDTO;
 import com.nocountry.appintercambiolibros.services.JsonService;
 import com.nocountry.appintercambiolibros.services.LibroService;
+import com.nocountry.appintercambiolibros.services.ReseniaService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -31,6 +32,9 @@ public class LibroController {
     @Autowired
     private LibroService libroService;
 
+    @Autowired
+    private ReseniaService reseniaService;
+
     @Autowired 
     JsonService jsonService;
 
@@ -39,15 +43,56 @@ public class LibroController {
     public ResponseEntity<?> listarLibros(@ParameterObject @Parameter(hidden = true) Pageable pageable) {
         return ResponseEntity.ok(libroService.listarLibros(pageable));
     }
+
     @Operation(summary = "Obtener libro por Id")
     @GetMapping("/{id}")
     public LibroDTORespuesta getLibro(@PathVariable Long id) {
         return this.libroService.find(id);
     }
 
+    @Operation(summary = "Obtener las reseñas de un libro por su id")
     @GetMapping("/{id}/resenias")
     public List<GetReseniaDTO> getReseniasDeLibro(@PathVariable("id") Long id) {
         return this.libroService.getReseniasDeLibroId(id);
+    }
+
+    @Operation( summary = "Registrar una reseña nueva por un usuario y libro especifico")
+    @PostMapping("/usuario/{usuarioId}/libro/{libroId}/agregar-resenia")
+    public ResponseEntity<?> agregarResenia(
+        @PathVariable("usuarioId") Long idUsuario,
+        @PathVariable("libroId") Long isLibro,
+        @RequestBody ReseniaDTO dataResenia
+    ) {
+        ReseniaDTO nuevo = this.reseniaService.registrarResenia(isLibro, idUsuario, dataResenia);
+        if (nuevo == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
+    }
+
+    @Operation( summary = "Edita una reseña de un usuario sobre un libro")
+    @PutMapping("/usuario/{usuarioId}/libro/{libroId}/editar-resenia")
+    public ResponseEntity<?> editarResenia(
+        @PathVariable("usuarioId") Long idUsuario,
+        @PathVariable("libroId") Long isLibro,
+        @RequestBody ReseniaDTO dataResenia
+    ) {
+        ReseniaDTO nuevo = this.reseniaService.editarResenia(isLibro, idUsuario, dataResenia);
+        if (nuevo == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
+    }
+
+    @Operation( summary = "Eliminar la reseña por id")
+    @DeleteMapping("/resenias/eliminar-resenia/{id}")
+    public ResponseEntity<?> eliminarResenia(
+        @PathVariable("id") Long idResenia
+    ) {
+        if (!this.reseniaService.eliminarResenia(idResenia)){
+            return ResponseEntity.internalServerError().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body("Elemento eliminado");
     }
 
     @GetMapping("/{id}/usuario")

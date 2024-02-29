@@ -5,6 +5,7 @@ import com.nocountry.appintercambiolibros.models.dto.GetUsuarioDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
 import com.nocountry.appintercambiolibros.models.dto.UsuarioDTO;
+import com.nocountry.appintercambiolibros.models.entity.Libro;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public interface LibroService {
     LibroDTORespuesta guardar(LibroDTOSolicitud libro, MultipartFile imagen);
     Page<LibroDTORespuesta> findByGenero(String genero, Pageable pageable);
     LibroDTORespuesta find(Long libroId);
+    Libro findLibro(Long libroId);
     List<GetReseniaDTO> getReseniasDeLibroId(Long id);
     UsuarioDTO getUsuarioDTODeLibrodId(Long idLibro);
 
