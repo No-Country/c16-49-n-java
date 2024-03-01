@@ -12,6 +12,7 @@ import com.nocountry.appintercambiolibros.repositories.ReseniaRepository;
 import com.nocountry.appintercambiolibros.repositories.UsuarioRepository;
 import com.nocountry.appintercambiolibros.services.ImagenService;
 import com.nocountry.appintercambiolibros.services.LibroService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
@@ -213,5 +214,22 @@ public class LibroServiceImpl implements LibroService {
                     return comentario;
                 }).collect(Collectors.toList());
     }
+        @Override
+        public UsuarioDTO getUsuarioDTODeLibrodId(Long idLibro) {
+            Libro libro = this.libroRepository.findById(idLibro).orElseThrow();
+            Usuario usuario = libro.getUsuario();
+            return UsuarioDTO.builder()
+                .id(usuario.getId())
+                .nombre(usuario.getNombre())
+                .nombreImagen(usuario.getNombreImagen())
+                .build();
+                
+        }
+
+        @Override
+        public Libro findLibro(Long libroId) {
+            return this.libroRepository.findById(libroId).orElse(null);
+        }
+
 }
 

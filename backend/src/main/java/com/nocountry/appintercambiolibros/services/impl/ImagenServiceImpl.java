@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nocountry.appintercambiolibros.exceptions.RecursoNoEncontradoException;
 import com.nocountry.appintercambiolibros.services.ImagenService;
 
 @Service
@@ -33,12 +34,16 @@ public class ImagenServiceImpl implements ImagenService {
         }
     }
 
-    public byte[] obtenerImagen(String filename) throws IOException {
+    public byte[] obtenerImagen(String filename) {
         final Path pathImage = Paths.get(this.imagePath.toAbsolutePath().toString(), filename);
-        if(Files.exists(pathImage)){
-            return Files.readAllBytes(pathImage);
-        } else {
-            throw new FileNotFoundException("No se encontró el archivo" + filename );
+        try {
+            if(Files.exists(pathImage)){
+                return Files.readAllBytes(pathImage);
+            } else {
+                throw new RecursoNoEncontradoException("No se encontró el archivo" + filename );
+            }
+        } catch (Exception e) {
+            return null;
         }
     }
 

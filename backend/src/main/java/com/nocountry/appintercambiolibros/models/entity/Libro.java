@@ -1,6 +1,7 @@
 package com.nocountry.appintercambiolibros.models.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -40,6 +41,7 @@ public class Libro {
     @Temporal(TemporalType.DATE)
     private Date fechaDeCreacion;
 
+    @NotNull
     @ManyToOne( fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
