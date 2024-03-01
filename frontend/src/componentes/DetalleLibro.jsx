@@ -11,12 +11,16 @@ import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import { ThemeProvider } from "styled-components";
 import theme from "./themeConfig";
 import Boton from './Boton';
+import FormularioIntercambio from "./FormularioIntercambio";
+
 
 // FALTA ENLAZAR LA IMAGEN
 function DetalleLibro() {
     const { id } = useParams(); // Obtiene l ID del libro de la URL
     const [libro, setLibro] = useState();
     const [imagen, setImagen] = useState(null);
+    const [mostrarFormulario, setMostrarFormulario] = useState(false);
+
 
     const imagenGenerica = 'https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2FPortada%20Libro%20Generica.png?alt=media&token=42926409-eb7b-4a16-9298-e6a53d6faee8'
 
@@ -30,7 +34,8 @@ function DetalleLibro() {
     }, [id]); // El efecto se ejecuta cada vez que cambia el ID
 
     const handleClick = () => {
-        console.log('hice clic en pedir intercambio')
+        setMostrarFormulario(true);
+        console.log('hice clic en mostrar form')
     }
 
     // RECUPERANDO IMAGEN
@@ -82,7 +87,7 @@ function DetalleLibro() {
                                     <Resenias />
                                 </div>
                                 <LineaH color={'#dda15e'} width={'100%'} />
-                                <Typography sx={{ textAlign: 'justify' , height:'40%'}}>{libro.resumen}</Typography>
+                                <Typography sx={{ textAlign: 'justify', height: '40%' }}>{libro.resumen}</Typography>
                                 <div className="contenedorTipsDetalle">
                                     <div className="tipsDetalle">
                                         <div className="infoTipDetalle"> <HomeIcon sx={{ color: 'primary.light' }} /><Typography>Editorial:{libro.editorial}</Typography></div>
@@ -101,7 +106,7 @@ function DetalleLibro() {
                                 <div className="contenedorBotonDetalle">
                                     <Boton className={'atencion'} onClick={handleClick} titulo={'Pedir Intercambio'} ></Boton>
                                 </div>
-
+                                {mostrarFormulario && <FormularioIntercambio tituloLibro={libro.titulo} autorLibro={libro.autor}/>} {/* Renderiza el formulario si mostrarFormulario es true */}
                             </div>
 
                         </div >

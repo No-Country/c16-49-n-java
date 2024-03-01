@@ -6,11 +6,11 @@ import Stack from '@mui/material/Stack';
 
 export default function Paginacion() {
     const { cantidadPaginas, tamañoPagina, paginaActual, setPaginaActual} = useContext(AppContext);
-      
+      console.log(paginaActual)
     
     const handleChange = (event, value) => {
-    setPaginaActual(value);
-    // console.log(paginaActual)
+    setPaginaActual(value - 1);
+    console.log(paginaActual)
 }
 
 

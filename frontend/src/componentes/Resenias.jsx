@@ -11,19 +11,40 @@ import { Typography } from "@mui/material";
 function Resenias() {
     const { id } = useParams(); // Obtiene l ID del libro de la URL
     const [resenias, setResenias] = useState();
-    const [cantResenias, setCantResenias] = useState();
+    const [cantResenias, setCantResenias] = useState(0);
+    const [isLoading, setIsLoading] = useState(true); // Nuevo estado para manejar la carga
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/v1/libros/${id}/resenias`)
-            .then(response => response.json())
-
-            .then(data => {setResenias(data[0].calificacion),
-                setCantResenias(data.length)})
-
-            .catch(error => console.error('Error:', error));
+        // Solo realizar la consulta si el ID está presente
+        if (id) {
+            fetch(`http://localhost:8080/api/v1/libros/${id}/resenias`)
+                .then(response => response.json())
+                .then(data => {
+                    setResenias(data);
+                    setCantResenias(data.length);
+                    setIsLoading(false); // Marcar la carga como completa
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    setIsLoading(false); // Marcar la carga como completa incluso si hay errores
+                });
+        }
     }, [id]);
 
-    const valoracion = resenias
+    // useEffect(() => {
+    //     fetch(`http://localhost:8080/api/v1/libros/${id}/resenias`)
+    //         .then(response => response.json())
+    //    .then(data => console.log(data))
+    //     .then(data => {setResenias(data[0].calificacion),
+    //         setCantResenias(data.length), 
+    //         console.log(data)})
+
+
+    //     .catch(error => console.error('Error:', error));
+    // }, [id]);
+
+    const valoracion =  resenias && resenias.length > 0 ? resenias[0].calificacion : 0 ;
+
 
     const iconos = [];
     if (valoracion >= 0) {
@@ -44,10 +65,19 @@ function Resenias() {
     return (
         <>
             <div style={{ display: 'flex', flexDirection: 'row', columGap: '5' }}>
-                {iconos}
+                {isLoading ? (
+                    <Typography>Cargando...</Typography>
+                ) : cantResenias === 0 ? (
+                    <Typography></Typography>
+                ) : (
+                    iconos
+                )}
+                {/* {iconos} */}
             </div>
             {/* indica la cantidad de puntuaciones */}
-            <Typography>{cantResenias} Valoraciones</Typography>
+            {cantResenias === 0 ? (<Typography>Sin Valoraciones</Typography>)
+                : cantResenias === 1 ? (<Typography>{cantResenias} Valoración</Typography>)
+                    : (<Typography>{cantResenias} Valoraciones</Typography>)}
         </>
 
     )

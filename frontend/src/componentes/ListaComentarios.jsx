@@ -9,14 +9,14 @@ import AvatarUsuario from './AvatarUsuario';
 import '../estilos/detalleLibro.css';
 
 export default function ListaComentarios() {
-    // const { id } = useParams(); // Obtiene l ID del libro de la URL
-    // const [dataComentario, setDataComentario] = useState();
+    const { id } = useParams(); // Obtiene l ID del libro de la URL
+    const [dataComentario, setDataComentario] = useState();
     // useEffect(() => {
-    //     fetch(`http://localhost:8080/api/v1/comentario/` + id)
+    //     fetch(`http://localhost:8080/api/v1//libros/comentarios/libro/1` + id)
 
     //         .then(response => response.json())
     //         .then(data => setDataComentario(data))
-
+    //     console.log(dataComentario)
     //         .catch(error => console.error('Error:', error));
     // }, [id]); // El efecto se ejecuta cada vez que cambia el ID
 
@@ -25,20 +25,20 @@ export default function ListaComentarios() {
         <Container maxWidth="xl">
             {/* {dataComentario.length > 0 &&
                 (dataComentario.map((comentario, index) => ( */}
-            <Box sx={{ width: '100%', height: 'auto', display: 'flex', flexDirection: 'row', alignItems: 'flexStart', justifyContent: 'flexStart', textAlign: 'justify', marginBottom:'20px' }}
+            <Box sx={{ width: '100%', height: 'auto', display: 'flex', flexDirection: 'row', alignItems: 'flexStart', justifyContent: 'flexStart', textAlign: 'justify', marginBottom: '20px' }}
             // key={index} comentario={comentario}
             >
                 <AvatarUsuario />
                 <div className='contenedorComentario'>
                     <div className='infoUsuarioComentario'>
-                    <Typography variant='body1'>Nombre Usuario 
-                        {/* {comentario.usuario} */}
+                        <Typography variant='body1'>Nombre Usuario
+                            {/* {comentario.usuario} */}
                         </Typography>
                         <Typography variant='body2'>Enviado el:
-                        {/* {comentario.fechaCreacion} */}
+                            {/* {comentario.fechaCreacion} */}
                         </Typography>
                     </div>
-                    
+
                     <Typography>
                         {/* {comentario.contenido} */}
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
