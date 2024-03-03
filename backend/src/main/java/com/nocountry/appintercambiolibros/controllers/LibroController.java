@@ -49,19 +49,19 @@ public class LibroController {
     @Autowired 
     JsonService jsonService;
 
-    @Operation(summary = "Obtener todos lo libros paginados", security = @SecurityRequirement(name = "bearerAuth"))
+    @Operation(summary = "Obtener todos lo libros paginados")
     @GetMapping()
     public ResponseEntity<?> listarLibros(@ParameterObject @Parameter(hidden = true) Pageable pageable) {
         return ResponseEntity.ok(libroService.listarLibros(pageable));
     }
 
-    @Operation(summary = "Obtener libro por Id",  security = @SecurityRequirement(name = "bearerAuth"))
+    @Operation(summary = "Obtener libro por Id")
     @GetMapping("/{id}")
     public LibroDTORespuesta getLibro(@PathVariable Long id) {
         return this.libroService.find(id);
     }
 
-    @Operation(summary = "Obtener libro por Id",  security = @SecurityRequirement(name = "bearerAuth"))
+    @Operation(summary = "Obtener libro por Id")
     @GetMapping("/{id}/resenias")
     public List<GetReseniaDTO> getReseniasDeLibro(@PathVariable("id") Long id) {
         return this.libroService.getReseniasDeLibroId(id);

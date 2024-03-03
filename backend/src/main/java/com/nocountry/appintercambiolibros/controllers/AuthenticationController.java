@@ -32,7 +32,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(autRespuesta);
 
     }
-
+    @Operation(summary = "Cerrar sesión")
     @PostMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest httpServletRequest){
         authenticationService.logout(httpServletRequest);

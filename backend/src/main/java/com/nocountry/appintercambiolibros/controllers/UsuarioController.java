@@ -46,7 +46,7 @@ public class UsuarioController {
 
     @Autowired
     private AuthenticationService authenticationService;
-
+    @Operation(summary = "Registra un usuario")
     @PostMapping("registro")
     public ResponseEntity<?> registerOne(@RequestBody @Valid UsuarioRegistroSolicitud usuarioRegistro){
         usuarioService.registrarUsuario(usuarioRegistro);
