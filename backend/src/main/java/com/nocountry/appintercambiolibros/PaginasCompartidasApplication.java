@@ -16,10 +16,10 @@ public class PaginasCompartidasApplication {
 	/*@Bean
 	public CommandLineRunner createPasswordCommand(PasswordEncoder passwordEncoder){
 		return args -> {
-			System.out.println(passwordEncoder.encode("clave123"));
-			System.out.println(passwordEncoder.encode("clave456"));
-			System.out.println(passwordEncoder.encode("clave789"));
-			System.out.println(passwordEncoder.encode("clave101"));
+			System.out.println(passwordEncoder.encode("clave123")); PABLO
+			System.out.println(passwordEncoder.encode("clave456")); YORMARIS
+			System.out.println(passwordEncoder.encode("clave789")); MATÍAS
+			System.out.println(passwordEncoder.encode("clave101")); MARIANA
 		};
 	}*/
 
