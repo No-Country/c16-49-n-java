@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class PerfilUsuarioRespuesta {
+    private Long id;
     private String nombre;
     private Role role;
     private String email;

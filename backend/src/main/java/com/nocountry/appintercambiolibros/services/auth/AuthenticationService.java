@@ -90,7 +90,7 @@ public class AuthenticationService {
                 SecurityContextHolder.getContext().getAuthentication();
         String email = (String) auth.getPrincipal();
         Usuario usuario = usuarioService.findByEmail(email)
-                .orElseThrow( ()-> new RecursoNoEncontradoException("No se encontro al usuario con el email proporcionado"));
+                .orElseThrow( ()-> new RecursoNoEncontradoException("No se encontró al usuario con el email proporcionado"));
         List<LibroDTORespuesta> libros = usuario.getLibros().stream().map( libro -> {
             return LibroDTORespuesta.builder()
                     .id(libro.getId().toString())
@@ -108,6 +108,7 @@ public class AuthenticationService {
         }).toList();
 
         return PerfilUsuarioRespuesta.builder()
+                .id(usuario.getId())
                 .nombre(usuario.getNombre())
                 .email(usuario.getEmail())
                 .role(usuario.getRole())

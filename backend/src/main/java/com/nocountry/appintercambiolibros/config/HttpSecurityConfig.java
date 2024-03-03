@@ -96,6 +96,9 @@ public class HttpSecurityConfig {
         authRequest.requestMatchers(HttpMethod.GET, "api/v1/usuarios/{id}/imagen")
                 .hasAnyRole(Role.ADMINISTRADOR.name(), Role.USUARIO.name());
 
+        authRequest.requestMatchers(HttpMethod.GET, "api/v1/auth/perfil")
+                .hasAnyRole(Role.ADMINISTRADOR.name(), Role.USUARIO.name());
+
         //PÚBLICOS
         authRequest.requestMatchers(HttpMethod.POST, "api/v1/usuarios/registro").permitAll();
         authRequest.requestMatchers(HttpMethod.POST, "api/v1/auth/login").permitAll();
