@@ -16,18 +16,19 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UsuarioRegistroSolicitud {
     @NotEmpty
-    @Size(min = 4)
+    @Size(min = 4, max = 60)
     private String nombre;
     @NotEmpty
+    @Size(min = 10, max = 30)
     @Email
     @Schema(description = "Correo electrónico del usuario", example = "usuario@example.com")
     @Pattern(regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$", message = "Formato de email inválido")
     private String email;
     @NotEmpty
-    @Size(min = 8)
+    @Size(min = 8, max = 12)
     private String password;
     @NotEmpty
-    @Size(min = 8)
+    @Size(min = 8, max = 12)
     private String repeatedPassword;
 
 }

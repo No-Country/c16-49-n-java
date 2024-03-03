@@ -3,8 +3,6 @@ package com.nocountry.appintercambiolibros.controllers;
 import com.nocountry.appintercambiolibros.models.dto.security.UsuarioRegistroSolicitud;
 import com.nocountry.appintercambiolibros.services.auth.AuthenticationService;
 import io.swagger.v3.oas.annotations.Hidden;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nocountry.appintercambiolibros.models.dto.UsuarioDTO;
-import com.nocountry.appintercambiolibros.models.entity.Usuario;
 import com.nocountry.appintercambiolibros.services.ImagenService;
 import com.nocountry.appintercambiolibros.services.JsonService;
 import com.nocountry.appintercambiolibros.services.UsuarioService;
@@ -24,14 +21,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-
-@ApiResponses(value = {
-        @ApiResponse(responseCode= "200", description = "Operación exitosa"),
-        @ApiResponse(responseCode= "201", description = "Operación de creación exitosa"),
-        @ApiResponse(responseCode = "404", description = "No encontrado"),
-        @ApiResponse(responseCode = "403", description = "No se encontraron permisos para esta solicitud"),
-        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-})
 
 @RestController
 @RequestMapping("api/v1/usuarios")

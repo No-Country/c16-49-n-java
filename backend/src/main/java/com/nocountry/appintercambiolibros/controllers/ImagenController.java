@@ -17,12 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nocountry.appintercambiolibros.services.impl.ImagenServiceImpl;
-@ApiResponses(value = {
-        @ApiResponse(responseCode= "200", description = "Operación exitosa"),
-        @ApiResponse(responseCode= "203", description = "Operación de creación"),
-        @ApiResponse(responseCode = "404", description = "No encontrado"),
-        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-})
+
 @RestController()
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("api/v1/imagenes")
