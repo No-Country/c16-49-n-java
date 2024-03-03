@@ -5,8 +5,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -52,5 +54,18 @@ public class JwtService {
                 .parseSignedClaims(jwt).getPayload();
     }
 
+    public Date extractExpiration(String jwt) {
+        return extractAllClaims(jwt).getExpiration();
+    }
+
+    public String extractJwtFromRequest(HttpServletRequest httpServletRequest) {
+        String authorizationHeader = httpServletRequest.getHeader("Authorization");
+
+        if(!StringUtils.hasText(authorizationHeader) || !authorizationHeader.startsWith("Bearer ")){
+            return null;
+        }
+
+        return authorizationHeader.split(" ")[1];
+    }
 }
 

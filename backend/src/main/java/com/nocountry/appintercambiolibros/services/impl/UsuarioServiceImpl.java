@@ -79,11 +79,6 @@ public class UsuarioServiceImpl implements UsuarioService{
         return usuarioRepository.findByEmail(email);
     }
 
-    @Override
-    public Optional<Usuario> findByNombre(String nombre) {
-        return usuarioRepository.findByNombre(nombre);
-    }
-
     private void validarPassword(UsuarioRegistroSolicitud usuarioRegistro) {
 
         if(!StringUtils.hasText(usuarioRegistro.getPassword()) || !StringUtils.hasText(usuarioRegistro.getRepeatedPassword())){

@@ -1,5 +1,6 @@
 package com.nocountry.appintercambiolibros.config;
 
+import com.nocountry.appintercambiolibros.config.filter.JwtAuthenticationFilter;
 import com.nocountry.appintercambiolibros.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +11,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -23,14 +26,25 @@ public class HttpSecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
 
-   @Bean
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
+
+
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
        return httpSecurity
                .sessionManagement( session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                .authenticationProvider(daoAuthProvider)
                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                .authorizeHttpRequests(HttpSecurityConfig::buildAuthorizeRequest)
+               .exceptionHandling( exceptionConfig -> {
+                   exceptionConfig.authenticationEntryPoint(authenticationEntryPoint);
+                   exceptionConfig.accessDeniedHandler(accessDeniedHandler);
+               })
                .headers( headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                .csrf(csrf -> {
                    csrf.disable();
@@ -85,6 +99,7 @@ public class HttpSecurityConfig {
         //PÚBLICOS
         authRequest.requestMatchers(HttpMethod.POST, "api/v1/usuarios/registro").permitAll();
         authRequest.requestMatchers(HttpMethod.POST, "api/v1/auth/login").permitAll();
+        authRequest.requestMatchers(HttpMethod.POST, "api/v1/auth/logout").permitAll();
         authRequest.requestMatchers(HttpMethod.GET, "api/v1/auth/validar-token").permitAll();
         authRequest.requestMatchers(HttpMethod.GET, "api/v1/libros/buscar/libro").permitAll();
 

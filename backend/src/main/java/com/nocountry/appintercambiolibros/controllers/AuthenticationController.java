@@ -2,13 +2,16 @@ package com.nocountry.appintercambiolibros.controllers;
 
 import com.nocountry.appintercambiolibros.models.dto.security.AutenticacionRespuesta;
 import com.nocountry.appintercambiolibros.models.dto.security.AutenticacionSolicitud;
+import com.nocountry.appintercambiolibros.models.dto.security.PerfilUsuarioRespuesta;
 import com.nocountry.appintercambiolibros.services.auth.AuthenticationService;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +31,19 @@ public class AuthenticationController {
         AutenticacionRespuesta autRespuesta = authenticationService.login(authenticationRequest);
         return ResponseEntity.ok(autRespuesta);
 
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest httpServletRequest){
+        authenticationService.logout(httpServletRequest);
+        return ResponseEntity.ok("Sesión cerrada exitosamente");
+    }
+
+    @Operation(summary = "Obtener perfil de usuario")
+    @GetMapping("/perfil")
+    public ResponseEntity<?> perfilUsuarioLogueado(){
+        PerfilUsuarioRespuesta userProfile = authenticationService.usuarioLogueado();
+        return ResponseEntity.ok(userProfile);
     }
     @Hidden
     @GetMapping("/validar-token")

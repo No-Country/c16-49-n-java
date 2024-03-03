@@ -18,6 +18,6 @@ public interface UsuarioService {
     UsuarioDTO registrar(UsuarioDTO usuario, MultipartFile imagen);
     void registrarUsuario(UsuarioRegistroSolicitud usuarioRegistro);
     Optional<Usuario> findByEmail(String email);
-    Optional<Usuario> findByNombre(String nombre);
+
 
 }
