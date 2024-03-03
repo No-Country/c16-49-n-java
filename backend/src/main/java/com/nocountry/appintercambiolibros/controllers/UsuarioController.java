@@ -2,8 +2,10 @@ package com.nocountry.appintercambiolibros.controllers;
 
 import com.nocountry.appintercambiolibros.models.dto.security.UsuarioRegistroSolicitud;
 import com.nocountry.appintercambiolibros.services.auth.AuthenticationService;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,7 @@ import org.springframework.http.ResponseEntity;
         @ApiResponse(responseCode = "403", description = "No se encontraron permisos para esta solicitud"),
         @ApiResponse(responseCode = "500", description = "Error interno del servidor")
 })
+
 @RestController
 @RequestMapping("api/v1/usuarios")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -46,20 +49,22 @@ public class UsuarioController {
 
     @Autowired
     private AuthenticationService authenticationService;
+
     @Operation(summary = "Registra un usuario")
     @PostMapping("registro")
-    public ResponseEntity<?> registerOne(@RequestBody @Valid UsuarioRegistroSolicitud usuarioRegistro){
+    public ResponseEntity<?> registrarUsuario(@RequestBody @Valid UsuarioRegistroSolicitud usuarioRegistro){
         usuarioService.registrarUsuario(usuarioRegistro);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Lista todos los usuarios")
     @GetMapping
     public List<UsuarioDTO> getMethodName() {
         return this.usuarioService.listarUsuarios();
     }
-
+    @Hidden
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Registra un nuevo usuario")
     @PostMapping("register")
     public ResponseEntity<?> registrarUsuario(
@@ -72,13 +77,13 @@ public class UsuarioController {
             return ResponseEntity.internalServerError().body("Error al intentar guardar el usuario");
         }
     }
-
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Obtiene los datos del usuario solicitado")
     @GetMapping("{id}")
     public UsuarioDTO obtenerUsuario(@PathVariable("id") Long idUsuario ) {
         return this.usuarioService.find(idUsuario);       
     }
-
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Devuelve la imagen del usuario")
     @GetMapping("{id}/imagen")
     public ResponseEntity<?> obtenerImagenUsuario(@PathVariable("id") Long idUsuario ) {

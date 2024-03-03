@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class AuthenticationController {
         authenticationService.logout(httpServletRequest);
         return ResponseEntity.ok("Sesión cerrada exitosamente");
     }
-
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Obtener perfil de usuario")
     @GetMapping("/perfil")
     public ResponseEntity<?> perfilUsuarioLogueado(){

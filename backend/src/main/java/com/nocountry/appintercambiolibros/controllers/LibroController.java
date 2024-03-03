@@ -2,7 +2,6 @@ package com.nocountry.appintercambiolibros.controllers;
 
 import com.nocountry.appintercambiolibros.models.dto.ComentarioDTOSolicitud;
 import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
-import com.nocountry.appintercambiolibros.models.dto.GetUsuarioDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
 import com.nocountry.appintercambiolibros.models.dto.ReseniaDTO;
@@ -28,13 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@ApiResponses(value = {
-        @ApiResponse(responseCode= "200", description = "Operación exitosa"),
-        @ApiResponse(responseCode= "203", description = "Operación de creación"),
-        @ApiResponse(responseCode = "404", description = "No encontrado"),
-        @ApiResponse(responseCode = "403", description = "No se encontraron permisos para esta solicitud"),
-        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-})
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("api/v1/libros")
 @CrossOrigin(origins = "http://localhost:5173")

@@ -30,7 +30,7 @@ public class ImagenController {
 
     @Autowired
     ImagenServiceImpl imagenService;
-
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Obtener imagen de usuario")
     @GetMapping("/{filename}")
     public ResponseEntity<?> descargarImagen(@PathVariable("filename") String filename) throws IOException {

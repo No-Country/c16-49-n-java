@@ -6,6 +6,7 @@ import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 @SecurityScheme(
@@ -15,6 +16,15 @@ import org.springframework.context.annotation.Configuration;
         scheme = "bearer")
 @Configuration
 public class SpringOpenApiConfig {
+
+    @Bean
+    public GroupedOpenApi publicApi() {
+        return GroupedOpenApi.builder()
+                .group("demo-paginas-compartidas")
+                .pathsToMatch("v1", "/api/v1/libros/**", "/api/v1/imagenes/**", "/api/v1/usuarios/**", "/api/v1/auth/**")
+                .packagesToScan("com.nocountry.appintercambiolibros.controllers")
+                .build();
+    }
 
     @Bean
     public OpenAPI springShopOpenAPI() {
