@@ -1,26 +1,32 @@
 package com.nocountry.appintercambiolibros.services.impl;
 
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nocountry.appintercambiolibros.exceptions.RecursoNoEncontradoException;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
 import com.nocountry.appintercambiolibros.services.ImagenService;
 
 @Service
 public class ImagenServiceImpl implements ImagenService {
 
     private final Path imagePath;
+
+    @Value("${gcp.bucket.name}")
+    private String bucketname;
+
+    @Autowired
+    private Storage storage;
 
     @Autowired
     public ImagenServiceImpl(@Value("${storage.path.imagen}") Path imagePath) throws IOException{
@@ -35,32 +41,18 @@ public class ImagenServiceImpl implements ImagenService {
     }
 
     public byte[] obtenerImagen(String filename) {
-        final Path pathImage = Paths.get(this.imagePath.toAbsolutePath().toString(), filename);
-        try {
-            if(Files.exists(pathImage)){
-                return Files.readAllBytes(pathImage);
-            } else {
-                throw new RecursoNoEncontradoException("No se encontró el archivo" + filename );
-            }
-        } catch (Exception e) {
-            return null;
-        }
+        Blob blob = storage.get(bucketname, filename);
+        return blob.getContent();
     }
 
-    public String guardarImagen(MultipartFile imagen){
-        if (imagen == null){
-            throw new IllegalArgumentException("No se envió ningún archivo");
-        }
-
-        String extension = StringUtils.getFilenameExtension(imagen.getOriginalFilename());
-        final String nombre = UUID.randomUUID().toString() + "." + extension;
-        final Path path_imagen = Paths.get(this.imagePath.toAbsolutePath().toString(), nombre);
-
+    public String guardarImagen(MultipartFile file) {
+        BlobId blobId = BlobId.of(bucketname, file.getOriginalFilename());
+        BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
+            .setContentType(file.getContentType()).build();
         try {
-            imagen.transferTo(path_imagen);
-            return nombre;
-
-        } catch (IOException ioe) {
+            Blob blob = storage.create(blobInfo, file.getBytes());
+            return file.getOriginalFilename();
+        } catch (Exception e) {
             return null;
         }
     }
