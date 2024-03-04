@@ -25,7 +25,7 @@ function DetalleLibro() {
     const imagenGenerica = 'https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2FPortada%20Libro%20Generica.png?alt=media&token=42926409-eb7b-4a16-9298-e6a53d6faee8'
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/v1/libros/` + id)
+        fetch(`https://paginascompartidas.fly.dev/api/v1/libros/` + id)
 
             .then(response => response.json())
             .then(data => setLibro(data))
@@ -41,7 +41,7 @@ function DetalleLibro() {
     // RECUPERANDO IMAGEN
     useEffect(() => {
         if (libro && libro.nombreImagen) {
-            const apiUrl = `http://localhost:8080/api/v1/imagenes/${libro.nombreImagen}`;
+            const apiUrl = `https://paginascompartidas.fly.dev/api/v1/imagenes/${libro.nombreImagen}`;
 
             fetch(apiUrl)
                 .then(response => {
@@ -104,9 +104,11 @@ function DetalleLibro() {
                                 </div>
 
                                 <div className="contenedorBotonDetalle">
-                                    <Boton className={'atencion'} onClick={handleClick} titulo={'Pedir Intercambio'} ></Boton>
+                                    <FormularioIntercambio tituloLibro={libro.titulo} autorLibro={libro.autor} idLibro={libro.id} />
+                                    {/* <Boton className={'atencion'} onClick={handleClick} titulo={'Pedir Intercambio'} ></Boton> */}
                                 </div>
-                                {mostrarFormulario && <FormularioIntercambio tituloLibro={libro.titulo} autorLibro={libro.autor}/>} {/* Renderiza el formulario si mostrarFormulario es true */}
+                                {/* {mostrarFormulario && <FormularioIntercambio tituloLibro={libro.titulo} autorLibro={libro.autor}/>}  */}
+                                {/* Renderiza el formulario si mostrarFormulario es true */}
                             </div>
 
                         </div >

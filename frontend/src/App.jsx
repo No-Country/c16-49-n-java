@@ -13,6 +13,7 @@ import Registro from './componentes/Registro';
 import Sesion from './componentes/InicioSesion';
 import Footer from './componentes/Footer';
 import DetalleLibro from './componentes/DetalleLibro'
+import PerfilUsuario from './componentes/PerfilUsuario'
 import axios from 'axios';
 
 import { Routes, Route } from 'react-router-dom';
@@ -27,7 +28,8 @@ function App() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8080/api/v1/libros?p='+paginaActual)
+    .get('https://paginascompartidas.fly.dev/api/v1/libros?p='+paginaActual)
+      // .get('http://localhost:8080/api/v1/libros?p='+paginaActual)
       .then((response) => {
        console.log(response.data)
         setDataLibros(response.data.content);
@@ -56,6 +58,7 @@ function App() {
             <Route path='/Registro' element={<Registro />}></Route>
             <Route path='/Sesion' element={<Sesion />}></Route>
             <Route path='/Libro/:id' element={<DetalleLibro />}></Route>
+            <Route path='/Sesion/perfil' element={<PerfilUsuario />}></Route>
           </Routes>
           <Footer />
 

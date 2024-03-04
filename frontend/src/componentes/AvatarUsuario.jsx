@@ -33,7 +33,7 @@ export default function AvatarUsuario() {
 
     <Stack direction="row" spacing={2}>
        {imagenUsuario ?
-      <Avatar alt="imagen Usuario" src={imagenUsuario} />
+      <Avatar sx={{width:'60', height:'60'}} alt="imagen Usuario" src={imagenUsuario} />
       :
       <Avatar src="/broken-image.jpg" />}
     </Stack>

@@ -1,100 +1,144 @@
-import { Password } from "@mui/icons-material";
+
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+// import { Link as LinkRouter } from 'react-router-dom';
+import { Button, Typography } from "@mui/material";
+import TextField from '@mui/material/TextField';
+import { Password } from "@mui/icons-material";
+import Boton from "./Boton";
+import Box from '@mui/material/Box';
 import Swal from "sweetalert2";
 import '../estilos/formulariosesion.css';
 
+
 function FormSesion() {
-    // define los datos a capturar
     const [datosForm, setDatosForm] = useState({
         email: "",
         password: ""
     })
-    // array para almacenar errores
-    const [errors, setErrors] = useState({
-        email: "",
-        password: "",
-    });
+    const [error, setError] = useState('');
+    const SesionExitosa = () => {
+        const history = useHistory()
 
-    // agrega los datos ingresados en la constante de datos
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setDatosForm({ ...datosForm, [name]: value });
+
+        const redirigirAPerfil = () => {
+            history.push('/Sesion/perfil');
+        }
     };
+
+
+    const handleClose = () => {
+        Swal.fire({
+            title: "",
+            text: 'Inicio de Sesión Cancelado',
+            icon: "info",
+        })
+            .then(() => {
+                limpiarCampos()
+
+            });
+
+        // Limpiar campos al cancelar
+        limpiarCampos()
+    };
+    const limpiarCampos = () => {
+        setError('');
+        setDatosForm({ email: "", password: "" });
+    }
     // activa la validacion al hacer submit
     const handleSubmit = (event) => {
         event.preventDefault();
+        setError('');
 
-        // Validación de datos de entrada al formulario
-        let newErrors = {};
-        // Verificar si algún campo está vacio
-        if (datosForm.email === "") {
-            newErrors.email = "El campo Email es obligatorio";
-        }
-        if (datosForm.password === "") {
-            newErrors.password = "Debe ingresar su contraseña";
-        }
-        // Si hay campos vacíos, mostrar errores y detener la validación
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            Swal.fire({
-                title: 'Error!',
-                text: Object.values(newErrors).join("\n"), // Une todos los mensajes de error en una sola cadena',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            })
+        // Verificar si los campos están llenos
+        if (datosForm.email.trim() === '' || datosForm.password.trim() === '') {
+            setError('Todos los campos son requeridos');
             return;
         }
+
 
         // Verificar el campo email
         const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
         if (!validEmail.test(datosForm.email)) {
-            newErrors.email = "Email inválido, por favor verifique";
+            setError("Email inválido, por favor verifique");
+            return;
         }
 
-        // Validación de la contraseña al menos 8 caracteres, una letra y un numero
-        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        if (!regex.test(datosForm.password)) {
-            newErrors.password = "La contraseña debe tener al menos 8 caracteres, al menos una letra y un número"
+        // Validación de la Password al menos 8 caracteres, una letra y un numero
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if (!passwordRegex.test(datosForm.password)) {
+            setError('La Password debe tener al menos 8 caracteres, al menos una letra y un número');
+            return;
         }
-        setErrors(newErrors);
-        // Envío del formulario si no hay errores
-        if (Object.keys(newErrors).length === 0) {
-            // INGRESAR CODIGO PARA ENVIAR EL FORMULARIO AL BACKEND
-            console.log("Datos del formulario:", datosForm);
-        }
-        else {
-            Swal.fire({
-                title: 'Error!',
-                text: Object.values(newErrors).join("\n"), // Une todos los mensajes de error en una sola cadena',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            })
-        }
+
+        // Si pasa las validaciones, enviar la solicitud
+        console.log('inicie sesion')
+        Swal.fire({
+            title: "Cargando",
+            text: 'Iniciando Sesión...',
+            icon: "success",
+            onClick:{}
+        })
+
     };
-
+    const handleChange = (event) => {
+        setDatosForm({ ...datosForm, [event.target.id]: event.target.value });
+    };
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-            <h1 style={{ marginTop: 100 }}>Inicia Sesion</h1>
-                <div className="filas">
-                    <label htmlFor="email" className="form-label">Email</label>
-                    <input className="form-control" type="email" id="email" name="email" placeholder="maria@mail.com"
-                        value={datosForm.email}
-                        onChange={handleChange} />
-                    {errors.email && <div className="text-danger">{errors.email}</div>}
+            <Box
+                component="form"
+                onSubmit={handleSubmit}
+                sx={{
+                    '& .MuiTextField-root': { m: 1, width: '80%' },
+                }}
+                noValidate
+                autoComplete="off"
+                backgroundColor='white'
+            >
+                <div>
+                    <Typography variant="h3" color='secondary'>Inicio de Sesión</Typography>
+
+                    <Box
+                        sx={{
+                            width: '90%',
+                            // display: 'flex', flexDirection: 'row', flexWrap: 'noWrap',
+                            // columnGap: '1%'
+                        }}>
+
+
+                        <TextField
+                            required
+                            variant="standard"
+                            helperText="Ingresa tu email"
+                            id="email"
+                            label="Email"
+                            defaultValue={''}
+                            // onChange={(e) => setEmail(e.target.value)}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            required
+                            variant="standard"
+                            id="password"
+                            label="Password"
+                            helperText="Ingresa tu Contraseña"
+                            defaultValue={''}
+                            // onChange={(e) => setPassword(e.target.value)}
+                            onChange={handleChange}
+                        />
+                        {error && <Typography color="error">{error}</Typography>}
+                    </Box>
                 </div>
-                <div className="filas">
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" name="password"
-                        value={datosForm.password}
-                        onChange={handleChange} />
-                    {errors.password && <div className="text-danger">{errors.password}</div>}
+
+                <div className="accionesInicioSesion">
+                    <Button type="submit">Iniciar Sesión</Button>
+                    <Button onClick={handleClose}>Cancelar</Button>
                 </div>
-                <div className="filas">
-                    <button type="submit" className="">Iniciar Sesion</button>
-                </div>
-            </form>
+
+            </Box>
+
         </>
 
 

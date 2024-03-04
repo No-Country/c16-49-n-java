@@ -27,8 +27,9 @@ import java.util.List;
 
 
 @RestController
+
+@CrossOrigin(origins = {"http://localhost:5173", "https://paginascompartidas.netlify.app/"})
 @RequestMapping("api/v1/libros")
-@CrossOrigin(origins = "http://localhost:5173")
 public class LibroController {
 
     @Autowired

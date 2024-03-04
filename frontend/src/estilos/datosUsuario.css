@@ -1,0 +1,25 @@
+.contenedorFormDatosUsuario{
+    width: 80%;
+    height: 330px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+}
+.tituloUsuarioPerfil{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #bc6c25;
+    color: white;
+    padding-left: 20px;
+    border-radius: 5px 5px 0 0;
+}
+.formularioDatosUsuario{
+    height: 80%;
+    justify-content: space-evenly;
+}

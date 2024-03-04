@@ -1,15 +1,14 @@
-.vistaInicioSesion{
-    width: 80%;
-    height: 70vh;
+.contenedorGeneralPopover {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-left: 10%;
-    margin-top: 50px;
-    margin-bottom: 100px;
+    width: 100%;
+    height: 100%;
+    background-color: #bc6c25;
 }
-.contenedorGraficoFormSesion {
+
+.contenedorGraficoFormIntercambio {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -17,11 +16,11 @@
     width: 40%;
     height: 100%;
     text-align: center;
-background-color: #bc6c25;
+
     padding: 0;
 }
 
-.contenedorImagenFormSesion {
+.contenedorImagenFormInytercambio {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,23 +29,22 @@ background-color: #bc6c25;
     height: 40%;
 }
 
-.contenedorImagenFormSesion>img {
+.contenedorImagenFormInytercambio>img {
     width: 100%;
     height: 100%;
     overflow: hidden;
     object-fit: contain;
 }
-.contenedorTextoGraficoFormSesion{
-    width: 80%;
-    height: auto;
-    margin-left: 5%;
-    padding: 0%;
-}
-.contenedorFormulario{
-    width: 60%;
-    height: 100%;
+
+.contenedorTextoGraficoFormIntercambio {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 90%;
+    height: 60%;
+
+  margin: 10% 5%;
+
+    color: white;
 }

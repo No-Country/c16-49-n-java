@@ -1,6 +1,15 @@
+// estructura de datos del Componente 
+// <Boton className="info" 
+//             titulo="Ver más" 
+//             mensaje="Registrate para ver más informacion" 
+//             title='Atención'
+//             icon='info'
+//             ></Boton>
+
 import React from "react";
 import '../estilos/botones.css'
 import Swal from 'sweetalert2';
+
 
 function Boton(props) {
     const handleClick = () => {

@@ -1,0 +1,51 @@
+.tarjetaCabecera{
+    position: relative;
+    overflow: hidden;
+}
+.contenedorAvatarPerfil{
+    position: absolute;
+    top: 70px;
+    left: 85px;
+    width: 130px;
+    height: 130px;
+    
+}
+
+.css-pl8gqh-MuiStack-root, .css-5vyjnk-MuiAvatar-root {
+    width: 130px !important;
+    height: 130px !important;
+
+}
+.css-5vyjnk-MuiAvatar-root {
+    border: 5px solid white;
+    background-color: wheat;
+}
+.contenedorNombre{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 10px;
+    height: 100px;
+    width: 100%;
+}
+.usuarioEstadisticas{
+    width: 100%;
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+}
+.datosEstadisticas{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+}

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nocountry.appintercambiolibros.services.impl.ImagenServiceImpl;
 
 @RestController()
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173","https://paginascompartidas.netlify.app/"})
 @RequestMapping("api/v1/imagenes")
 public class ImagenController {
 
