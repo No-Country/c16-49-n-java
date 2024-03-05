@@ -12,12 +12,14 @@ function Resenias() {
     const { id } = useParams(); // Obtiene l ID del libro de la URL
     const [resenias, setResenias] = useState();
     const [cantResenias, setCantResenias] = useState(0);
+    const[reseniasProm, setReseniasProm]=useState(0);
     const [isLoading, setIsLoading] = useState(true); // Nuevo estado para manejar la carga
 
     useEffect(() => {
         // Solo realizar la consulta si el ID está presente
         if (id) {
-            fetch(`https://paginascompartidas.fly.dev/api/v1/libros/${id}/resenias`)
+            // fetch(`https://paginascompartidas.fly.dev/api/v1/libros/${id}/resenias`)
+            fetch(`http://localhost:8080/api/v1/libros/${id}/resenias`)
                 .then(response => response.json())
                 .then(data => {
                     setResenias(data);
@@ -30,21 +32,26 @@ function Resenias() {
                 });
         }
     }, [id]);
+    useEffect(() => {
+        // Solo realizar la consulta si el ID está presente
+        if (id) {
+            // fetch(`https://paginascompartidas.fly.dev/api/v1/libros/${id}/resenias/promedio`)
+            fetch(`http://localhost:8080/api/v1/libros/${id}/resenias/promedio`)
+                .then(response => response.json())
+                .then(data => {
+                    setReseniasProm(data)
+                    setIsLoading(false); // Marcar la carga como completa
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    setIsLoading(false); // Marcar la carga como completa incluso si hay errores
+                });
+        }
+    }, [id]);
+    
 
-    // useEffect(() => {
-    //     fetch(`http://localhost:8080/api/v1/libros/${id}/resenias`)
-    //         .then(response => response.json())
-    //    .then(data => console.log(data))
-    //     .then(data => {setResenias(data[0].calificacion),
-    //         setCantResenias(data.length), 
-    //         console.log(data)})
-
-
-    //     .catch(error => console.error('Error:', error));
-    // }, [id]);
-
-    const valoracion =  resenias && resenias.length > 0 ? resenias[0].calificacion : 0 ;
-
+    // const valoracion =  resenias && resenias.length > 0 ? resenias[0].calificacion : 0 ;
+const valoracion= reseniasProm
 
     const iconos = [];
     if (valoracion >= 0) {

@@ -43,7 +43,7 @@ function Footer() {
       
                             <div className="contenedorEnlacesFooter">
                                 <LinkRouter to='/'>Home</LinkRouter>
-                                <LinkRouter to='/Libros'>Ver Catálogo</LinkRouter>
+                                <LinkRouter to='/libros'>Ver Catálogo</LinkRouter>
 
 
                             </div>

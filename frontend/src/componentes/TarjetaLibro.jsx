@@ -25,8 +25,8 @@ export default function TarjetaLibro({ libro }) {
 
   useEffect(() => {
     if (libro && libro.nombreImagen) {
-      const apiUrl = `https://paginascompartidas.fly.dev/api/v1/imagenes/${libro.nombreImagen}`;
-
+      // const apiUrl = `https://paginascompartidas.fly.dev/api/v1/imagenes/${libro.nombreImagen}`;
+      const apiUrl = `http://localhost:8080/api/v1/imagenes/${libro.nombreImagen}`;
       fetch(apiUrl)
         .then(response => {
           if (!response.ok) {
@@ -68,7 +68,7 @@ export default function TarjetaLibro({ libro }) {
             </Typography>
           </CardContent>
           <CardActions sx={{ height: 40, justifyContent: 'center' }}>
-            <LinkRouter to={'/Libro/'+ libro.id}>
+            <LinkRouter to={'/libro/'+ libro.id}>
             <Boton className="info" 
             titulo="Ver más" 
             mensaje="Registrate para ver más informacion" 

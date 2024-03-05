@@ -86,8 +86,8 @@ function Buscar() {
     
     const handleInput = () => {
 
-        fetch(`https://paginascompartidas.fly.dev/api/v1/libros/buscar?${parametro}=${datosInput}`)
-
+        // fetch(`https://paginascompartidas.fly.dev/api/v1/libros/buscar?${parametro}=${datosInput}`)
+        fetch(`http://localhost:8080/api/v1/libros/buscar?${parametro}=${datosInput}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data.content);

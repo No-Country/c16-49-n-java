@@ -22,16 +22,17 @@ function App() {
   const [dataLibros, setDataLibros] = useState([])
   const [loading, setLoading] = useState(true);
   const [resultadosBusqueda, setResultadosBusqueda] = useState([]);
-  const [cantidadPaginas, setCantidadPaginas]= useState(0)
-  const [tamañoPagina, setTamañoPagina]= useState([]);
-  const [paginaActual, setPaginaActual] =useState(0);
+  const [cantidadPaginas, setCantidadPaginas] = useState(0)
+  const [tamañoPagina, setTamañoPagina] = useState([]);
+  const [paginaActual, setPaginaActual] = useState(0);
 
   useEffect(() => {
     axios
-    .get('https://paginascompartidas.fly.dev/api/v1/libros?p='+paginaActual)
-      // .get('http://localhost:8080/api/v1/libros?p='+paginaActual)
+      // .get('https://paginascompartidas.fly.dev/api/v1/libros?p=' + paginaActual)
+      .get('http://localhost:8080/api/v1/libros?p='+paginaActual)
       .then((response) => {
-       console.log(response.data)
+        console.log('respuesta de la api:response.data')
+        console.log(response.data)
         setDataLibros(response.data.content);
         setCantidadPaginas(Math.ceil(response.data.totalPages))
         setTamañoPagina(response.data.size)
@@ -44,20 +45,20 @@ function App() {
       });
 
   }, [paginaActual]);
-  console.log(dataLibros)
+ 
 
   return (
     <>
       <ThemeProvider theme={theme}>
-        <AppContext.Provider value={{ dataLibros, setResultadosBusqueda, resultadosBusqueda, setCantidadPaginas, cantidadPaginas, tamañoPagina, paginaActual, setPaginaActual}}>
+        <AppContext.Provider value={{ dataLibros, setResultadosBusqueda, resultadosBusqueda, setCantidadPaginas, cantidadPaginas, tamañoPagina, paginaActual, setPaginaActual }}>
           <NavBar />
           <Routes>
             <Route path="*" element={<Home />}></Route>
             {/* <Route path='/Inicio' element={<Home />}> </Route> */}
-            <Route path='/Libros' element={<Catalogo />} ></Route>
+            <Route path='/libros' element={<Catalogo />} ></Route>
             <Route path='/Registro' element={<Registro />}></Route>
             <Route path='/Sesion' element={<Sesion />}></Route>
-            <Route path='/Libro/:id' element={<DetalleLibro />}></Route>
+            <Route path='/libro/:id' element={<DetalleLibro />}></Route>
             <Route path='/Sesion/perfil' element={<PerfilUsuario />}></Route>
           </Routes>
           <Footer />

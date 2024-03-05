@@ -25,7 +25,7 @@ const pages = [
 
     {
         name: 'Libros',
-        path: '/Libros'
+        path: '/libros'
     },
     {
         name: 'Registrate',
@@ -43,7 +43,7 @@ const pages = [
 
 function NavBar() {
     const ubicacion = useLocation();
-    const mostrarBuscador = ubicacion.pathname === '/Libros';
+    const mostrarBuscador = ubicacion.pathname === '/libros';
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 

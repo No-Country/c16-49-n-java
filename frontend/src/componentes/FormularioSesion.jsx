@@ -1,7 +1,6 @@
 
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-// import { Link as LinkRouter } from 'react-router-dom';
+import { Link as LinkRouter } from 'react-router-dom';
 import { Button, Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import { Password } from "@mui/icons-material";
@@ -17,14 +16,7 @@ function FormSesion() {
         password: ""
     })
     const [error, setError] = useState('');
-    const SesionExitosa = () => {
-        const history = useHistory()
 
-
-        const redirigirAPerfil = () => {
-            history.push('/Sesion/perfil');
-        }
-    };
 
 
     const handleClose = () => {
@@ -38,15 +30,16 @@ function FormSesion() {
 
             });
 
-        // Limpiar campos al cancelar
-        limpiarCampos()
+        // // Limpiar campos al cancelar
+        // limpiarCampos()
     };
     const limpiarCampos = () => {
         setError('');
         setDatosForm({ email: "", password: "" });
     }
+
     // activa la validacion al hacer submit
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setError('');
 
@@ -57,7 +50,7 @@ function FormSesion() {
         }
 
 
-        // Verificar el campo email
+        // Verificar estructura del campo email valido
         const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
         if (!validEmail.test(datosForm.email)) {
             setError("Email inválido, por favor verifique");
@@ -71,16 +64,34 @@ function FormSesion() {
             return;
         }
 
-        // Si pasa las validaciones, enviar la solicitud
-        console.log('inicie sesion')
-        Swal.fire({
-            title: "Cargando",
-            text: 'Iniciando Sesión...',
-            icon: "success",
-            onClick:{}
-        })
+        try {
+            const response = await fetch('http://localhost:8080/api/v1/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datosForm)
 
-    };
+            });
+            if (response.ok) {
+                const data = await response.json()
+            } else {
+                setError('Credenciales inválidas, por favor verifica los datos');
+            }
+        } catch (error) {
+            setError('Error al iniciar sesión. Intenta de nuevo en unos minutos')
+        };
+    }
+
+    // Si pasa las validaciones, enviar la solicitud
+    // console.log('inicie sesion')
+    // Swal.fire({
+    //     title: "Cargando",
+    //     text: 'Iniciando Sesión...',
+    //     icon: "success",
+    //     onClick:{}
+    // })
+
     const handleChange = (event) => {
         setDatosForm({ ...datosForm, [event.target.id]: event.target.value });
     };
@@ -114,7 +125,7 @@ function FormSesion() {
                             helperText="Ingresa tu email"
                             id="email"
                             label="Email"
-                            defaultValue={''}
+                            defaultValue={datosForm.email}
                             // onChange={(e) => setEmail(e.target.value)}
                             onChange={handleChange}
                         />
@@ -124,7 +135,7 @@ function FormSesion() {
                             id="password"
                             label="Password"
                             helperText="Ingresa tu Contraseña"
-                            defaultValue={''}
+                            defaultValue={datosForm.password}
                             // onChange={(e) => setPassword(e.target.value)}
                             onChange={handleChange}
                         />
@@ -133,7 +144,8 @@ function FormSesion() {
                 </div>
 
                 <div className="accionesInicioSesion">
-                    <Button type="submit">Iniciar Sesión</Button>
+                    <LinkRouter to={'/Sesion/perfil'}><Button type="submit">Iniciar Sesión</Button></LinkRouter>
+
                     <Button onClick={handleClose}>Cancelar</Button>
                 </div>
 
