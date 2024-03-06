@@ -25,8 +25,8 @@ export default function TarjetaLibro({ libro }) {
 
   useEffect(() => {
     if (libro && libro.nombreImagen) {
-      // const apiUrl = `https://paginascompartidas.fly.dev/api/v1/imagenes/${libro.nombreImagen}`;
-      const apiUrl = `http://localhost:8080/api/v1/imagenes/${libro.nombreImagen}`;
+      const apiUrl = `https://paginascompartidas.fly.dev/api/v1/imagenes/${libro.nombreImagen}`;
+      // const apiUrl = `http://localhost:8080/api/v1/imagenes/${libro.nombreImagen}`;
       fetch(apiUrl)
         .then(response => {
           if (!response.ok) {
