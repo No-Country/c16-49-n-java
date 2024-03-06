@@ -1,12 +1,19 @@
 package com.nocountry.appintercambiolibros.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import com.nocountry.appintercambiolibros.exceptions.InvalidPasswordException;
+import com.nocountry.appintercambiolibros.models.dto.security.UsuarioRegistroSolicitud;
+import com.nocountry.appintercambiolibros.util.Role;
 import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nocountry.appintercambiolibros.exceptions.RecursoNoEncontradoException;
@@ -24,6 +31,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UsuarioDTO registrar(UsuarioDTO dtoUsuario, MultipartFile imagen) {
@@ -48,6 +58,36 @@ public class UsuarioServiceImpl implements UsuarioService{
             .email(nuevo.getEmail())
             .nombreImagen(nuevo.getNombreImagen())
             .build();
+    }
+    @Transactional
+    @Override
+    public void registrarUsuario(UsuarioRegistroSolicitud usuarioRegistro) {
+        validarPassword(usuarioRegistro);
+
+        Usuario usuario = Usuario.builder()
+                .nombre(usuarioRegistro.getNombre())
+                .email(usuarioRegistro.getEmail())
+                .password(passwordEncoder.encode(usuarioRegistro.getPassword()))
+                .role(Role.USUARIO)
+                .build();
+
+        usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public Optional<Usuario> findByEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
+
+    private void validarPassword(UsuarioRegistroSolicitud usuarioRegistro) {
+
+        if(!StringUtils.hasText(usuarioRegistro.getPassword()) || !StringUtils.hasText(usuarioRegistro.getRepeatedPassword())){
+            throw new InvalidPasswordException("Passwords don't match");
+        }
+
+        if(!usuarioRegistro.getPassword().equals(usuarioRegistro.getRepeatedPassword())){
+            throw new InvalidPasswordException("Passwords don't match");
+        }
     }
 
     @Override

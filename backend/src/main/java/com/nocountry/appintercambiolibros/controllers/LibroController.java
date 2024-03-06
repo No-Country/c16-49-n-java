@@ -2,7 +2,6 @@ package com.nocountry.appintercambiolibros.controllers;
 
 import com.nocountry.appintercambiolibros.models.dto.ComentarioDTOSolicitud;
 import com.nocountry.appintercambiolibros.models.dto.GetReseniaDTO;
-import com.nocountry.appintercambiolibros.models.dto.GetUsuarioDTO;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTORespuesta;
 import com.nocountry.appintercambiolibros.models.dto.LibroDTOSolicitud;
 import com.nocountry.appintercambiolibros.models.dto.ReseniaDTO;
@@ -13,6 +12,7 @@ import com.nocountry.appintercambiolibros.services.ReseniaService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 import org.springdoc.core.annotations.ParameterObject;
@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 
 @CrossOrigin(origins = {"http://localhost:5173", "https://paginascompartidas.netlify.app/"})
@@ -53,7 +53,7 @@ public class LibroController {
         return this.libroService.find(id);
     }
 
-    @Operation(summary = "Obtener las reseñas de un libro por su id")
+    @Operation(summary = "Obtener libro por Id")
     @GetMapping("/{id}/resenias")
     public List<GetReseniaDTO> getReseniasDeLibro(@PathVariable("id") Long id) {
         return this.libroService.getReseniasDeLibroId(id);
@@ -130,7 +130,7 @@ public class LibroController {
     }
 
     @Operation(summary = "Obtener una lista de libros paginados, filtrados por isbn, titulo, autor")
-    @GetMapping("/buscar")
+    @GetMapping("buscar/libro")
     public ResponseEntity<?> buscar(@RequestParam(required = false) String isbn,
                                     @RequestParam(required = false) String titulo,
                                     @RequestParam(required = false) String autor,
@@ -144,13 +144,13 @@ public class LibroController {
         return ResponseEntity.status(HttpStatus.OK).body(libroService.findByGenero(genero,pageable));
     }
     @Operation(summary = "Agregar comentario a un libro")
-    @PostMapping("usuario/{usuarioId}/libro/{libroId}/agregar-comentario")
+    @PostMapping("/usuario/{usuarioId}/libro/{libroId}/agregar-comentario")
     public ResponseEntity<?> agregarComentario(@Valid @RequestBody ComentarioDTOSolicitud comentarioSolicitud, @PathVariable Long usuarioId, @PathVariable Long libroId){
         libroService.agregarComentario(comentarioSolicitud,usuarioId,libroId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @Operation(summary = "Eliminar comentario de un libro")
-    @DeleteMapping("usuario/{usuarioId}/libro/eliminar-comentario/{comentarioId}")
+    @DeleteMapping("/usuario/{usuarioId}/libro/eliminar-comentario/{comentarioId}")
     public ResponseEntity<?> eliminarComentario(
             @PathVariable Long usuarioId, @PathVariable Long comentarioId){
         libroService.eliminarComentario(usuarioId,comentarioId);
@@ -158,7 +158,7 @@ public class LibroController {
     }
 
     @Operation(summary = "Actualizar comentario")
-    @PutMapping("usuario/{usuarioId}/comentario/{comentarioId}")
+    @PutMapping("/usuario/{usuarioId}/comentario/{comentarioId}")
     public ResponseEntity<?> actualizarComentario(@PathVariable Long usuarioId,
                                                   @PathVariable Long comentarioId,
                                                   @RequestBody ComentarioDTOSolicitud comentarioSolicitud){
@@ -166,7 +166,7 @@ public class LibroController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @Operation(summary = "Obtener comentarios de un libro por su id")
-    @GetMapping("comentarios/libro/{libroId}")
+    @GetMapping("/comentarios/libro/{libroId}")
     public ResponseEntity<?> buscarComentariosPorLibro(@PathVariable Long libroId){
         return ResponseEntity.ok(libroService.comentariosPorLibro(libroId));
     }

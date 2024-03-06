@@ -2,6 +2,10 @@ package com.nocountry.appintercambiolibros.controllers;
 
 import java.io.IOException;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +26,8 @@ public class ImagenController {
 
     @Autowired
     ImagenServiceImpl imagenService;
-
+    @SecurityRequirement(name = "bearerAuth")
+    @Operation(summary = "Obtener imagen de usuario")
     @GetMapping("/{filename}")
     public ResponseEntity<?> descargarImagen(@PathVariable("filename") String filename) throws IOException {
         try {

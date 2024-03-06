@@ -1,14 +1,22 @@
-INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('frankenstein', 'nstei@gmail.com', NOW() , 'frank1.jpg', 'sh@d0w231')
-INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('Rambo', 'rambo@gmail.com', NOW() , 'frank1.jpg', 'H8lH,o5C1e')
-INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('PlateBible', 'eBibl@gmail.com', NOW() , 'frank1.jpg', 'ej31ds')
-INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('BlueAlto', 'ueAlto@gmail.com', NOW() , 'frank1.jpg', '24@fe')
-INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('ProteinDolphin', 'einDolphi@gmail.com', NOW() , 'frank1.jpg', '!!reee32')
-INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('SymbolicLovecraft', 'mboli@gmail.com', NOW() , 'frank1.jpg', 'roma-12s')
-INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('SunrisePassion', 'assi@gmail.com', NOW() , 'frank1.jpg', 'elvis1M')
-INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('NickelStability', 'tability@gmail.com', NOW() , 'frank1.jpg', 'cattt1')
-INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('MacroBook', 'macro@gmail.com', NOW() , 'frank1.jpg', 's0meth!ng')
+--USUARIOS
+INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('frankenstein', 'nstei@gmail.com', NOW() , 'frank1.jpg', 'sh@d0w231');
+INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('Rambo', 'rambo@gmail.com', NOW() , 'frank1.jpg', 'H8lH,o5C1e');
+INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('PlateBible', 'eBibl@gmail.com', NOW() , 'frank1.jpg', 'ej31ds');
+INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('BlueAlto', 'ueAlto@gmail.com', NOW() , 'frank1.jpg', '24@fe');
+INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('ProteinDolphin', 'einDolphi@gmail.com', NOW() , 'frank1.jpg', '!!reee32');
+INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('SymbolicLovecraft', 'mboli@gmail.com', NOW() , 'frank1.jpg', 'roma-12s');
+INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('SunrisePassion', 'assi@gmail.com', NOW() , 'frank1.jpg', 'elvis1M');
+INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('NickelStability', 'tability@gmail.com', NOW() , 'frank1.jpg', 'cattt1');
+INSERT INTO usuarios (nombre, email, fecha_creacion, nombre_imagen, password) VALUES ('MacroBook', 'macro@gmail.com', NOW() , 'frank1.jpg', 's0meth!ng');
 
+--ADMINISTRADORES
+INSERT INTO usuarios (nombre, email, password, role, fecha_creacion) VALUES ('Pablo', 'pablo@gmail.com','$2a$10$5kRDQSmUeUDoroBwx.s4K.2avo38jq.XVS8NWfSR2I3wsEqJmTu9C','ADMINISTRADOR', NOW());
+INSERT INTO usuarios (nombre, email, password, role, fecha_creacion) VALUES ('Yormaris', 'yormaris@gmail.com','$2a$10$Eh9rRKwEmqYRKdso87LVieKOwp.IAeAaa1j2MZoiBe1yubHzluLya','ADMINISTRADOR', NOW());
+INSERT INTO usuarios (nombre, email, password, role, fecha_creacion) VALUES ('Matías', 'matias@gmail.com','$2a$10$pyInlLytF7uIIM3Szr1Gtu3g.bYIGJwkYpFxNIvTCzSktKM982vyq','ADMINISTRADOR', NOW());
+--USUARIO CON CONTRA
+INSERT INTO usuarios (nombre, email, password, role, fecha_creacion) VALUES ('Mariana', 'mariana@gmail.com','$2a$10$9l6A6zhoZplJAbOvLTkjOOIPIDw4ZRZC.1LwlT57.K7thOtPShan.','USUARIO', NOW());
 
+--LIBROS
 INSERT INTO libros (isbn, usuario_id,  titulo, autor, fecha_de_publicacion, resumen, editorial, paginas, genero, estado, nombre_imagen, fecha_de_creacion) VALUES ('9780132350884', 5 ,'Clean Code',  'Robert C. Martin', '2008-08-11', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Prentice Hall', '464', 'Programming', 'NUEVO', 'clean_code.jpg', NOW());
 INSERT INTO libros (isbn, usuario_id,  titulo, autor, fecha_de_publicacion, resumen, editorial, paginas, genero, estado, nombre_imagen, fecha_de_creacion) VALUES ('8780132350884', 3 ,'La vidente',  'Lars Kepler', '2008-08-11', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Prentice Hall', '464', 'Policiaca', 'NUEVO', 'la_vidente.jpg', NOW());
 INSERT INTO libros (isbn, usuario_id,  titulo, autor, fecha_de_publicacion, resumen, editorial, paginas, genero, estado, nombre_imagen, fecha_de_creacion) VALUES ('7780132350884', 1 ,'El hipnotista',  'Lars Kepler', '2008-08-11', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Prentice Hall', '464', 'Policiaca', 'NUEVO', 'la_hipnotista.jpg', NOW());

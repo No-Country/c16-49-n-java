@@ -1,12 +1,15 @@
 package com.nocountry.appintercambiolibros.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.nocountry.appintercambiolibros.models.dto.security.UsuarioRegistroSolicitud;
+import com.nocountry.appintercambiolibros.services.auth.AuthenticationService;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nocountry.appintercambiolibros.models.dto.UsuarioDTO;
-import com.nocountry.appintercambiolibros.models.entity.Usuario;
 import com.nocountry.appintercambiolibros.services.ImagenService;
 import com.nocountry.appintercambiolibros.services.JsonService;
 import com.nocountry.appintercambiolibros.services.UsuarioService;
@@ -18,12 +21,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
-
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
@@ -39,14 +36,26 @@ public class UsuarioController {
     @Autowired
     ImagenService imagenService;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    @Operation(summary = "Registra un usuario")
+    @PostMapping("registro")
+    public ResponseEntity<?> registrarUsuario(@RequestBody @Valid UsuarioRegistroSolicitud usuarioRegistro){
+        usuarioService.registrarUsuario(usuarioRegistro);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Lista todos los usuarios")
     @GetMapping
     public List<UsuarioDTO> getMethodName() {
         return this.usuarioService.listarUsuarios();
     }
-
+    @Hidden
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Registra un nuevo usuario")
-    @PostMapping("/register")
+    @PostMapping("register")
     public ResponseEntity<?> registrarUsuario(
         @RequestParam(name = "json") String objUsuario,
         @RequestParam(name = "imagen") MultipartFile imagen) {
@@ -57,15 +66,15 @@ public class UsuarioController {
             return ResponseEntity.internalServerError().body("Error al intentar guardar el usuario");
         }
     }
-
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Obtiene los datos del usuario solicitado")
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public UsuarioDTO obtenerUsuario(@PathVariable("id") Long idUsuario ) {
         return this.usuarioService.find(idUsuario);       
     }
-
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Devuelve la imagen del usuario")
-    @GetMapping("/{id}/imagen")
+    @GetMapping("{id}/imagen")
     public ResponseEntity<?> obtenerImagenUsuario(@PathVariable("id") Long idUsuario ) {
 
         UsuarioDTO usuario = usuarioService.find(idUsuario);
