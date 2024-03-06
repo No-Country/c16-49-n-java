@@ -41,9 +41,10 @@ function DetalleLibro() {
     // RECUPERANDO IMAGEN
     useEffect(() => {
         if (libro && libro.nombreImagen) {
-            // const apiUrl = `https://paginascompartidas.fly.dev/api/v1/imagenes/${libro.nombreImagen}`;
-            const apiUrl = `http://localhost:8080/api/v1/imagenes/${libro.nombreImagen}`;
-            fetch(apiUrl)
+            // const apiUrl = `https://paginascompartidas.fly.dev/api/v1/imagenes/` + libro.nombreImagen;
+            // const apiUrl = `http://localhost:8080/api/v1/imagenes/${libro.nombreImagen}`;
+            // fetch(apiUrl)
+            fetch(`https://paginascompartidas.fly.dev/api/v1/imagenes/` + libro.nombreImagen)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Error al cargar la imagen');

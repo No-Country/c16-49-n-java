@@ -68,7 +68,7 @@ export default function TarjetaLibro({ libro }) {
             </Typography>
           </CardContent>
           <CardActions sx={{ height: 40, justifyContent: 'center' }}>
-            <LinkRouter to={'/libro/'+ libro.id}>
+            <LinkRouter to={'/libros/'+ libro.id}>
             <Boton className="info" 
             titulo="Ver más" 
             mensaje="Registrate para ver más informacion" 

@@ -12,7 +12,7 @@ export default function ListaComentarios() {
     const { id } = useParams(); // Obtiene l ID del libro de la URL
     const [dataComentario, setDataComentario] = useState();
     // useEffect(() => {
-    //     fetch(`http://localhost:8080/api/v1//libros/comentarios/libro/1` + id)
+    //     fetch(`https://paginascompartidas.fly.dev/api/v1/libros/comentarios/libro/1` + id)
 
     //         .then(response => response.json())
     //         .then(data => setDataComentario(data))

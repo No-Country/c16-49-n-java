@@ -28,8 +28,8 @@ function App() {
 
   useEffect(() => {
     axios
-      // .get('https://paginascompartidas.fly.dev/api/v1/libros?p=' + paginaActual)
-      .get('http://localhost:8080/api/v1/libros?p='+paginaActual)
+      .get('https://paginascompartidas.fly.dev/api/v1/libros?p=' + paginaActual)
+      // .get('http://localhost:8080/api/v1/libros?p='+paginaActual)
       .then((response) => {
         console.log('respuesta de la api:response.data')
         console.log(response.data)
@@ -58,7 +58,7 @@ function App() {
             <Route path='/libros' element={<Catalogo />} ></Route>
             <Route path='/Registro' element={<Registro />}></Route>
             <Route path='/Sesion' element={<Sesion />}></Route>
-            <Route path='/libro/:id' element={<DetalleLibro />}></Route>
+            <Route path='/libros/:id' element={<DetalleLibro />}></Route>
             <Route path='/Sesion/perfil' element={<PerfilUsuario />}></Route>
           </Routes>
           <Footer />
