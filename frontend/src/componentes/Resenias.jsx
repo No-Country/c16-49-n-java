@@ -18,8 +18,8 @@ function Resenias() {
     useEffect(() => {
         // Solo realizar la consulta si el ID está presente
         if (id) {
-            // fetch(`https://paginascompartidas.fly.dev/api/v1/libros/${id}/resenias`)
-            fetch(`http://localhost:8080/api/v1/libros/${id}/resenias`)
+            fetch(`https://paginascompartidas.fly.dev/api/v1/libros/${id}/resenias`)
+            // fetch(`http://localhost:8080/api/v1/libros/${id}/resenias`)
                 .then(response => response.json())
                 .then(data => {
                     setResenias(data);
@@ -35,8 +35,8 @@ function Resenias() {
     useEffect(() => {
         // Solo realizar la consulta si el ID está presente
         if (id) {
-            // fetch(`https://paginascompartidas.fly.dev/api/v1/libros/${id}/resenias/promedio`)
-            fetch(`http://localhost:8080/api/v1/libros/${id}/resenias/promedio`)
+            fetch(`https://paginascompartidas.fly.dev/api/v1/libros/${id}/resenias/promedio`)
+            // fetch(`http://localhost:8080/api/v1/libros/${id}/resenias/promedio`)
                 .then(response => response.json())
                 .then(data => {
                     setReseniasProm(data)

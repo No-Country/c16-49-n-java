@@ -38,8 +38,6 @@ const pages = [
 
 ];
 
-// const settings = ['Inicia Sesión', 'Registrate'];
-
 
 function NavBar() {
     const ubicacion = useLocation();
@@ -55,36 +53,6 @@ function NavBar() {
         setAnchorElNav(null);
     };
 
-
-    // manejo de los estados para mostrar inicio de sesion
-    // const [showSesion, setShowSesion] = React.useState(false);
-    // const [showRegistro, setShowRegistro] = React.useState(false);
-    // const handleOpenSesion = () => {
-    //     setShowSesion(true);
-    //     console.log("Se abrió el formulario de inicio de sesión");
-    //     handleCloseUserMenu(); // Cierra el menú después de hacer clic en "Iniciar Sesión"
-    // };
-
-    // const handleOpenRegistro = () => {
-    //     setShowRegistro(true);
-    //     console.log("Se abrió el formulario de registro");
-    //     handleCloseUserMenu(); // Cierra el menú después de hacer clic en "Registrarse"
-    // };
-
-    // const handleCloseForms = () => {
-    //     setShowSesion(false);
-    //     setShowRegistro(false);
-    // };
-    // const handleMenuItemClick = (setting) => {
-    //     switch (setting) {
-    //         case 'Inicia Sesion':
-    //             return handleOpenSesion;
-    //         case 'Registrate':
-    //             return handleOpenRegistro;
-    //         default:
-    //             return handleCloseUserMenu;
-    //     }
-    // };
     
     return (
         <AppBar position='fixed' sx={{ left: '0', right: 'auto' }}>
