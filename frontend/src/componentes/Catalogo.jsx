@@ -20,7 +20,8 @@ function Catalogo() {
     //     setPaginaActual(1); // Reinicia la página actual
 
     // };
-
+console.log('llame al catalogo')
+console.log(dataLibros)
     return (
         <>
             <ThemeProvider theme={(theme.palette)}>
