@@ -69,23 +69,26 @@ export default function TarjetaLibro({ libro }) {
     <ThemeProvider theme={(theme.palette, theme.typography)}>
       {
         libro &&
-        <Card sx={{ width: 200, height: 320, justifyContent: 'space-between' }}>
+        <Card sx={{ width: '30%', height: 300, justifyContent: 'space-between', display:'flex', flexDirection:'row'}}>
           <CardMedia
             component="img"
             alt="caratula libro"
-            height="200"
+            height="100%"
+            width='30%'
             image={imagen ? imagen : imagenGenerica}
           />
-          <CardContent sx={{ height: 80 }}>
-            <Typography gutterBottom variant="body2" component="div" style={{ textAlign: 'left' }}>
-              {/* Autor:{libro.autor.length > 25 ? `${libro.autor.slice(0, 25)}...` : libro.autor} */}
-              Autor:{libro.autor.length > 25 ? `${libro.author.slice(0, 25)}...` : libro.autor}
-            </Typography>
+          <Box sx={{ height: '100%', display:'flex', flexDirection:'column', width:'70%' }}>
+          <CardContent sx={{ height: '70%', display:'flex', flexDirection:'column', width:'100%'}} style={{ textAlign: 'left' }}>
+            
             <Typography variant="h5" color="secondary.dark">
               {libro.titulo}
             </Typography>
+            <Typography gutterBottom variant="body2" component="div" style={{ textAlign: 'left', marginTop:'20px'}}>
+              {/* Autor:{libro.autor.length > 25 ? `${libro.autor.slice(0, 25)}...` : libro.autor} */}
+              Autor:{libro.autor.length > 25 ? `${libro.author.slice(0, 25)}...` : libro.autor}
+            </Typography>
           </CardContent>
-          <CardActions sx={{ height: 40, justifyContent: 'center' }}>
+          <CardActions sx={{ height: '30%', justifyContent: 'center' }}>
             <LinkRouter to={'/libros/'+libro.id}>
             {/* <Button onClick={handleClick}>Ver mas</Button> */}
             <Boton className="info"
@@ -98,6 +101,9 @@ export default function TarjetaLibro({ libro }) {
             </LinkRouter>
 
           </CardActions>
+
+          </Box>
+          
         </Card>
       }
 

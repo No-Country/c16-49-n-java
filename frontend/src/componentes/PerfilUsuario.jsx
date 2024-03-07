@@ -20,7 +20,7 @@ function PerfilUsuario() {
     useEffect(() => {
         const verificarAutorizacion = async () => {
           try {
-            const response = await fetch('http://localhost:8080/api/v1/auth/perfil', {
+            const response = await fetch('https://paginascompartidas.fly.dev/api/v1/auth/perfil', {
               method: 'GET',
               headers: {
                 'Authorization': `Bearer ${token}`

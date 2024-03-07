@@ -15,7 +15,7 @@ export default function Paginacion() {
 
 
   return (
-    <Stack spacing={2} sx={{marginTop:'40px'}}>
+    <Stack spacing={2} sx={{marginTop:'20px', marginBottom:'50px'}}>
       <Pagination count={cantidadPaginas} onChange={handleChange} />
     </Stack>
   );

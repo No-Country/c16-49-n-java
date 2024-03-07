@@ -10,8 +10,8 @@
 .css-dnrpxu-MuiCardActions-root {
     margin-bottom: 8px;
 }
-.contenedorTarjetas{
-    width: calc(90%/4);
+/* .contenedorTarjetas{
+    width: calc(90%/2);
     margin-left: 5%;
     height: auto;
     display: flex;
@@ -21,4 +21,4 @@
     flex-wrap: wrap;
     column-gap: 5%;
     row-gap: 35px;
-}
+} */

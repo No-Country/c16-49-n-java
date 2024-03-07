@@ -48,9 +48,8 @@ function Footer() {
                         <div className="contenedorLogoFooter"><img src="https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2Flogo.png?alt=media&token=b47a9708-49ef-4457-bc1a-f42b16282ef1" alt='logo de la web'></img></div>
                         <div className="contenedorInfoDerecha">
                             <div className="contenedorRedes">
-                                <InstagramIcon sx={{ fontSize: '45px' }} />
-                                <LinkedInIcon sx={{ fontSize: '45px' }} />
-                                <MailOutlineIcon sx={{ fontSize: '45px' }} />
+                                <a href="https://biolink.website/paginasCompartidas" target="_blank"><LinkedInIcon sx={{ fontSize: '45px' }}  /></a>
+
                             </div>
       
                             <div className="contenedorEnlacesFooter">
