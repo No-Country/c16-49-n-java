@@ -11,6 +11,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import { Button } from "@mui/material";
 import AppContext from "../context/AppContext";
+import { API_BASE_URL } from "../config";
 
 {/* SEARCH */ }
 const Search = styled('div')(({ theme }) => ({
@@ -86,7 +87,7 @@ function Buscar() {
     
     const handleInput = () => {
 
-        fetch(`https://paginascompartidas.fly.dev/api/v1/libros/buscar?${parametro}=${datosInput}`)
+        fetch(`${API_BASE_URL}/libros/buscar?${parametro}=${datosInput}`)
         // fetch(`http://localhost:8080/api/v1/libros/buscar?${parametro}=${datosInput}`)
             .then(response => response.json())
             .then(data => {

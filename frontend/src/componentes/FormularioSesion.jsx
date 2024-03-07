@@ -10,6 +10,7 @@ import Boton from "./Boton";
 import Box from '@mui/material/Box';
 import Swal from "sweetalert2";
 import '../estilos/formulariosesion.css';
+import { API_BASE_URL } from "../config";
 
 
 function FormSesion() {
@@ -63,7 +64,7 @@ function FormSesion() {
 
         // buscar el usuario en la DB
         try {
-            const response = await fetch('https://paginascompartidas.fly.dev/api/v1/auth/login',
+            const response = await fetch(`${API_BASE_URL}/auth/login`,
             // const response = await fetch('http://localhost:8080/api/v1/auth/login',
                 {
                     method: 'POST',
@@ -74,8 +75,10 @@ function FormSesion() {
 
                 });
             if (response.ok) {
+                console.log("RESPUESTA OK")
                 const data = await response.json()
                 setToken(data.jwt)
+                console.log(data.jwt);
                 if (libroIdSeleccionado || token) {
                     setRedirigir(true);
                 }

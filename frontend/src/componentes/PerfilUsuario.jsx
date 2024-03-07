@@ -10,6 +10,7 @@ import DatosUsuario from "./DatosUsuario";
 import ListaCRUDLibrosUsuario from "./ListaCRUDLibrosUsuario";
 import ListaCRUDIntercambios from "./ListaCRUDIntercambios";
 import BotonArriba from "./BotonArriba";
+import { API_BASE_URL } from "../config";
 
 function PerfilUsuario() {
     const { token } = useContext(AppContext)
@@ -20,7 +21,7 @@ function PerfilUsuario() {
     useEffect(() => {
         const verificarAutorizacion = async () => {
           try {
-            const response = await fetch('http://localhost:8080/api/v1/auth/perfil', {
+            const response = await fetch(`${API_BASE_URL}/auth/perfil`, {
               method: 'GET',
               headers: {
                 'Authorization': `Bearer ${token}`

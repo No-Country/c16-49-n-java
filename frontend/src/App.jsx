@@ -15,6 +15,7 @@ import PerfilUsuario from './componentes/PerfilUsuario'
 import axios from 'axios';
 
 import { Routes, Route } from 'react-router-dom';
+import { API_BASE_URL } from './config';
 
 function App() {
   const [dataLibros, setDataLibros] = useState([])
@@ -29,8 +30,8 @@ function App() {
 
   useEffect(() => {
     axios
-      .get('https://paginascompartidas.fly.dev/api/v1/libros?p=' + paginaActual)
-      // .get('http://localhost:8080/api/v1/libros?p='+paginaActual)
+      // .get('https://paginascompartidas.fly.dev/api/v1/libros?p=' + paginaActual)
+      .get(`${API_BASE_URL}/libros?p=`+paginaActual)
       .then((response) => {
         console.log('respuesta de la api:response.data')
         console.log(response.data)
