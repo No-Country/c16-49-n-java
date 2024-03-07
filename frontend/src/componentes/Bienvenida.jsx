@@ -4,6 +4,7 @@ import { Typography } from "@mui/material";
 import theme from "./themeConfig";
 import { ThemeProvider } from "styled-components";
 import Boton from "./Boton";
+import { Link as LinkRouter } from 'react-router-dom';
 
 
 function Hero() {
@@ -16,7 +17,7 @@ function Hero() {
                         <div className="slogan">
 
                             <Typography variant="h2" className="titulo" >Cada libro, una conexión: forma parte de una comunidad de lectores apasionados</Typography>
-                            <Boton className="atencion" titulo="Quiero ser Parte"></Boton>
+                           <LinkRouter to={'/Registro'}><Boton className="atencion" titulo="Quiero ser Parte"></Boton></LinkRouter> 
                         </div>
 
                     </div>

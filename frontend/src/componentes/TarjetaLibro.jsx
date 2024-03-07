@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
+import { useContext } from "react";
+import AppContext from "../context/AppContext";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -14,13 +16,29 @@ import { Link as LinkRouter } from 'react-router-dom';
 import '../estilos/tarjetaLibros.css';
 
 
+
 export default function TarjetaLibro({ libro }) {
   // console.log(libro)
-  const handleClick = (event, id) => {
-    console.log('hice click en el boton ver del id'+{id})
-};
-  const [imagen, setImagen] = useState(null);
+  const { token, setLibroSeleccionado } = useContext(AppContext)
+  const [mensaje, setMensaje] =useState('')
+
+  const handleClick = (e) => {
+    if(token){
+      setMensaje('')
+    }
+    setMensaje('Inicia sesión para ver más informacion')
+    console.log('hice clic en el libro'+ libro.id)
+    // if (!token) {
+    //   // Si el usuario tiene un token (está autenticado), establece el ID del libro seleccionado
+      // const id=libro.id
+      // setLibroSeleccionado(id);
+    // } else {
+      // Si el usuario no está autenticado, redirige al usuario a la página de registro
+      // window.location.href = '/Registro';
+    }
   
+  const [imagen, setImagen] = useState(null);
+
   const imagenGenerica = 'https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2FPortada%20Libro%20Generica.png?alt=media&token=42926409-eb7b-4a16-9298-e6a53d6faee8'
 
   useEffect(() => {
@@ -56,7 +74,7 @@ export default function TarjetaLibro({ libro }) {
             component="img"
             alt="caratula libro"
             height="200"
-          image={imagen ? imagen : imagenGenerica}
+            image={imagen ? imagen : imagenGenerica}
           />
           <CardContent sx={{ height: 80 }}>
             <Typography gutterBottom variant="body2" component="div" style={{ textAlign: 'left' }}>
@@ -68,15 +86,17 @@ export default function TarjetaLibro({ libro }) {
             </Typography>
           </CardContent>
           <CardActions sx={{ height: 40, justifyContent: 'center' }}>
-            <LinkRouter to={'/libros/'+ libro.id}>
-            <Boton className="info" 
-            titulo="Ver más" 
-            mensaje="Registrate para ver más informacion" 
-            title='Atención'
-            icon='info'
-            ></Boton>
+            <LinkRouter to={'/libros/'+libro.id}>
+            {/* <Button onClick={handleClick}>Ver mas</Button> */}
+            <Boton className="info"
+              titulo="Ver más"
+              mensaje={mensaje}
+              title='Atención'
+              icon='info'
+              
+            ></Boton> 
             </LinkRouter>
-            
+
           </CardActions>
         </Card>
       }

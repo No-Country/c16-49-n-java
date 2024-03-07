@@ -9,7 +9,7 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import StarsIcon from '@mui/icons-material/Stars';
 import '../estilos/tarjetaUsuario.css'
 
-export default function TarjetaPerfilUsuario() {
+export default function TarjetaPerfilUsuario({usuario}) {
   return (
     <Card sx={{ width: 300, height: 330 }}>
       <CardActionArea>
@@ -22,7 +22,7 @@ export default function TarjetaPerfilUsuario() {
         <div className='contenedorAvatarPerfil'><AvatarUsuario /></div>
         <CardContent className='contenedorNombre'>
           <Typography gutterBottom variant="h5">
-            Nombre Usuario
+            {usuario.nombre}
           </Typography>
         </CardContent>
         <div className='usuarioEstadisticas'>
@@ -30,7 +30,7 @@ export default function TarjetaPerfilUsuario() {
             <Typography variant="h4" fontWeight={'bold'} color="text.primary">
             <MenuBookIcon />Libros </Typography>
             <Typography variant="body1" fontWeight={'bold'} color="text.secondary">
-              30 </Typography>
+              {usuario.libros.length}</Typography>
           </div>
           <div className='datosEstadisticas'>
             <Typography variant="h4" fontWeight='bold' color="text.primary">

@@ -105,10 +105,10 @@ function Buscar() {
 
     return (
         <>
-        <Box sx={{ width: 80 }}>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
-                    <Select
+        <Box sx={{ width: 80, borderColor:'rgba(255, 255, 255, 0.15)'}}>
+                <FormControl fullWidth sx={{color:'white'}}>
+                    <InputLabel id="demo-simple-select-label" sx={{backgroundColor:'rgba(255, 255, 255, 0.15)', color:'white'}}>Filtro</InputLabel>
+                    <Select sx={{borderColor:'rgba(255, 255, 255, 0.15)'}}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={parametro}

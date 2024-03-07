@@ -5,12 +5,12 @@ import TextField from '@mui/material/TextField';
 import '../estilos/datosUsuario.css'
 
 
-function DatosUsuario() {
+function DatosUsuario({usuario}) {
    // Estado inicial con los datos de prueba
-   const [usuario, setUsuario] = useState({
-    nombre: 'Usuario Prueba',
-    email: 'usuarioprueba@email.com'
-});
+//    const [usuario, setUsuario] = useState({
+//     nombre: 'Usuario Prueba',
+//     email: 'usuarioprueba@email.com'
+// });
 
     return (
         <>

@@ -12,6 +12,10 @@ import { ThemeProvider } from "styled-components";
 import theme from "./themeConfig";
 import Boton from './Boton';
 import FormularioIntercambio from "./FormularioIntercambio";
+import BotonArriba from "./BotonArriba";
+import { useContext } from "react";
+import AppContext from "../context/AppContext";
+import { Navigate } from "react-router-dom";
 
 
 // FALTA ENLAZAR LA IMAGEN
@@ -20,13 +24,17 @@ function DetalleLibro() {
     const [libro, setLibro] = useState();
     const [imagen, setImagen] = useState(null);
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
+    const { token, setToken } = useContext(AppContext);
+    const { libroIdSeleccionado} = useContext(AppContext);
+
+    // const id= libroIdSeleccionado
 
 
     const imagenGenerica = 'https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2FPortada%20Libro%20Generica.png?alt=media&token=42926409-eb7b-4a16-9298-e6a53d6faee8'
 
     useEffect(() => {
         fetch(`https://paginascompartidas.fly.dev/api/v1/libros/` + id)
-        // fetch(`http://localhost:8080/api/v1/libros/` + id)
+            // fetch(`http://localhost:8080/api/v1/libros/` + id)
             .then(response => response.json())
             .then(data => setLibro(data))
 
@@ -61,12 +69,16 @@ function DetalleLibro() {
         }
     }, [libro]);
 
+    // // Almacena temporalmente el ID del libro seleccionado
+    // useEffect(() => {
+    //     setLibroIdSeleccionado(id);
+    // }, [id, setLibroIdSeleccionado]);
 
     return (
         <ThemeProvider theme={(theme.palette)}>
             <h1>Detalle Libro</h1>
-            {libro ?
-                (
+            {token ? (
+                libro ? (
                     <>
 
                         <div className="contenedorInfoDetalle">
@@ -116,15 +128,18 @@ function DetalleLibro() {
                         <InfoDetalle />
 
                     </>
+                ) : (
+                    <Typography variant="h1">Cargando...</Typography>)
+            ) : (
+                <Navigate to="/Sesion" />
+            )
+            }
 
-                )
-                : (
-                    <Typography variant="h1">Cargando...</Typography>
-                )}
 
-        </ThemeProvider>
+            <BotonArriba />
+        </ThemeProvider >
 
 
-    )
+    );
 }
 export default DetalleLibro;

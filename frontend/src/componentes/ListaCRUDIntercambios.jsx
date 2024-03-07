@@ -13,6 +13,7 @@ import theme from "./themeConfig";
 import { Typography } from "@mui/material";
 import AgregaNuevoLibro from "./AgregaNuevoLibro";
 import EditarLibro from "./EditarLibro";
+import '../estilos/listaIntercambioCRUD.css'
 
 function createData(id, fechaSolicitud, usuarioSolicita, libroSolicitado, libroOfrecido, estadoIntercambio,  acciones) {
     return { id, fechaSolicitud,usuarioSolicita, libroSolicitado, libroOfrecido, estadoIntercambio,  acciones };
@@ -45,10 +46,10 @@ function ListaCRUDIntercambios() {
                                 <TableCell>Id</TableCell>
                                 <TableCell align="right"><Typography>Fecha de Solicitud</Typography></TableCell>
                                 <TableCell align="right"><Typography>Solicitante</Typography></TableCell>
-                                <TableCell align="right">Libro Solicitado</TableCell>
-                                <TableCell align="right">Libro Ofrecido</TableCell>
-                                <TableCell align="right">Estado</TableCell>
-                                <TableCell align="center">Acciones</TableCell>
+                                <TableCell align="right"><Typography>Libro Solicitado</Typography></TableCell>
+                                <TableCell align="right"><Typography>Libro Ofrecido</Typography></TableCell>
+                                <TableCell align="right"><Typography>Estado</Typography></TableCell>
+                                <TableCell align="center"><Typography>Acciones</Typography></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -58,15 +59,15 @@ function ListaCRUDIntercambios() {
                                     key={intercambio.id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell component="th" scope="row">{intercambio.id}</TableCell>
-                                    <TableCell align="right"> {intercambio.fechaSolicitud}</TableCell>
-                                    <TableCell align="right">{intercambio.usuarioSolicita}</TableCell>
-                                    <TableCell align="right">{intercambio.libroSolicitado}</TableCell>
-                                    <TableCell align="right">{intercambio.libroOfrecido}</TableCell>
-                                    <TableCell align="right">{intercambio.estadoIntercambio}</TableCell>
+                                    <TableCell component="th" scope="row"><Typography>{intercambio.id}</Typography></TableCell>
+                                    <TableCell align="right"><Typography>{intercambio.fechaSolicitud}</Typography> </TableCell>
+                                    <TableCell align="right"><Typography>{intercambio.usuarioSolicita}</Typography></TableCell>
+                                    <TableCell align="right"><Typography>{intercambio.libroSolicitado}</Typography></TableCell>
+                                    <TableCell align="right"><Typography>{intercambio.libroOfrecido}</Typography></TableCell>
+                                    <TableCell align="right"><Typography>{intercambio.estadoIntercambio}</Typography></TableCell>
                                     <TableCell align="right">
-                                        <Button variant="contained" onClick={handleClickAceptar}>Aceptar</Button>
-                                        <Button variant="contained" onClick={handleClickEliminar}>Rechazar</Button>
+                                        <Button variant="contained" onClick={handleClickAceptar} className="focoB">Aceptar</Button>
+                                        <Button variant="contained" onClick={handleClickEliminar} className="focoA">Rechazar</Button>
                                     </TableCell>
 
 

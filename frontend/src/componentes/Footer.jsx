@@ -11,7 +11,12 @@ import { Link as LinkRouter } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Boton from './Boton';
 import LineaH from "./LineaH";
+import { useContext } from "react";
+import AppContext from "../context/AppContext";
+
 function Footer() {
+    const {token, setToken}= useContext(AppContext);
+
     return (
         <>
             <ThemeProvider theme={theme.palette}>
@@ -20,16 +25,23 @@ function Footer() {
                         <div className="contenedorTextoEstatico">
                             <Typography variant="h3" className="titulo">Descubre, intercambia, crece</Typography>
                         </div>
-                        <div className="contenedorLlamados">
-                            <div className="contenedorBotones">
-                                <LinkRouter to='/Registro'><Boton className="focoA" titulo="Inicia Sesión"
-                                ></Boton></LinkRouter>
-                            </div>
-                            <div className="contenedorBotones">
-                                <LinkRouter to='/Sesion'><Boton className="focoB" titulo="Registrate"
-                                ></Boton></LinkRouter>
-                            </div>
+                        {(!token)?
+                        (<div className="contenedorLlamados">
+                        <div className="contenedorBotones">
+                            <LinkRouter to='/Sesion'><Boton className="focoA" titulo="Ingresa"
+                            ></Boton></LinkRouter>
                         </div>
+                        <div className="contenedorBotones">
+                            <LinkRouter to='/Registro'><Boton className="focoB" titulo="Registrate"
+                            ></Boton></LinkRouter>
+                        </div>
+                    </div>):
+                    (<div className="cuadroLlamado">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2FLogo%20sobre%20moda%20femenina%20minimalista%20neutral%20(1).png?alt=media&token=1e673b5d-87b9-41a7-8356-28331c529883" alt="logo app"></img>
+                    </div>)
+                        
+                    }
+                        
                     </div>
 
                     <div className="contenedorInfoFooter">

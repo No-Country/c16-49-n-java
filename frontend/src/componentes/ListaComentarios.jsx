@@ -10,45 +10,67 @@ import '../estilos/detalleLibro.css';
 
 export default function ListaComentarios() {
     const { id } = useParams(); // Obtiene l ID del libro de la URL
-    const [dataComentario, setDataComentario] = useState();
-    // useEffect(() => {
-    //     fetch(`https://paginascompartidas.fly.dev/api/v1/libros/comentarios/libro/1` + id)
+    const [dataComentario, setDataComentario] = useState([]);
+    const [error, setError] = useState(null);
 
-    //         .then(response => response.json())
-    //         .then(data => setDataComentario(data))
-    //     console.log(dataComentario)
-    //         .catch(error => console.error('Error:', error));
-    // }, [id]); // El efecto se ejecuta cada vez que cambia el ID
+    useEffect(() => {
+        fetch(`https://paginascompartidas.fly.dev/api/v1/libros/comentarios/libro/` + id)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('No se encontraron comentarios' +response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.status === 404) {
+                    throw new Error(data.message); // Mensaje de error proporcionado por la API
+                }
+                setDataComentario(data);
+                console.log(dataComentario)
+                setError(null);
+            })
+            .catch(error => setError(error.message));
+    }, [id]);
 
     return (
 
         <Container maxWidth="xl">
-            {/* {dataComentario.length > 0 &&
-                (dataComentario.map((comentario, index) => ( */}
-            <Box sx={{ width: '100%', height: 'auto', display: 'flex', flexDirection: 'row', alignItems: 'flexStart', justifyContent: 'flexStart', textAlign: 'justify', marginBottom: '20px' }}
-            // key={index} comentario={comentario}
+            {error &&
+
+                (<Typography variant="h6" color="error" align="center">
+                     {error}
+                </Typography>)}
+
+
+
+            
+                {dataComentario.map((comentario, index) => 
+                    (<Box sx={{ width: '100%', height: 'auto', display: 'flex', flexDirection: 'row', alignItems: 'flexStart', justifyContent: 'flexStart', textAlign: 'justify', marginBottom: '20px' }}
+            key={index} 
             >
                 <AvatarUsuario />
                 <div className='contenedorComentario'>
                     <div className='infoUsuarioComentario'>
                         <Typography variant='body1'>Nombre Usuario
-                            {/* {comentario.usuario} */}
+                            {comentario.usuario}
                         </Typography>
                         <Typography variant='body2'>Enviado el:
-                            {/* {comentario.fechaCreacion} */}
+                            {comentario.fechaCreacion}
                         </Typography>
                     </div>
 
                     <Typography>
-                        {/* {comentario.contenido} */}
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        {comentario.contenido}
+                        {/* Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Minima reiciendis fugiat sit quis similique corporis, voluptatibus, architecto
                         iure dignissimos quisquam eos delectus ipsum doloribus.
-                        Numquam officia nostrum beatae iusto. Doloribus.</Typography>
+                        Numquam officia nostrum beatae iusto. Doloribus. */}
+                        </Typography>
                 </div>
-            </Box>
-            {/* )))
-            } */}
+            </Box>)
+            )}
+            
+
 
         </Container>
     );

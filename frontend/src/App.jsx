@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import AppContext from './context/AppContext'
-import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import './App.css'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from './componentes/themeConfig';
@@ -25,6 +23,9 @@ function App() {
   const [cantidadPaginas, setCantidadPaginas] = useState(0)
   const [tamañoPagina, setTamañoPagina] = useState([]);
   const [paginaActual, setPaginaActual] = useState(0);
+  const [token, setToken] = useState(null); 
+  const [usuario, setUsuario]=useState({})
+  const { libroSeleccionado, setLibroSeleccionado } = useState(null);
 
   useEffect(() => {
     axios
@@ -50,7 +51,7 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <AppContext.Provider value={{ dataLibros, setResultadosBusqueda, resultadosBusqueda, setCantidadPaginas, cantidadPaginas, tamañoPagina, paginaActual, setPaginaActual }}>
+        <AppContext.Provider value={{ dataLibros, setResultadosBusqueda, resultadosBusqueda, setCantidadPaginas, cantidadPaginas, tamañoPagina, paginaActual, setPaginaActual, token, setToken, usuario, setUsuario, libroSeleccionado, setLibroSeleccionado}}>
           <NavBar />
           <Routes>
             <Route path="*" element={<Home />}></Route>
@@ -59,7 +60,7 @@ function App() {
             <Route path='/Registro' element={<Registro />}></Route>
             <Route path='/Sesion' element={<Sesion />}></Route>
             <Route path='/libros/:id' element={<DetalleLibro />}></Route>
-            <Route path='/Sesion/perfil' element={<PerfilUsuario />}></Route>
+            <Route path='/perfil' element={<PerfilUsuario />}></Route>
           </Routes>
           <Footer />
 

@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Paginacion from "./Paginacion";
 
 function Catalogo() {
-    const { dataLibros, resultadosBusqueda, setResultadosBusqueda, cantidadPaginas, setCantidadPaginas, tamañoPagina, paginaActual, setPaginaActual } = useContext(AppContext);
+    const { dataLibros, resultadosBusqueda, setResultadosBusqueda, cantidadPaginas, setCantidadPaginas, tamañoPagina, paginaActual, setPaginaActual, token, setToken, libroSeleccionado, setLibroSeleccionado} = useContext(AppContext);
 
     // const handleLimpiarBusqueda = ()  => {
     //     setResultadosBusqueda([]);
