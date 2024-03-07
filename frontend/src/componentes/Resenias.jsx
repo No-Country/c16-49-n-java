@@ -7,6 +7,7 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { grey } from "@mui/material/colors";
 import { Typography } from "@mui/material";
+import { API_BASE_URL } from "../config";
 
 function Resenias() {
     const { id } = useParams(); // Obtiene l ID del libro de la URL
@@ -18,7 +19,7 @@ function Resenias() {
     useEffect(() => {
         // Solo realizar la consulta si el ID está presente
         if (id) {
-            fetch(`https://paginascompartidas.fly.dev/api/v1/libros/${id}/resenias`)
+            fetch(`${API_BASE_URL}/libros/${id}/resenias`)
             // fetch(`http://localhost:8080/api/v1/libros/${id}/resenias`)
                 .then(response => response.json())
                 .then(data => {
@@ -35,7 +36,7 @@ function Resenias() {
     useEffect(() => {
         // Solo realizar la consulta si el ID está presente
         if (id) {
-            fetch(`https://paginascompartidas.fly.dev/api/v1/libros/${id}/resenias/promedio`)
+            fetch(`${API_BASE_URL}/libros/${id}/resenias/promedio`)
             // fetch(`http://localhost:8080/api/v1/libros/${id}/resenias/promedio`)
                 .then(response => response.json())
                 .then(data => {

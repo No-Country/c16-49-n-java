@@ -7,6 +7,7 @@ import Container from '@mui/material/Container';
 import { Typography } from '@mui/material';
 import AvatarUsuario from './AvatarUsuario';
 import '../estilos/detalleLibro.css';
+import { API_BASE_URL } from '../config';
 
 export default function ListaComentarios() {
     const { id } = useParams(); // Obtiene l ID del libro de la URL
@@ -14,7 +15,7 @@ export default function ListaComentarios() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(`https://paginascompartidas.fly.dev/api/v1/libros/comentarios/libro/` + id)
+        fetch(`${API_BASE_URL}/libros/comentarios/libro/` + id)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('No se encontraron comentarios' +response.statusText);
