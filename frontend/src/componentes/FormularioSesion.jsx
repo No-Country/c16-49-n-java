@@ -65,7 +65,7 @@ function FormSesion() {
         // buscar el usuario en la DB
         try {
             const response = await fetch(`${API_BASE_URL}/auth/login`,
-            // const response = await fetch('http://localhost:8080/api/v1/auth/login',
+            
                 {
                     method: 'POST',
                     headers: {
@@ -145,10 +145,15 @@ function FormSesion() {
 
                 <div className="accionesInicioSesion">
                     {/* <LinkRouter to={'/Sesion/perfil'}> */}
-                    <Button type="submit">Iniciar Sesión</Button>
+                    <Button type="submit" variant="contained" sx={{
+                                backgroundColor:'#79a843'
+                            }}>Iniciar Sesión</Button>
                     {/* </LinkRouter> */}
 
-                    <Button onClick={handleClose}>Cancelar</Button>
+                    <Button onClick={handleClose} variant="contained" sx={{
+                                backgroundColor:'rgba(240, 52, 6, 0.945)',
+                                
+                            }}>Cancelar</Button>
                 </div>
 
             </Box>

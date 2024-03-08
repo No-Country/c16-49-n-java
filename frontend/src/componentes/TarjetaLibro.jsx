@@ -85,7 +85,7 @@ export default function TarjetaLibro({ libro }) {
               {libro.titulo}
             </Typography>
             <Typography gutterBottom variant="body2" component="div" style={{ textAlign: 'left', marginTop:'20px'}}>
-              {/* Autor:{libro.autor.length > 25 ? `${libro.autor.slice(0, 25)}...` : libro.autor} */}
+              
               Autor:{libro.autor.length > 25 ? `${libro.author.slice(0, 25)}...` : libro.autor}
             </Typography>
           </CardContent>
@@ -97,7 +97,7 @@ export default function TarjetaLibro({ libro }) {
               mensaje={mensaje}
               title='Atención'
               icon='info'
-              
+           
             ></Boton> 
             </LinkRouter>
 

@@ -7,48 +7,43 @@ import '../estilos/registroUsuarios.css';
 import Boton from "./Boton";
 import Swal from 'sweetalert2';
 import { Password } from "@mui/icons-material";
+import { API_BASE_URL } from "../config";
 
 function Registro() {
-    // const [mensaje, setMensaje] = useState(null);
     const [error, setError] = useState('');
     // constantes del usuario
     const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [nombreImagen, setNombreImagen] = useState('');
-    const [fechaCreacion, setFechaCreacion] = useState('');
+    const [repeatedPassword, setRepeatedPassword]=  useState('');
 
     const fechaActual = new Date().toISOString().split('T')[0];
 
 
     const handleClose = () => {
-       
-        console.log('hice clic en cerrar')
-       
         Swal.fire({
             title: "",
             text: 'Registro Cancelado',
-            icon: "info",})
-            .then(()=>{
+            icon: "info",
+        })
+            .then(() => {
                 limpiarCampos()
-            
-          });
+
+            });
     };
-    const limpiarCampos =()=>{
-        console.log('llame a limpiar')
+    const limpiarCampos = () => {
         setError('');
-        // setMensaje('');
         setNombre('')
         setEmail('')
         setPassword('')
-        setNombreImagen('')
-        setFechaCreacion('')
+        setRepeatedPassword('')
     }
 
-    const handleClickForm = (event) => {
+    const handleClickForm = async (event) => {
         event.preventDefault();
+        console.log(nombre,email,password)
         // Verificar si los campos están llenos
-        if (nombre.trim() === '' || email.trim() === '' || password.trim() === '') {
+        if (nombre.trim() === '' || email.trim() === '' || password.trim() === '' || repeatedPassword.trim() === '') {
             setError('Todos los campos son requeridos');
             return;
         }
@@ -57,6 +52,11 @@ function Registro() {
         const emailRegex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
         if (!emailRegex.test(email)) {
             setError('Ingrese un email válido');
+            return;
+        }
+        // comprobar que ambas contraseñas coinciden 
+        if (password !== repeatedPassword) {
+            setError('Las contraseñas no coinciden');
             return;
         }
         // Validación de la Password al menos 8 caracteres, una letra y un numero
@@ -68,14 +68,41 @@ function Registro() {
 
         setError('');
         // Si pasa las validaciones, enviar la solicitud
-        console.log('me registre')
-        // setMensaje('¡Felicidades! Te registraste con éxito. Inicia Sesión para empezar a intercambiar');
-        Swal.fire({
-            title: "Felicidades!",
-            text: 'Te registraste con éxito. Inicia Sesión para empezar a intercambiar',
-            icon: "success"
-          });
+        console.log('me puedo registrar')
+        try {
+            // Enviar datos a la API
+            const response = await fetch(`${API_BASE_URL}/usuarios/registro`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre, email, password, repeatedPassword
+                })
+            });
+    
+            // Verificar si la solicitud fue exitosa
+            if (!response.ok) {
+                throw new Error('Error al enviar datos a la API');
+            }
+    
+            // Si pasa las validaciones y la solicitud fue exitosa, mostrar mensaje de éxito
+            console.log('me registre');
+            Swal.fire({
+                title: "Felicidades!",
+                text: 'Te registraste con éxito. Inicia Sesión para empezar a intercambiar',
+                icon: "success"
+            });
+    
+            // Limpiar campos después del registro exitoso
+            limpiarCampos();
+        } catch (error) {
+            console.error('Error:', error.message);
+            setError('Hubo un error al registrar el usuario. Por favor, intenta nuevamente más tarde.');
+        }
     }
+        
+
 
     return (
         <>
@@ -106,10 +133,7 @@ function Registro() {
                             <Typography variant="h3" color='secondary'>Registro de Usuario</Typography>
 
                             <Box
-                                sx={{
-                                    width: '90%',
-                                    // display: 'flex', flexDirection: 'row', flexWrap: 'noWrap',
-                                    // columnGap: '1%'
+                                sx={{  width: '90%',
                                 }}>
 
                                 <TextField
@@ -119,7 +143,8 @@ function Registro() {
                                     label="Nombre"
                                     variant="standard"
                                     helperText="Escribe tu Nombre"
-                                    defaultValue={''}
+                                    // defaultValue={''}
+                                    value={nombre}
                                     onChange={(e) => setNombre(e.target.value)}
                                 />
                                 <TextField
@@ -129,21 +154,35 @@ function Registro() {
                                     helperText="Escribe tu email"
                                     id="email"
                                     label="Email"
-                                    defaultValue={''}
+                                    value={email}
+                                    // defaultValue={''}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                                 <TextField
 
                                     required
                                     variant="standard"
-
+                                    type="password"
                                     id="password"
                                     label="Password"
                                     helperText="Ingresa una Password minimo 8 caracteres, al menos una letra y un número"
-                                    defaultValue={''}
+                                    value={password}
+                                    // defaultValue={''}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                                 <TextField
+
+                                    required
+                                    variant="standard"
+                                    type="password"
+                                    id="passwordRepeat"
+                                    label="Repita Password"
+                                    helperText="Escriba nuevamente la contraseña"
+                                    value={repeatedPassword}
+                                    // defaultValue={''}
+                                    onChange={(e) => setRepeatedPassword(e.target.value)}
+                                />
+                                {/* <TextField
 
                                     variant="standard"
                                     disabled
@@ -152,13 +191,18 @@ function Registro() {
                                     defaultValue={fechaActual}
 
                                 />
-                                <CargarArchivo required />
+                                <CargarArchivo required /> */}
                                 {error && <Typography color="error">{error}</Typography>}
                             </Box>
                         </div>
                         <div className="accionesRegistrarUsuario">
-                            <Button type="submit" variant="contained">Confirmar Registro</Button>
-                            <Button variant="contained" onClick={handleClose}>Cancelar</Button>
+                            <Button type="submit" variant="contained" sx={{
+                                backgroundColor:'#79a843'
+                            }}>Confirmar Registro</Button>
+                            <Button variant="contained" onClick={handleClose} sx={{
+                                backgroundColor:'rgba(240, 52, 6, 0.945)',
+                                
+                            }}>Cancelar</Button>
                         </div>
                     </Box>
                 </div>

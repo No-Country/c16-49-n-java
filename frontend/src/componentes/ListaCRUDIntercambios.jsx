@@ -66,8 +66,13 @@ function ListaCRUDIntercambios() {
                                     <TableCell align="right"><Typography>{intercambio.libroOfrecido}</Typography></TableCell>
                                     <TableCell align="right"><Typography>{intercambio.estadoIntercambio}</Typography></TableCell>
                                     <TableCell align="right">
-                                        <Button variant="contained" onClick={handleClickAceptar} className="focoB">Aceptar</Button>
-                                        <Button variant="contained" onClick={handleClickEliminar} className="focoA">Rechazar</Button>
+                                        <Button variant="contained" onClick={handleClickAceptar} sx={{
+                                backgroundColor:'#79a843'
+                            }}>Aceptar</Button>
+                                        <Button variant="contained" onClick={handleClickEliminar} sx={{
+                                backgroundColor:'rgba(240, 52, 6, 0.945)',
+                                
+                            }}>Rechazar</Button>
                                     </TableCell>
 
 

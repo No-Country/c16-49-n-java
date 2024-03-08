@@ -34,7 +34,7 @@ function FormularioIntercambio({ idLibro, tituloLibro, autorLibro }) {
     const [fechaSolicitud, setFechaSolicitud]= useState('')
     const [error, setError] = useState('');
 
-
+    const fechaActual = new Date().toISOString().split('T')[0];
 
 
     const handleClickForm = (event) => {
@@ -111,33 +111,33 @@ function FormularioIntercambio({ idLibro, tituloLibro, autorLibro }) {
                                     }}>
 
                                     <TextField
-                                        variant="outlined"
+                                        variant="standard"
                                         disabled
                                         id="id"
                                         label="id Libro"
                                         defaultValue={idLibro}
                                     />
                                     <TextField
-                                        variant="outlined"
+                                        variant="standard"
                                         disabled
                                         id="titulo"
                                         label="Titulo del Libro"
                                         defaultValue={tituloLibro}
                                     />
                                     <TextField
-                                        variant="outlined"
+                                        variant="standard"
                                         disabled
                                         id="autor"
                                         label="Autor del Libro"
                                         defaultValue={autorLibro}
                                     />
-                                    <TextField
-                                        variant="outlined"
+                                    {/* <TextField
+                                        variant="standard"
                                         disabled
                                         id="autor"
                                         label="Autor del Libro"
                                         defaultValue={autorLibro}
-                                    />
+                                    /> */}
 
                                 </Box>
                                 <Typography>Solicitante</Typography>
@@ -148,6 +148,7 @@ function FormularioIntercambio({ idLibro, tituloLibro, autorLibro }) {
                                         columnGap: '1%'
                                     }}>
                                     <TextField
+                                    variant="standard"
                                         required
                                         id="nombre"
                                         label="Nombre"
@@ -155,6 +156,7 @@ function FormularioIntercambio({ idLibro, tituloLibro, autorLibro }) {
                                         onChange={(e) => setNombre(e.target.value)}
                                     />
                                     <TextField
+                                    variant="standard"
                                         required
                                         id="email"
                                         label="Email"
@@ -170,6 +172,7 @@ function FormularioIntercambio({ idLibro, tituloLibro, autorLibro }) {
                                         columnGap: '1%'
                                     }}>
                                     <TextField
+                                    variant="standard"
                                         required
                                         id="libroOfrecido"
                                         label="libroOfrecido"
@@ -177,12 +180,12 @@ function FormularioIntercambio({ idLibro, tituloLibro, autorLibro }) {
                                         onChange={(e) => setNombre(e.target.value)}
                                     />
                                     <TextField
-                                        
-                                        id="fecha"
+                                        variant="standard"
+                                        disabled
+                                        id="fechaSolicitud"
                                         label="Fecha de Solicitud"
-                                        defaultValue={''}
-                                        helperText="Fecha Actual"
-                                        onChange={(e) => setFechaSolicitud(e.target.value)}
+                                        defaultValue={fechaActual}
+                                        
                                     />
                                 </Box>
 

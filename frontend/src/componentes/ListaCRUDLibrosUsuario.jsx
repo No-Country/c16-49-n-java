@@ -61,7 +61,10 @@ function ListaCRUDLibrosUsuario({ usuario }) {
                                         <TableCell align="right">{libro.autor}</TableCell>
                                         <TableCell align="right">
                                             <EditarLibro />
-                                            <Button variant="contained" onClick={handleClickEliminar}>Eliminar</Button>
+                                            <Button variant="contained" onClick={handleClickEliminar} sx={{
+                                backgroundColor:'rgba(240, 52, 6, 0.945)',
+                                
+                            }}>Eliminar</Button>
                                         </TableCell>
 
 

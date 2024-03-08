@@ -84,9 +84,10 @@ function EditarLibro() {
             <div>
                 
                 <Button aria-describedby={id} onClick={handleEditar} 
-                sx={{backgroundColor:'#dda15e'
-                
+                sx={{
+                    backgroundColor:'#79a843'
                 }}
+                
                 >
                     Editar Libro
                 </Button>
