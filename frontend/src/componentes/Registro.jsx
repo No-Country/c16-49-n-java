@@ -3,6 +3,8 @@ import { Button, Typography } from "@mui/material";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import CargarArchivo from "./CargarArchivo";
+import { Navigate } from "react-router-dom";
+import BotonArriba from "./BotonArriba";
 import '../estilos/registroUsuarios.css';
 import Boton from "./Boton";
 import Swal from 'sweetalert2';
@@ -11,6 +13,7 @@ import { API_BASE_URL } from "../config";
 
 function Registro() {
     const [error, setError] = useState('');
+    const [redirigir, setRedirigir] = useState(false);
     // constantes del usuario
     const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
@@ -28,9 +31,15 @@ function Registro() {
         })
             .then(() => {
                 limpiarCampos()
+                setRedirigir(true)
 
             });
     };
+    if (redirigir) 
+        {
+            return <Navigate to={`/libros`}  />;
+        }
+    
     const limpiarCampos = () => {
         setError('');
         setNombre('')
@@ -207,6 +216,7 @@ function Registro() {
                     </Box>
                 </div>
             </div>
+            <BotonArriba />
         </>
 
     )

@@ -7,6 +7,7 @@ import { Password } from "@mui/icons-material";
 import AppContext from "../context/AppContext";
 import { Navigate } from "react-router-dom";
 import Boton from "./Boton";
+import BotonArriba from "./BotonArriba";
 import Box from '@mui/material/Box';
 import Swal from "sweetalert2";
 import '../estilos/formulariosesion.css';
@@ -19,6 +20,7 @@ function FormSesion() {
     const [error, setError] = useState('');
     const { token, setToken, libroIdSeleccionado } = useContext(AppContext);
     const [redirigir, setRedirigir] = useState(false);
+    const [redirigeCancelar,setRedirigeCancelar] =useState(false)
 
 
 
@@ -30,6 +32,7 @@ function FormSesion() {
         })
             .then(() => {
                 limpiarCampos()
+                setRedirigeCancelar(true)
             });
     };
     const limpiarCampos = () => {
@@ -37,7 +40,10 @@ function FormSesion() {
         emailRef.current.value = "";
         passwordRef.current.value = "";
     }
-
+    if (redirigeCancelar) 
+    {
+        return <Navigate to={`/libros`}  />;
+    }
     // activa la validacion al hacer submit
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -157,7 +163,7 @@ function FormSesion() {
                 </div>
 
             </Box>
-
+<BotonArriba/>
         </>
 
 

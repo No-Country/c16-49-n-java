@@ -12,6 +12,7 @@ import { ThemeProvider } from "styled-components";
 import theme from "./themeConfig";
 import Boton from './Boton';
 import FormularioIntercambio from "./FormularioIntercambio";
+
 import BotonArriba from "./BotonArriba";
 import { useContext } from "react";
 import AppContext from "../context/AppContext";
