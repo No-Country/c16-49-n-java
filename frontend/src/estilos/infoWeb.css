@@ -1,0 +1,81 @@
+.contenedorGeneral{
+    width: 100vw;
+    height: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    /* background-color: aqua; */
+}
+.izquierda{
+    width: 30%;
+    height:100%;
+    margin-left: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #68753e7c;
+}
+.fondoIzquierda{
+    background-color: #68753e7c;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    row-gap: 50px;
+}
+.contenedorGaleria{
+    width: 210px;
+    height: 200px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid rgba(240, 52, 6, 0.945);
+    position: relative;
+    top:-50px;
+    z-index: 1000;
+}
+.contenedorGaleria>img{
+    max-width: 100%;
+    height: 100%;
+}
+.derecha{
+    width: 69%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: justify;
+    margin: 40px 0;
+    padding: 0;
+}
+.tituloBienvenida{
+    margin:auto auto 40px auto;
+}
+.contenedorTexto{
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin:1% 5%;
+}
+.preguntas{
+width: 100%;
+height: auto;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding-right:30px;
+margin: 50px auto 20px auto;
+}
+
+    span{
+        font-weight: bold;
+    }

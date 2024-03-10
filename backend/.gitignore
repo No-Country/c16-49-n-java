@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### environment ###
+.env
+
+### GCP ###
+src/main/resources/bucket-credentials.json

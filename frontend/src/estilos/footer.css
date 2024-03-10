@@ -1,0 +1,145 @@
+.footerContenedor {
+    margin-top: 20px;
+    padding: 0;
+    width: 100vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-image: linear-gradient(#68753edc, #3a4123);
+
+}
+
+.contenedorEstatico {
+    width: 60%;
+    height: 100px;
+    position: relative;
+    bottom: 40px;
+
+    display: flex;
+    flex-direction: row;
+    background-color: #283618;
+    border-radius: 10px;
+}
+
+.contenedorTextoEstatico {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+.contenedorLlamados {
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+
+}
+
+.contenedorBotones {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.contenedorInfoFooter {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.contenedorLogoFooter {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 50px;
+}
+
+.contenedorLogoFooter>img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+
+}
+
+.contenedorInfoDerecha {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5%;
+}
+
+.contenedorEnlacesFooter {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+    font-size: 20px;
+    color:white !important;
+}
+.contenedorRedes {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* column-gap: 30px; */
+    color: #f8f7f3;
+    font-weight: bold;
+  
+}
+a{
+    color:white !important;
+}
+
+.contenedorDerechos {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    column-gap: 70px;
+    color: white;
+    font-weight: bold;
+    padding:0 ;
+    margin: 0;
+}
+.cuadroLlamado{
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.cuadroLlamado>img{
+    width: 50%;
+    height: 80%;
+    overflow: hidden;
+}

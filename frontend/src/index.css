@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html{
+  padding: 0;
+  margin: 0;
+}
+#root{
+  margin: 0;
+  padding: 0;
+}
+:root {
+
+  font-family: Libre Franklin, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: ligth;
+  color: #283618;
+  background-color: #fefae0;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #1b1f1b;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #bc6c25;
+}
+
+body {
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 0.5em;
+  font-weight: 300;
+  font-family: Libre Franklin;
+  /* background-color: #1a1a1a; */
+  cursor: pointer;
+  transition: border-color 0.25s;
+} 
+ button:hover {
+  border-color: #606c38;
+} 
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+} */
+/* 
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */ */
+
+.libre-franklin {
+  font-family: '"Libre Franklin", sans-serif';
+  font-optical-sizing: auto;
+  font-weight: inherit;
+  font-style: normal;
+}

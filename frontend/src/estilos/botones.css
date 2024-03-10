@@ -1,0 +1,53 @@
+.accion{
+    background-color: #283618;
+    color: white;
+    padding: 7px;
+    border: none;
+    border-radius: 10px;
+    text-transform: uppercase;
+    
+}
+.accion:hover{
+    background-color: #606c38;
+}
+.info{
+    background-color: #dda15e;
+    color: white;
+    padding: 7px;
+    border: none;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+.info:hover{
+    background-color: #bc6c25;
+}
+.atencion{
+    background-color: rgba(240, 52, 6, 0.945);
+    color: white;
+    padding: 7px;
+    border: none;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+.focoA{
+    background-color: rgba(240, 52, 6, 0.945);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+.focoA:hover{
+    background-color: rgba(177, 39, 5, 0.993);
+}
+.focoB{
+    background-color: #79a843;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+.focoB:hover{
+    background-color: #8ad336;
+}

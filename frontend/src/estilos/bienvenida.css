@@ -1,0 +1,79 @@
+.contenedorHero {
+    width: 100vw;
+    height: 86vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+
+}
+
+.contenedorHero>video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+
+}
+
+.fondo {
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    /* background-color: #dda25e56; */
+    background-color: #68753e8f;
+    width: 30%;
+    height: 88.5%;
+    margin-left: 3%;
+    z-index: 100;
+    position: absolute;
+    left: 0%;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+ 
+
+}
+
+.slogan {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* margin-bottom: 1%;
+    margin-left: 5%; */
+    position: absolute;
+   top: 40%;
+  bottom: 5%;
+
+
+
+    /* transition: .3s ease;
+  box-shadow: 0 1px 1px rgba(0,0,0,.3);
+  
+  &:hover {
+    box-shadow: 0 5px 20px rgba(0,0,0,.8);
+    transform: translateY(-10px) scale(1.02);
+  	.entry-title{
+			background-position: -100% 0;
+		} 
+  } */
+}
+
+.titulo {
+    font-weight: bold;
+    padding: 1px 5px;
+    text-align: center;
+    text-rendering: optimizeLegibility;
+    letter-spacing: 0.01rem;
+    color:white;
+    text-shadow: 
+      -1px -1px 1px #111, 
+      1px 1px 1px #dda15e;
+margin-bottom: 10px;
+}
