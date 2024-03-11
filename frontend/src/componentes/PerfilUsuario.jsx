@@ -1,7 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-
 import { Navigate } from "react-router-dom";
-
 import AppContext from "../context/AppContext";
 import { Typography } from "@mui/material";
 import '../estilos/perfilUsuario.css'
@@ -33,6 +31,7 @@ function PerfilUsuario() {
                 const data = await response.json()
                 setUsuario(data)
                 console.log(data)
+                
               setAutorizado(true);
             } else {
                 console.log('no estoy autorizado')
@@ -49,7 +48,7 @@ function PerfilUsuario() {
           verificarAutorizacion();
         }
       }, [token]);
-    
+      // console.log(usuario.libros)
       if (!token) {
         return <Navigate to='/sesion' />;
       }
@@ -71,7 +70,7 @@ function PerfilUsuario() {
                 <div className="contenedorDatosUsuario"><DatosUsuario usuario={usuario}/></div>
 
             </div>
-            <div className="listasUsuario"><ListaCRUDLibrosUsuario usuario={usuario}/></div>
+            <div className="listasUsuario"><ListaCRUDLibrosUsuario libros={usuario.libros}/></div>
             <div className="listasUsuario"><ListaCRUDIntercambios /></div>
             <BotonArriba />
         </>

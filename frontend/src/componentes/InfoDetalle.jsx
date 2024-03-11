@@ -57,8 +57,8 @@ export default function InfoDetalle() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <ListaComentarios />
-        <Comentarios />
+        {/* <ListaComentarios />
+        <Comentarios /> */}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         Detalles sobre el usuario que lo tiene

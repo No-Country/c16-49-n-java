@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -20,7 +20,7 @@ function createData(id, imagen, titulo, autor, acciones) {
 }
 
 
-function ListaCRUDLibrosUsuario({ usuario }) {
+function ListaCRUDLibrosUsuario({ libros}) {
 
     const handleClickEliminar = () => {
         console.log('hice clic en eliminar')
@@ -31,8 +31,10 @@ function ListaCRUDLibrosUsuario({ usuario }) {
                 <div className="tituloUsuarioPerfil">
                     <Typography variant="h2">Mi Librería Virtual</Typography>
                 </div>
-                {usuario.libros.length > 0 ?
-                    (<TableContainer component={Paper} >
+                {libros.length > 0 ?
+                <>
+                
+                (<TableContainer component={Paper} >
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead >
                                 <TableRow>
@@ -44,7 +46,7 @@ function ListaCRUDLibrosUsuario({ usuario }) {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {usuario.libros.map((libro) => (
+                                {libros.map((libro) => (
 
                                     <TableRow
                                         key={libro.id}
@@ -72,7 +74,10 @@ function ListaCRUDLibrosUsuario({ usuario }) {
                                 ))}
                             </TableBody>
                         </Table>
-                    </TableContainer>)
+                    </TableContainer>
+                    <Box sx={{height:'60px', backgroundColor:'white', flexDirection:'row', alignItems:'center'}}><Typography variant="h3">Aún no tienes libros cargados</Typography></Box>
+                    <div><AgregaNuevoLibro /></div>)
+                </>
                 :
                 (
                     <>

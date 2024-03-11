@@ -20,7 +20,7 @@ function Resenias() {
         // Solo realizar la consulta si el ID está presente
         if (id) {
             fetch(`${API_BASE_URL}/libros/${id}/resenias`)
-            // fetch(`http://localhost:8080/api/v1/libros/${id}/resenias`)
+          
                 .then(response => response.json())
                 .then(data => {
                     setResenias(data);
@@ -37,7 +37,7 @@ function Resenias() {
         // Solo realizar la consulta si el ID está presente
         if (id) {
             fetch(`${API_BASE_URL}/libros/${id}/resenias/promedio`)
-            // fetch(`http://localhost:8080/api/v1/libros/${id}/resenias/promedio`)
+    
                 .then(response => response.json())
                 .then(data => {
                     setReseniasProm(data)

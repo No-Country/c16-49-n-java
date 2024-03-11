@@ -26,11 +26,11 @@ function App() {
   const [paginaActual, setPaginaActual] = useState(0);
   const [token, setToken] = useState(null); 
   const [usuario, setUsuario]=useState({})
-  const { libroSeleccionado, setLibroSeleccionado } = useState(null);
+  const [ libroSeleccionado, setLibroSeleccionado ] = useState();
+  const [autorizado, setAutorizado]= useState(false);
 
   useEffect(() => {
     axios
-      // .get('https://paginascompartidas.fly.dev/api/v1/libros?p=' + paginaActual)
       .get(`${API_BASE_URL}/libros?p=`+paginaActual)
       .then((response) => {
         console.log('respuesta de la api:response.data')
@@ -52,7 +52,7 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <AppContext.Provider value={{ dataLibros, setResultadosBusqueda, resultadosBusqueda, setCantidadPaginas, cantidadPaginas, tamañoPagina, paginaActual, setPaginaActual, token, setToken, usuario, setUsuario, libroSeleccionado, setLibroSeleccionado}}>
+        <AppContext.Provider value={{ dataLibros, setResultadosBusqueda, resultadosBusqueda, setCantidadPaginas, cantidadPaginas, tamañoPagina, paginaActual, setPaginaActual, token, setToken, usuario, setUsuario, libroSeleccionado, setLibroSeleccionado, autorizado, setAutorizado}}>
           <NavBar />
           <Routes>
             <Route path="*" element={<Home />}></Route>

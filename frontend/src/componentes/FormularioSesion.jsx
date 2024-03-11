@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { Link as LinkRouter } from 'react-router-dom';
-import { Button, Typography } from "@mui/material";
+import { Button, Typography,CircularProgress } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import { Password } from "@mui/icons-material";
 import AppContext from "../context/AppContext";
@@ -18,11 +18,10 @@ function FormSesion() {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [error, setError] = useState('');
-    const { token, setToken, libroIdSeleccionado } = useContext(AppContext);
+    const { token, setToken, libroSeleccionado, setLibroSeleccionado, setAutorizado} = useContext(AppContext);
     const [redirigir, setRedirigir] = useState(false);
     const [redirigeCancelar,setRedirigeCancelar] =useState(false)
-
-
+    const [loading, setLoading]= useState(false)
 
     const handleClose = () => {
         Swal.fire({
@@ -33,23 +32,28 @@ function FormSesion() {
             .then(() => {
                 limpiarCampos()
                 setRedirigeCancelar(true)
+                setLibroSeleccionado('')
+                setAutorizado(false)
             });
     };
+    if (redirigeCancelar) 
+    {
+        return <Navigate to={`/libros`}  />;
+    }
     const limpiarCampos = () => {
         setError('');
         emailRef.current.value = "";
         passwordRef.current.value = "";
     }
-    if (redirigeCancelar) 
-    {
-        return <Navigate to={`/libros`}  />;
-    }
+ 
     // activa la validacion al hacer submit
     const handleSubmit = async (event) => {
+        console.log('hice clic en iniciar sesion')
         event.preventDefault();
         setError('');
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
+        console.log('hice clic en iniciar sesion')
 
         if (email.trim() === '' || password.trim() === '') {
             setError('Todos los campos son requeridos');
@@ -67,9 +71,10 @@ function FormSesion() {
             setError('La Password debe tener al menos 8 caracteres, al menos una letra y un número');
             return;
         }
-
+        setLoading(true);
         // buscar el usuario en la DB
         try {
+            console.log('llame al try')
             const response = await fetch(`${API_BASE_URL}/auth/login`,
             
                 {
@@ -84,13 +89,6 @@ function FormSesion() {
                 console.log("RESPUESTA OK")
                 const data = await response.json()
                 setToken(data.jwt)
-                console.log(data.jwt);
-                if (libroIdSeleccionado || token) {
-                    setRedirigir(true);
-                }
-              
-            //    setRedirigir(true)
-
             }
 
             else {
@@ -99,14 +97,21 @@ function FormSesion() {
         } catch (error) {
             setError('Error al iniciar sesión. Intenta de nuevo en unos minutos')
         }
+        finally {
+            setLoading(false); // Establecer loading en false después de completar la solicitud de inicio de sesión
+        }
     }
-    console.log(libroIdSeleccionado)
-    if (redirigir && libroIdSeleccionado) {
-        return <Navigate to={`/libros/${libroIdSeleccionado}`}  />;
+    console.log(libroSeleccionado)
+
+// Redirigir si el usuario ya está autenticado y hay un libro seleccionado
+if (token) {
+    if (libroSeleccionado) {
+        return <Navigate to={`/libros/${libroSeleccionado}`} />;
+    } else {
+        return <Navigate to="/perfil" />;
     }
-    if(redirigir){
-        return <Navigate to='/perfil' />;
-    }
+}
+    
     return (
         <>
             <Box
@@ -150,12 +155,8 @@ function FormSesion() {
                 </div>
 
                 <div className="accionesInicioSesion">
-                    {/* <LinkRouter to={'/Sesion/perfil'}> */}
-                    <Button type="submit" variant="contained" sx={{
-                                backgroundColor:'#79a843'
-                            }}>Iniciar Sesión</Button>
-                    {/* </LinkRouter> */}
-
+                    <Button type="submit" variant="contained" sx={{backgroundColor:'#79a843'}}>
+                    {loading ? <CircularProgress size={24} sx={{color:'white'}} /> : 'Iniciar Sesión'}</Button>
                     <Button onClick={handleClose} variant="contained" sx={{
                                 backgroundColor:'rgba(240, 52, 6, 0.945)',
                                 
