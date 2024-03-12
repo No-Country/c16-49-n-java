@@ -32,7 +32,7 @@ function DetalleLibro() {
 
     // verificar autorizacion
     useEffect(() => {
-        const verificarAutorizacion = async () => {
+        const fetchLibro = async () => {
             try {
                 const response = await fetch(`${API_BASE_URL}/libros/` +id, {
                     method: 'GET',
@@ -55,10 +55,10 @@ function DetalleLibro() {
             }
         };
 
-        if (token) {
-            verificarAutorizacion();
+        if (token && id) {
+            fetchLibro();
         }
-    }, [token, id]);
+    }, [token,id]);
     const imagenGenerica = 'https://firebasestorage.googleapis.com/v0/b/mi-proyecto-de-recetas.appspot.com/o/PAGINAS%20COMPARTIDAS%2FPortada%20Libro%20Generica.png?alt=media&token=42926409-eb7b-4a16-9298-e6a53d6faee8'
 
     // RECUPERANDO IMAGEN

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "./themeConfig";
@@ -7,55 +7,79 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { grey } from "@mui/material/colors";
 import { Typography } from "@mui/material";
+import AppContext from "../context/AppContext";
 import { API_BASE_URL } from "../config";
 
 function Resenias() {
-    const { id } = useParams(); // Obtiene l ID del libro de la URL
+    // const { id } = useParams(); // Obtiene l ID del libro de la URL
     const [resenias, setResenias] = useState();
     const [cantResenias, setCantResenias] = useState(0);
-    const[reseniasProm, setReseniasProm]=useState(0);
+    const [reseniasProm, setReseniasProm] = useState(0);
     const [isLoading, setIsLoading] = useState(true); // Nuevo estado para manejar la carga
+    const { token, libroSeleccionado } = useContext(AppContext);
 
+    const id = libroSeleccionado
+    // verificar autorizacion
     useEffect(() => {
-        // Solo realizar la consulta si el ID está presente
-        if (id) {
-            fetch(`${API_BASE_URL}/libros/${id}/resenias`)
-          
-                .then(response => response.json())
-                .then(data => {
+        const fetchResenias = async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/libros/${id}/resenias`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (response.ok) {
+                    console.log('estoy autorizado a ver resenias');
+                    const data = await response.json();
+                    console.log(data);
                     setResenias(data);
                     setCantResenias(data.length);
-                    setIsLoading(false); // Marcar la carga como completa
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    setIsLoading(false); // Marcar la carga como completa incluso si hay errores
+                } else {
+                    console.log('no estoy autorizado a ver resenias')
+                    setResenias([]);
+                }
+            } catch (error) {
+                console.error('Error al obtener resenias:', error);
+            }
+        };
+        const fetchReseniasProm = async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/libros/${id}/resenias/promedio`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
                 });
-        }
-    }, [id]);
-    useEffect(() => {
-        // Solo realizar la consulta si el ID está presente
-        if (id) {
-            fetch(`${API_BASE_URL}/libros/${id}/resenias/promedio`)
-    
-                .then(response => response.json())
-                .then(data => {
-                    setReseniasProm(data)
-                    setIsLoading(false); // Marcar la carga como completa
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    setIsLoading(false); // Marcar la carga como completa incluso si hay errores
-                });
-        }
-    }, [id]);
-    
+                if (response.ok) {
+                    console.log('estoy autorizado a ver prom resenias');
+                    const data = await response.json();
+                    console.log(data);
+                    setReseniasProm(data);
 
-    // const valoracion =  resenias && resenias.length > 0 ? resenias[0].calificacion : 0 ;
-const valoracion= reseniasProm
+                } else {
+                    console.log('no estoy autorizado a ver prom resenias')
+                    setReseniasProm(0);
+                }
+            } catch (error) {
+                console.error('Error al obtener promedio de resenias:', error);
+            }
+        };
+        const fetchData = async () => {
+            await Promise.all([fetchResenias(), fetchReseniasProm()]);
+            setIsLoading(false);
+        };
+
+        if ( id) {
+            fetchData();
+        }
+
+    }, [id]);
+
+    const valoracion = reseniasProm
 
     const iconos = [];
-    if (valoracion >= 0) {
+    if (valoracion > 0) {
         for (var i = 0; i < valoracion; i++) {
             iconos.push(<StarIcon sx={{ color: '#bc6c25' }} key={`iconos${i}`} />);
         }

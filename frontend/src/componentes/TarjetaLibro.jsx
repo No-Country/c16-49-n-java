@@ -50,8 +50,9 @@ export default function TarjetaLibro({ libro }) {
 
 
   const handleClick = () => {
-    setLibroSeleccionado(libro.id)
+    // setLibroSeleccionado(libro.id)
     if (token) {
+      setLibroSeleccionado(libro.id)
       console.log('hice clic en el libro' + libroSeleccionado)
       setNavegarADetalles(true)
       // setLibroSeleccionado(libro.id)
@@ -59,6 +60,7 @@ export default function TarjetaLibro({ libro }) {
       // setNavegarADetalles(true)
     }
     else {
+      setLibroSeleccionado(libro.id)
       Swal.fire({
         title: "",
         text: 'Inicia sesión para ver más informacion',
