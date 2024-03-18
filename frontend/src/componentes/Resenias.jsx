@@ -11,7 +11,7 @@ import AppContext from "../context/AppContext";
 import { API_BASE_URL } from "../config";
 
 function Resenias() {
-    // const { id } = useParams(); // Obtiene l ID del libro de la URL
+
     const [resenias, setResenias] = useState();
     const [cantResenias, setCantResenias] = useState(0);
     const [reseniasProm, setReseniasProm] = useState(0);

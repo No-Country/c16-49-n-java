@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -16,16 +17,24 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 export default function CargarArchivo() {
+  // const [selectedFile, setSelectedFile] = useState(null);
+
+  // const handleFileUpload = (event) => {
+  //   setSelectedFile(event.target.files[0]);
+  // };
+
   return (
     <Button
       component="label"
       role={undefined}
       variant="contained"
       tabIndex={-1}
-      startIcon={<CloudUploadIcon />}
+      startIcon={<CloudUploadIcon />
+    }
     >
       Subir Imagen
-      <VisuallyHiddenInput type="file" />
+      <VisuallyHiddenInput type="file"
+        />
     </Button>
   );
 }

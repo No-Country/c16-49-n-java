@@ -44,7 +44,7 @@ const pages = [
 function NavBar() {
     const ubicacion = useLocation();
     const mostrarBuscador = ubicacion.pathname === '/libros';
-    const {token, setToken} = useContext(AppContext)
+    const { token, setToken } = useContext(AppContext)
     const handleLogout = () => {
         // Limpiar el token de sesión al cerrar sesión
         setToken(null);
@@ -59,7 +59,7 @@ function NavBar() {
         setAnchorElNav(null);
     };
 
-    
+
     return (
         <AppBar position='fixed' sx={{ left: '0', right: 'auto' }}>
             <Toolbar disableGutters>
@@ -69,7 +69,7 @@ function NavBar() {
                     </div>
                 </LinkRouter>
                 {/* BUSQUEDA */}
-                {mostrarBuscador && <Buscar/>}
+                {mostrarBuscador && <Buscar />}
                 <Box sx={{ flexGrow: 1 }} />
                 {/* contenedor de enlaces */}
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -125,22 +125,31 @@ function NavBar() {
                         ))}
                     </Menu>
                 </Box >
-                
+
                 {/* Verificar si el usuario ha iniciado sesión */}
                 {token ? (
-                    <Button color="inherit" onClick={handleLogout}>
-                        Cerrar Sesión
-                    </Button>
+                    <>
+                        <Button color="inherit" onClick={handleLogout}>
+                            Cerrar Sesión
+                        </Button>
+                        <LinkRouter to='/perfil'>
+                            <Button color="inherit">
+                                Mi Perfil
+                            </Button>
+                        </LinkRouter>
+
+                    </>
+
                 ) : (
                     <>
-                     <Button color="inherit" component={LinkRouter} to='/Sesion'>
-                        Iniciar Sesión
-                    </Button>
-                    <Button color="inherit" component={LinkRouter} to='/Registro'>
-                    Registrate
-                </Button>
+                        <Button color="inherit" component={LinkRouter} to='/Sesion'>
+                            Iniciar Sesión
+                        </Button>
+                        <Button color="inherit" component={LinkRouter} to='/Registro'>
+                            Registrate
+                        </Button>
                     </>
-                   
+
                 )}
 
             </Toolbar>

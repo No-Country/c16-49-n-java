@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Comentarios from "./Comentarios";
 import ListaComentarios from './ListaComentarios';
+import DuenioLibro from './DuenioLibro';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,7 +62,7 @@ export default function InfoDetalle() {
         {/* <Comentarios />  */}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Detalles sobre el usuario que lo tiene
+        <DuenioLibro />
       </CustomTabPanel>
     </Box>
   );

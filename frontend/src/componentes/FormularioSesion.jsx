@@ -34,6 +34,7 @@ function FormSesion() {
                 setRedirigeCancelar(true)
                 setLibroSeleccionado('')
                 setAutorizado(false)
+                setToken(null)
             });
     };
     if (redirigeCancelar) 
@@ -89,6 +90,7 @@ function FormSesion() {
                 console.log("RESPUESTA OK")
                 const data = await response.json()
                 setToken(data.jwt)
+                setAutorizado(true)
             }
 
             else {

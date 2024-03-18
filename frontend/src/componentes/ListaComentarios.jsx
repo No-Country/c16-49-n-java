@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -16,24 +15,7 @@ export default function ListaComentarios() {
     const [error, setError] = useState(null);
 
     const id = libroSeleccionado
-    // useEffect(() => {
-    //     fetch(`${API_BASE_URL}/libros/comentarios/libro/` + id)
-    //         .then(response => {
-    //             if (!response.ok) {
-    //                 throw new Error('No se encontraron comentarios' +response.statusText);
-    //             }
-    //             return response.json();
-    //         })
-    //         .then(data => {
-    //             if (data && data.status === 404) {
-    //                 throw new Error(data.message); // Mensaje de error proporcionado por la API
-    //             }
-    //             setDataComentario(data);
-    //             console.log(dataComentario)
-    //             setError(null);
-    //         })
-    //         .catch(error => setError(error.message));
-    // }, [id]);
+
     useEffect(() => {
         const fetchComentarios = async () => {
             try {

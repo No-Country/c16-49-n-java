@@ -20,9 +20,7 @@ function Registro() {
     const [password, setPassword] = useState('');
     const [repeatedPassword, setRepeatedPassword]=  useState('');
 
-    const fechaActual = new Date().toISOString().split('T')[0];
-
-
+   
     const handleClose = () => {
         Swal.fire({
             title: "",
@@ -50,7 +48,7 @@ function Registro() {
 
     const handleClickForm = async (event) => {
         event.preventDefault();
-        console.log(nombre,email,password)
+        console.log(nombre,email,password, repeatedPassword)
         // Verificar si los campos están llenos
         if (nombre.trim() === '' || email.trim() === '' || password.trim() === '' || repeatedPassword.trim() === '') {
             setError('Todos los campos son requeridos');
@@ -91,20 +89,21 @@ function Registro() {
             });
     
             // Verificar si la solicitud fue exitosa
-            if (!response.ok) {
-                throw new Error('Error al enviar datos a la API');
+            if (response.ok){
+                
+                Swal.fire({
+                    title: "Felicidades!",
+                    text: 'Te registraste con éxito. Inicia Sesión para empezar a intercambiar',
+                    icon: "success"
+                });
+        
+                // Limpiar campos después del registro exitoso
+                limpiarCampos();
             }
-    
-            // Si pasa las validaciones y la solicitud fue exitosa, mostrar mensaje de éxito
-            console.log('me registre');
-            Swal.fire({
-                title: "Felicidades!",
-                text: 'Te registraste con éxito. Inicia Sesión para empezar a intercambiar',
-                icon: "success"
-            });
-    
-            // Limpiar campos después del registro exitoso
-            limpiarCampos();
+            else {
+                setError('Error al enviar datos a la API');
+            }
+            
         } catch (error) {
             console.error('Error:', error.message);
             setError('Hubo un error al registrar el usuario. Por favor, intenta nuevamente más tarde.');

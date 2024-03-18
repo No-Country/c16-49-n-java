@@ -22,8 +22,7 @@ import axios from "axios";
 // FALTA ENLAZAR LA IMAGEN
 function DetalleLibro() {
     
-    const { token, libroSeleccionado, autorizado, setAutorizado } = useContext(AppContext);
-    // const [autorizado, setAutorizado] = useState(false);
+    const { token, libroSeleccionado, autorizado } = useContext(AppContext);
     const [libro, setLibro] = useState([]);
     const [imagen, setImagen] = useState(null);
     // const [mostrarFormulario, setMostrarFormulario] = useState(false);
@@ -42,13 +41,13 @@ function DetalleLibro() {
                 });
                 if (response.ok) {
                     console.log('estoy autorizado a ver detalle')
-                    setAutorizado(true);
+                   
                    const data = await response.json()
                     setLibro(data)
                     console.log(data)
                 } else {
                     console.log('no estoy autorizado a ver detalle')
-                    setAutorizado(false);
+                  
                 }
             } catch (error) {
                 console.error('Error al verificar autorización:', error);

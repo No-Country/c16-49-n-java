@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Typography } from "@mui/material";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -6,10 +6,32 @@ import Boton from "./Boton";
 import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
 import Select from "@mui/material/Select";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { InputLabel } from "@mui/material";
+import Swal from "sweetalert2";
 import CargarArchivo from "./CargarArchivo";
+import MenuItem from "@mui/material/MenuItem";
+import { API_BASE_URL } from "../config";
+import AppContext from "../context/AppContext";
+
+const estados = [
+    {
+        value: "usado",
+        label: "usado",
+    },
+    {
+        value: "nuevo",
+        label: "nuevo",
+    },
+    {
+        value: "desgastado",
+        label: "desgastado",
+    },
+];
+
 
 function AgregaNuevoLibro() {
+    const { token } = useContext(AppContext);
     // codigo del popover
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mensaje, setMensaje] = useState(null);
@@ -21,11 +43,20 @@ function AgregaNuevoLibro() {
     };
 
     const handleClose = () => {
-        setAnchorEl(null);
-        setMensaje(''); // Limpiar el mensaje al cerrar
-        setError('');
+        console.log('llame a cancelar')
+        Swal.fire({
+            title: "",
+            text: 'Registro de Libro Cancelado',
+            icon: "info",
+        }).then(() => {
+            limpiarCampos()
+            setAnchorEl(null)
+        });
     };
-
+    const limpiarCampos = () => {
+        setAutor(''), setEditorial(''), setEstado(''), setIsbn(''), setTitulo(''), setFechaDePublicacion(''), setResumen(''),
+            setGenero(''), setPaginas(''), setSelectedFile(null), setError('')
+    }
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
@@ -38,34 +69,76 @@ function AgregaNuevoLibro() {
     const [editorial, setEditorial] = useState('');
     const [paginas, setPaginas] = useState('');
     const [genero, setGenero] = useState('');
-    const [nombreImagen, setNombreImagen] = useState('');
-    const [estado, setEstado] = useState("");
+    const [estado, setEstado] = useState(``);
     const [error, setError] = useState('');
+    const [selectedFile, setSelectedFile] = useState(null);
+
 
     const [libro, setLibro] = useState('');
     const handleChange = (event) => {
+       console.log(event.target.value)
         setEstado(event.target.value);
-        
+
     };
 
 
+    const handleCargarImagen = (event) => {
+        // console.log(event.target.files[0])
+        setSelectedFile(event.target.files[0]);
+    };
 
-
-    const handleClickForm = (event) => {
+    const handleClickForm = async (event) => {
         event.preventDefault();
-        console.log('verificar campos antes de enviar')
-            // Verificar si los campos están llenos
-            if (titulo.trim() === '' || autor.trim() === '' || isbn.trim() === '' || fechaDePublicacion.trim() === '' ||
+        if (titulo.trim() === '' || autor.trim() === '' || isbn.trim() === '' || fechaDePublicacion.trim() === '' ||
             resumen.trim() === '' || editorial.trim() === '' || paginas.trim() === '' || genero.trim() === '' ||
-            nombreImagen.trim() === ''  ||estado.trim() === '' ) {
-                setError('Todos los campos son requeridos');
-                return;
-            }
+            estado.trim() === '' || selectedFile === null) {
+            setError('Todos los campos son requeridos');
+            return;
+        }
 
-        
-            setError('');
+
+        setError('');
         //     // Si pasa las validaciones, enviar la solicitud
-            setMensaje('Libro Agregado con éxito');
+        const formData = new FormData();
+        const libro = {
+            isbn, titulo, autor, fechaDePublicacion, resumen, editorial, paginas, genero, estado
+        }
+
+        formData.append('json', JSON.stringify(libro));
+        formData.append('imagen', selectedFile);
+
+        formData.forEach((value, key) => {
+            console.log(key, value);
+        });
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/libros`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
+            });
+            if (response.ok) {
+                console.log(response)
+                Swal.fire({
+                    title: "Felicidades!",
+                    text: 'Libro Registrado con éxito',
+                    icon: "success",
+                }).then(() => {
+                    limpiarCampos()
+                    setAnchorEl(null)
+                });
+            }
+            else {
+                setError('Error al enviar datos a la API');
+            }
+        }
+        catch (error) {
+            setError('Error al agregar libro')
+            console.log(error)
+        }
+
     }
 
     return (
@@ -79,7 +152,6 @@ function AgregaNuevoLibro() {
                     id={id}
                     open={Boolean(anchorEl)}
                     anchorEl={anchorEl}
-                    // onClose={handleClose}
                     anchorOrigin={{
                         vertical: 'bottom',
                         horizontal: 'left',
@@ -105,8 +177,6 @@ function AgregaNuevoLibro() {
                             sx={{
                                 '& .MuiTextField-root': { m: 2, width: '100%' },
                                 width: '90%'
-                                // display: 'flex', flexDirection: 'row', flexWrap: 'wrap',
-                                // columnGap: '2%'
                             }}
                             noValidate
                             autoComplete="off"
@@ -156,6 +226,7 @@ function AgregaNuevoLibro() {
                                         required
                                         id="fechaDePublicacion"
                                         label="Fecha de Publicación"
+                                        type="date"
                                         defaultValue={''}
                                         helperText="Escribe la fecha en que se publicó"
                                         onChange={(e) => setFechaDePublicacion(e.target.value)}
@@ -218,49 +289,35 @@ function AgregaNuevoLibro() {
                                 </Box>
                                 <Box
                                     sx={{
-                                        width: '(calc(90%/2))', marginLeft:'3%',marginRight:'3%',
+                                        width: '(calc(90%/2))', marginLeft: '3%', marginRight: '3%',
                                         display: 'flex', flexDirection: 'row', flexWrap: 'noWrap',
                                         columnGap: '1%', alignItems: 'center', justifyContent: 'center', marginBottom: '30'
                                     }}
                                 >
-                                    <CargarArchivo
-                                    id="nombreImagen"
-                                    label="Nombre de la Imagen"
-                                    onChange={(e) => setNombreImagen(e.target.value)} />
-                                    {/* <TextField
-                                        required
-                                        id="nombreImagen"
-                                        label="Nombre de la Imagen"
-                                        defaultValue={''}
-                                        helperText="Escribe el nombre de tu archivo jpg"
-                                        onChange={(e) => setNombreImagen(e.target.value)}
-                                        variant="standard"
-                                    /> */}
+                                    <>
+                                        <CloudUploadIcon /><input type="file" onChange={handleCargarImagen}></input>
+                                    </>
+
                                     <Box sx={{
 
                                         display: 'flex', flexDirection: 'column',
                                         alignItems: 'center', justifyContent: 'center'
                                     }}>
-                                        <InputLabel
+                                        <TextField
                                             id="estado"
+                                            select
                                             label="Estado"
-                                            defaultValue={""}
-                                            onChange={handleChange}
-                                            variant="standard"
-                                        >
-                                            Estado
-                                        </InputLabel>
-                                        <Select
-                                            labelId="estado"
-                                            id="estado"
-                                            value={estado}
-                                            label="estado"
+                                            value={estado}  
+                                            helperText="En que estado se encuentra"
                                             onChange={handleChange}
                                         >
-                                            <option value="usado">usado</option>
-                                            <option value="desgastado">desgastado</option>
-                                            <option value="nuevo">nuevo</option>
-                                        </Select>
+                                            {estados.map((option) => (
+                                                <MenuItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))}
+                                        </TextField>
+                                      
                                     </Box>
 
 
@@ -269,20 +326,16 @@ function AgregaNuevoLibro() {
                                 {error && <Typography color="error">{error}</Typography>}
                             </div>
                             <div className="accionesAgregarLibro">
-                            <Boton className={'info'} titulo={'Cancelar'} mensaje={'Accion Cancelada'} icon={'info'} onClick={handleClose}></Boton>
-                                <Boton className={'accion'} type="submit"
-                                titulo={'Enviar Solicitud'} mensaje={mensaje} icon={'success'}></Boton>
+                                <Button variant="contained" onClick={handleClose} sx={{
+                                    backgroundColor: 'rgba(240, 52, 6, 0.945)',
+                                }}>Cancelar</Button>
+                                <Button type="submit" variant="contained" sx={{ backgroundColor: '#79a843' }}>Agregar</Button>
                             </div>
-                            
+
 
                         </Box>
 
                     </div>
-
-
-
-
-
                 </Popover>
             </div>
         </>
